@@ -1,0 +1,100 @@
+//
+//  NetworkingFramework.swift
+//  NetworkingFramework
+//
+//  Created by ZeroGravity on 1/13/21.
+//  Copyright © 2021 ZeroGravity. All rights reserved.
+//
+
+import UIKit
+
+public typealias BodyParameters = [URLQueryItem]
+public typealias RequestHeaders = [String: String]
+public typealias NetworkResponseHandler<Data: Decodable> = (Data?, HTTPURLResponse?, Error?)->Void
+
+open class NetworkingFramework {
+    private let urlReq: URLRequest!
+    
+    public enum HTTPMethod: String {
+        case options = "OPTIONS"
+        case get     = "GET"
+        case head    = "HEAD"
+        case post    = "POST"
+        case put     = "PUT"
+        case patch   = "PATCH"
+        case delete  = "DELETE"
+        case trace   = "TRACE"
+        case connect = "CONNECT"
+    }
+    
+    enum NetworkError: Error {
+        case JSONDecodeError
+        
+        var debugDescription: String {
+            switch self {
+            case .JSONDecodeError:
+                return "JSON decoding error!"
+            }
+        }
+    }
+    
+    init(urlReq: URLRequest) {
+        self.urlReq = urlReq
+    }
+    
+    @discardableResult
+    public static func request(url: URL, method: HTTPMethod, requestHeaders: RequestHeaders = ["Content-Type": "application/json"], bodyParameters: BodyParameters?) -> NetworkingFramework {
+        
+        let urlReq = getRequestObj(url: url, method: method, requestHeaders: requestHeaders, bodyParameters: bodyParameters)
+
+        return NetworkingFramework(urlReq: urlReq)
+    }
+    
+    private static func getRequestObj(url: URL, method: HTTPMethod, requestHeaders: RequestHeaders, bodyParameters: BodyParameters?) -> URLRequest {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.allHTTPHeaderFields = requestHeaders
+        urlRequest.httpBody = encoadingBodyParameters(bodyParameters)
+        
+        return urlRequest
+    }
+    
+    private static func encoadingBodyParameters(_ parameters: BodyParameters?) -> Data? {
+        guard let parameters = parameters else { return nil }
+//
+//        guard let JSONSerializedData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+//            fatalError("Unacceptable parameter value in  \(parameters)")
+//        }
+//
+//        return JSONSerializedData
+        
+        var queryItem = URLComponents()
+        queryItem.queryItems = parameters
+        
+        return queryItem.query?.data(using: .utf8)
+    }
+}
+
+extension NetworkingFramework {
+    @discardableResult
+    open func response<Data: Decodable>(dataType: Data.Type, complection: NetworkResponseHandler<Data>?) -> URLSessionDataTask {
+        let sessionTask = URLSession.shared.dataTask(with: urlReq) { (data, urlResponse, error) in
+            let urlResponse = urlResponse as? HTTPURLResponse
+            
+            guard let data = data else {
+                complection?(nil, urlResponse, error)
+                return
+            }
+            
+            guard let json = try? JSONDecoder().decode(dataType, from: data) else {
+                complection?(nil, urlResponse, error ?? NetworkError.JSONDecodeError)
+                return
+            }
+            
+            complection?(json, urlResponse, error)
+        }
+        
+        sessionTask.resume()
+        return sessionTask
+    }
+}
