@@ -8,34 +8,122 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Calibri-Bold.ttf">
+            <string>Calibri-Bold</string>
+        </array>
+        <array key="Calibri-Regular.ttf">
+            <string>Calibri</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="RCf-oK-Hjp">
             <objects>
-                <viewController id="mUS-cU-4sF" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginviewcontroller" id="mUS-cU-4sF" customClass="LoginViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8G-qV-sK0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOB-Al-AIK" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
-                                <rect key="frame" x="16" y="421" width="382" height="64"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJI-wC-7Qa">
+                                <rect key="frame" x="32" y="44" width="350" height="345"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Bhe-SA-8oy">
+                                        <rect key="frame" x="0.0" y="135.5" width="350" height="74"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Beautiful," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBY-XK-Ved">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="42"/>
+                                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="42"/>
+                                                <color key="textColor" red="0.21176470588235294" green="0.24705882352941178" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome from MovieTV 🥳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-bt-LhG">
+                                                <rect key="frame" x="0.0" y="54" width="350" height="20"/>
+                                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                                <color key="textColor" red="0.21176470588235294" green="0.24705882352941178" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="lA4-Q4-QcQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bhe-SA-8oy" secondAttribute="trailing" id="0IA-lM-hFa"/>
+                                    <constraint firstItem="Bhe-SA-8oy" firstAttribute="centerY" secondItem="cJI-wC-7Qa" secondAttribute="centerY" id="EcQ-GR-nSn"/>
+                                    <constraint firstItem="Bhe-SA-8oy" firstAttribute="leading" secondItem="cJI-wC-7Qa" secondAttribute="leading" id="MBb-Dd-ara"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolderTxt" value="login"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41M-Kj-2oe">
+                                <rect key="frame" x="32" y="389" width="350" height="128"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOB-Al-AIK" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="lA4-Q4-QcQ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderTxt" value="Username"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJv-bH-JYm" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="80" width="350" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="LFr-2Z-kFR"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderTxt" value="Password"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSecureEntry" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhs-uM-j3K">
+                                <rect key="frame" x="336" y="821" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yvt-Cg-IJP">
+                                <rect key="frame" x="0.0" y="810" width="414" height="86"/>
+                                <color key="backgroundColor" red="0.90980392156862744" green="0.9137254901960784" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysd-CC-HDi">
+                                <rect key="frame" x="283" y="778" width="99" height="64"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="99" id="BzQ-bC-PV5"/>
+                                    <constraint firstAttribute="height" constant="64" id="RG4-nb-Xge"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="20"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" red="0.92941176469999998" green="0.93333333330000001" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d8T-vs-vcs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lOB-Al-AIK" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" id="HFZ-5Y-cso"/>
-                            <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="lOB-Al-AIK" secondAttribute="trailing" constant="16" id="QMC-8a-ZUX"/>
-                            <constraint firstItem="lOB-Al-AIK" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" constant="16" id="wMw-Gp-Ssk"/>
+                            <constraint firstItem="d8T-vs-vcs" firstAttribute="bottom" secondItem="Yvt-Cg-IJP" secondAttribute="top" constant="52" id="4ca-8i-eE8"/>
+                            <constraint firstItem="cJI-wC-7Qa" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" id="9RG-fc-37p"/>
+                            <constraint firstItem="cJI-wC-7Qa" firstAttribute="leading" secondItem="41M-Kj-2oe" secondAttribute="leading" id="Fzb-op-jVK"/>
+                            <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" constant="32" id="IcP-6Z-9ll"/>
+                            <constraint firstItem="41M-Kj-2oe" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" constant="32" id="JkK-f6-qrX"/>
+                            <constraint firstItem="ysd-CC-HDi" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" id="KQX-S3-D1I"/>
+                            <constraint firstItem="41M-Kj-2oe" firstAttribute="top" secondItem="cJI-wC-7Qa" secondAttribute="bottom" id="Ksx-w3-iZP"/>
+                            <constraint firstItem="Yvt-Cg-IJP" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" id="Ysg-0L-13k"/>
+                            <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="Yvt-Cg-IJP" secondAttribute="trailing" id="dA7-m1-Hle"/>
+                            <constraint firstItem="Yvt-Cg-IJP" firstAttribute="bottom" secondItem="i8G-qV-sK0" secondAttribute="bottom" id="di0-oX-scP"/>
+                            <constraint firstItem="cJI-wC-7Qa" firstAttribute="top" secondItem="d8T-vs-vcs" secondAttribute="top" id="k4f-KU-ggA"/>
+                            <constraint firstItem="41M-Kj-2oe" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" id="oAn-Cn-97n"/>
+                            <constraint firstItem="ysd-CC-HDi" firstAttribute="centerY" secondItem="Yvt-Cg-IJP" secondAttribute="top" id="oP0-dY-ACB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="helloLbl" destination="DBY-XK-Ved" id="Efy-ed-BWB"/>
+                        <outlet property="loginBtn" destination="ysd-CC-HDi" id="yfA-MY-MUQ"/>
+                        <outlet property="passTxtField" destination="pJv-bH-JYm" id="Tjo-Va-AQC"/>
+                        <outlet property="userNameTxtField" destination="lOB-Al-AIK" id="MPl-fB-OoL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqv-eT-BIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

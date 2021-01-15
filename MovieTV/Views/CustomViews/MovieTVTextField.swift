@@ -11,15 +11,25 @@ import UIKit
 @IBDesignable class MovieTVTextField: UIView {
     lazy var txtField: UITextField = {
         let temp = UITextField()
+        temp.font = UIFont.light_body_m
+        temp.textColor = UIColor(named: "C100")
         temp.translatesAutoresizingMaskIntoConstraints = false
         return temp
     }()
     
     lazy var placeHolder: UILabel = {
         let temp = PlaceHolder()
-        temp.textColor = UIColor(red: 0.693, green: 0.696, blue: 0.7, alpha: 1)
+        temp.textColor = UIColor(named: "S70")
         temp.font = .light_body_l
         temp.translatesAutoresizingMaskIntoConstraints = false
+        return temp
+    }()
+    
+    lazy var separatorView: UIView = {
+        let temp = UIView()
+        temp.backgroundColor = UIColor(named: "S30")
+        temp.translatesAutoresizingMaskIntoConstraints = false
+        temp.heightAnchor.constraint(equalToConstant: 2).isActive = true
         return temp
     }()
     
@@ -32,6 +42,12 @@ import UIKit
     @IBInspectable var placeHolderColor: UIColor? {
         didSet {
             placeHolder.textColor = placeHolderColor
+        }
+    }
+    
+    @IBInspectable var isSecureEntry: Bool = false {
+        didSet {
+            txtField.isSecureTextEntry = isSecureEntry
         }
     }
     
@@ -52,7 +68,44 @@ import UIKit
     
     private func Initial() {
         addUIs()
-        backgroundColor = .systemYellow
+    }
+    
+    private func animatePlaceHolderLbl(isMove: Bool) {
+        UIView.easeSpringAnimation(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 0.9,
+            initialSpringVelocity: 0.9,
+            options: [.curveEaseInOut]) {[weak self] in
+            guard let self = self else { return }
+            
+            let placeHolderFrame = self.placeHolder.frame
+            
+            let translationY = -(placeHolderFrame.origin.y + placeHolderFrame.height / 2)
+            let translationX = -(placeHolderFrame.width * 0.1) + 2.5
+            
+            let transform = CGAffineTransform.identity.translatedBy(x: translationX, y: translationY).concatenating(CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9))
+            
+            self.placeHolder.transform = isMove ? transform : .identity
+            self.placeHolder.textColor = isMove ? UIColor(named: "C300") : UIColor(named: "S70")
+            self.placeHolder.font = isMove ? UIFont.h4_strong?.withSize(20) : .light_body_l
+        }
+    }
+}
+
+//  MARK: - UI textfield delegates.
+
+extension MovieTVTextField: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard textField.text?.isEmpty != false else { return }
+        
+        animatePlaceHolderLbl(isMove: true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard textField.text?.isEmpty != false else { return }
+        
+        animatePlaceHolderLbl(isMove: false)
     }
 }
 
@@ -62,21 +115,30 @@ extension MovieTVTextField {
         
         addTxtField()
         addPlaceHolderLbl()
+        addSeparator()
     }
     
     private func addTxtField() {
         addSubview(txtField)
-        txtField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        txtField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        txtField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        txtField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         txtField.topAnchor.constraint(equalTo: topAnchor).isActive = true
         txtField.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        txtField.delegate = self
     }
     
     private func addPlaceHolderLbl() {
         addSubview(placeHolder)
-        placeHolder.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        placeHolder.trailingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: -16).isActive = true
+        placeHolder.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        placeHolder.trailingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor).isActive = true
         placeHolder.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    private func addSeparator() {
+        addSubview(separatorView)
+        separatorView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        separatorView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        separatorView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     class PlaceHolder: UILabel {

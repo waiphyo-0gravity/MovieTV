@@ -12,4 +12,8 @@ extension UIStoryboard {
     @nonobjc class var Main: UIStoryboard? {
         return UIStoryboard(name: "Main", bundle: nil)
     }
+    
+    @nonobjc class var Login: UIStoryboard? {
+        return UIStoryboard(name: "Login", bundle: nil)
+    }
 }

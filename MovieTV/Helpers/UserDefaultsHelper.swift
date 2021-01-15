@@ -16,6 +16,9 @@ class UserDefaultsHelper {
     
     @UserDefaultValue(key: "api_key")
     var apiKey: String?
+    
+    @UserDefaultValue(key: "request_token")
+    var requestToken: String?
 }
 
 @propertyWrapper struct UserDefaultValue<T> {

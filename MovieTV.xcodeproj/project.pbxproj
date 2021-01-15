@@ -23,7 +23,11 @@
 		3A336BE925AF2D46007C1DA1 /* NetworkingFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A336BE225AF2D46007C1DA1 /* NetworkingFramework.framework */; };
 		3A336BEA25AF2D46007C1DA1 /* NetworkingFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A336BE225AF2D46007C1DA1 /* NetworkingFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A336BF125AF2D5A007C1DA1 /* NetworkingFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A336BF025AF2D5A007C1DA1 /* NetworkingFramework.swift */; };
-		3A336BFD25AF43AD007C1DA1 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A336BFC25AF43AD007C1DA1 /* AuthenticationViewModel.swift */; };
+		3A336BFD25AF43AD007C1DA1 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A336BFC25AF43AD007C1DA1 /* MainViewModel.swift */; };
+		3A37069725B1D1E600E48652 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A37069625B1D1E600E48652 /* LoginViewController.swift */; };
+		3A37069B25B1D2D000E48652 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A37069A25B1D2D000E48652 /* LoginViewModel.swift */; };
+		3A37069E25B1D73600E48652 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A37069D25B1D73600E48652 /* UIView+Extension.swift */; };
+		3A3706A125B1DBB600E48652 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A3706A025B1DBB600E48652 /* Colors.xcassets */; };
 		3AAD1F1025AEDD7100D40AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD1F0F25AEDD7100D40AA8 /* AppDelegate.swift */; };
 		3AAD1F1225AEDD7100D40AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD1F1125AEDD7100D40AA8 /* SceneDelegate.swift */; };
 		3AAD1F1725AEDD7100D40AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD1F1525AEDD7100D40AA8 /* Main.storyboard */; };
@@ -83,7 +87,11 @@
 		3A336BE425AF2D46007C1DA1 /* NetworkingFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingFramework.h; sourceTree = "<group>"; };
 		3A336BE525AF2D46007C1DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A336BF025AF2D5A007C1DA1 /* NetworkingFramework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingFramework.swift; sourceTree = "<group>"; };
-		3A336BFC25AF43AD007C1DA1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		3A336BFC25AF43AD007C1DA1 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		3A37069625B1D1E600E48652 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3A37069A25B1D2D000E48652 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		3A37069D25B1D73600E48652 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		3A3706A025B1DBB600E48652 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3AAD1F0C25AEDD7100D40AA8 /* MovieTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AAD1F0F25AEDD7100D40AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AAD1F1125AEDD7100D40AA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2516CC25AEE72E00793D7F /* MainViewController.swift */,
+				3A37069625B1D1E600E48652 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -155,6 +164,7 @@
 				3AAD1F0F25AEDD7100D40AA8 /* AppDelegate.swift */,
 				3AAD1F1125AEDD7100D40AA8 /* SceneDelegate.swift */,
 				3AAD1F1825AEDD7200D40AA8 /* Assets.xcassets */,
+				3A3706A025B1DBB600E48652 /* Colors.xcassets */,
 				3AAD1F1A25AEDD7200D40AA8 /* LaunchScreen.storyboard */,
 				3AAD1F1D25AEDD7200D40AA8 /* Info.plist */,
 			);
@@ -172,7 +182,8 @@
 		3A2516C925AEE65200793D7F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3A336BFC25AF43AD007C1DA1 /* AuthenticationViewModel.swift */,
+				3A336BFC25AF43AD007C1DA1 /* MainViewModel.swift */,
+				3A37069A25B1D2D000E48652 /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -201,6 +212,7 @@
 				3A2516D225AEE78100793D7F /* UIStoryboard+Extension.swift */,
 				3A2516D525AEE7C600793D7F /* UIViewcontroller+Extension.swift */,
 				3A2D7E2025B0987E008466D7 /* UIFont+Extension.swift */,
+				3A37069D25B1D73600E48652 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -379,6 +391,7 @@
 				3AC9435825B09E1B00CEF09E /* Calibri-Italic.ttf in Resources */,
 				3AAD1F1925AEDD7200D40AA8 /* Assets.xcassets in Resources */,
 				3A336BD025AF28A3007C1DA1 /* Login.storyboard in Resources */,
+				3A3706A125B1DBB600E48652 /* Colors.xcassets in Resources */,
 				3AC9435725B09E1B00CEF09E /* Calibri-Bold.ttf in Resources */,
 				3AAD1F1725AEDD7100D40AA8 /* Main.storyboard in Resources */,
 			);
@@ -399,13 +412,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A37069725B1D1E600E48652 /* LoginViewController.swift in Sources */,
 				3A336BD625AF2AF0007C1DA1 /* AuthenticationWebService.swift in Sources */,
+				3A37069E25B1D73600E48652 /* UIView+Extension.swift in Sources */,
 				3A2516D925AEE8B700793D7F /* UserDefaultsHelper.swift in Sources */,
 				3A2516CD25AEE72E00793D7F /* MainViewController.swift in Sources */,
 				3AAD1F1025AEDD7100D40AA8 /* AppDelegate.swift in Sources */,
 				3A2D7E1425B08B03008466D7 /* MovieTVTextField.swift in Sources */,
-				3A336BFD25AF43AD007C1DA1 /* AuthenticationViewModel.swift in Sources */,
+				3A336BFD25AF43AD007C1DA1 /* MainViewModel.swift in Sources */,
 				3A25170B25AEECA900793D7F /* BackwardsCompactableHelper.swift in Sources */,
+				3A37069B25B1D2D000E48652 /* LoginViewModel.swift in Sources */,
 				3A2516D625AEE7C600793D7F /* UIViewcontroller+Extension.swift in Sources */,
 				3A336BD325AF29BB007C1DA1 /* URLHelper.swift in Sources */,
 				3A2516D325AEE78100793D7F /* UIStoryboard+Extension.swift in Sources */,

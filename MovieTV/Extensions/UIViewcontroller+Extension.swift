@@ -12,4 +12,8 @@ extension UIViewController {
     @nonobjc class var MainViewController: UIViewController? {
         return UIStoryboard.Main?.instantiateViewController(withIdentifier: "mainviewcontroller")
     }
+    
+    @nonobjc class var LoginViewController: UIViewController? {
+        return UIStoryboard.Login?.instantiateViewController(withIdentifier: "loginviewcontroller")
+    }
 }

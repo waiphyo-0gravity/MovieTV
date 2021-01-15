@@ -20,14 +20,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.viewDidLoad()
-        for family: String in UIFont.familyNames
-                {
-                    print(family)
-                    for names: String in UIFont.fontNames(forFamilyName: family)
-                    {
-                        print("== \(names)")
-                    }
-                }
     }
     
     static func createModule() -> UIViewController? {

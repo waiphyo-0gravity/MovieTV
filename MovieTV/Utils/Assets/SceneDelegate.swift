@@ -21,9 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         BackwardsCompactableHelper.setDefaultAPIKeyIfNeeded()
         
-        guard let view = MainViewController.createModule() else { return }
+        let rootVC = UserDefaultsHelper.shared.requestToken == nil ? LoginViewController.createModule() : MainViewController.createModule()
         
-        window?.rootViewController = view
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
 
