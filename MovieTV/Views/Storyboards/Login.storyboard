@@ -16,13 +16,30 @@
                     <view key="view" contentMode="scaleToFill" id="i8G-qV-sK0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOB-Al-AIK" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
+                                <rect key="frame" x="16" y="421" width="382" height="64"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="lA4-Q4-QcQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolderTxt" value="login"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="d8T-vs-vcs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lOB-Al-AIK" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" id="HFZ-5Y-cso"/>
+                            <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="lOB-Al-AIK" secondAttribute="trailing" constant="16" id="QMC-8a-ZUX"/>
+                            <constraint firstItem="lOB-Al-AIK" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" constant="16" id="wMw-Gp-Ssk"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqv-eT-BIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-220" y="-45"/>
+            <point key="canvasLocation" x="-313" y="-61"/>
         </scene>
     </scenes>
     <resources>

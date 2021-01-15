@@ -13,6 +13,8 @@
 		3A2516D625AEE7C600793D7F /* UIViewcontroller+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2516D525AEE7C600793D7F /* UIViewcontroller+Extension.swift */; };
 		3A2516D925AEE8B700793D7F /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2516D825AEE8B700793D7F /* UserDefaultsHelper.swift */; };
 		3A25170B25AEECA900793D7F /* BackwardsCompactableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A25170A25AEECA900793D7F /* BackwardsCompactableHelper.swift */; };
+		3A2D7E1425B08B03008466D7 /* MovieTVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1325B08B03008466D7 /* MovieTVTextField.swift */; };
+		3A2D7E2125B0987E008466D7 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D7E2025B0987E008466D7 /* UIFont+Extension.swift */; };
 		3A336BD025AF28A3007C1DA1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A336BCF25AF28A3007C1DA1 /* Login.storyboard */; };
 		3A336BD325AF29BB007C1DA1 /* URLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A336BD225AF29BB007C1DA1 /* URLHelper.swift */; };
 		3A336BD625AF2AF0007C1DA1 /* AuthenticationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A336BD525AF2AF0007C1DA1 /* AuthenticationWebService.swift */; };
@@ -27,6 +29,12 @@
 		3AAD1F1725AEDD7100D40AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD1F1525AEDD7100D40AA8 /* Main.storyboard */; };
 		3AAD1F1925AEDD7200D40AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD1F1825AEDD7200D40AA8 /* Assets.xcassets */; };
 		3AAD1F1C25AEDD7200D40AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD1F1A25AEDD7200D40AA8 /* LaunchScreen.storyboard */; };
+		3AC9435325B09E1B00CEF09E /* Calibri-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1B25B09760008466D7 /* Calibri-Light.ttf */; };
+		3AC9435425B09E1B00CEF09E /* Calibri-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1C25B09760008466D7 /* Calibri-Regular.ttf */; };
+		3AC9435525B09E1B00CEF09E /* Calibri-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1D25B09761008466D7 /* Calibri-Light-Italic.ttf */; };
+		3AC9435625B09E1B00CEF09E /* Calibri-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AC9434725B09D5400CEF09E /* Calibri-Bold-Italic.ttf */; };
+		3AC9435725B09E1B00CEF09E /* Calibri-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1A25B09760008466D7 /* Calibri-Bold.ttf */; };
+		3AC9435825B09E1B00CEF09E /* Calibri-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D7E1E25B09761008466D7 /* Calibri-Italic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +68,13 @@
 		3A2516D525AEE7C600793D7F /* UIViewcontroller+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewcontroller+Extension.swift"; sourceTree = "<group>"; };
 		3A2516D825AEE8B700793D7F /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		3A25170A25AEECA900793D7F /* BackwardsCompactableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackwardsCompactableHelper.swift; sourceTree = "<group>"; };
+		3A2D7E1325B08B03008466D7 /* MovieTVTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTVTextField.swift; sourceTree = "<group>"; };
+		3A2D7E1A25B09760008466D7 /* Calibri-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold.ttf"; sourceTree = "<group>"; };
+		3A2D7E1B25B09760008466D7 /* Calibri-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Light.ttf"; sourceTree = "<group>"; };
+		3A2D7E1C25B09760008466D7 /* Calibri-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Regular.ttf"; sourceTree = "<group>"; };
+		3A2D7E1D25B09761008466D7 /* Calibri-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Light-Italic.ttf"; sourceTree = "<group>"; };
+		3A2D7E1E25B09761008466D7 /* Calibri-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Italic.ttf"; sourceTree = "<group>"; };
+		3A2D7E2025B0987E008466D7 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		3A336BCF25AF28A3007C1DA1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		3A336BD225AF29BB007C1DA1 /* URLHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHelper.swift; sourceTree = "<group>"; };
 		3A336BD525AF2AF0007C1DA1 /* AuthenticationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationWebService.swift; sourceTree = "<group>"; };
@@ -76,6 +91,7 @@
 		3AAD1F1825AEDD7200D40AA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AAD1F1B25AEDD7200D40AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AAD1F1D25AEDD7200D40AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AC9434725B09D5400CEF09E /* Calibri-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri-Bold-Italic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +116,7 @@
 		3A2516C025AEE29C00793D7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A2D7E1225B08AEF008466D7 /* CustomViews */,
 				3A2516C225AEE2CA00793D7F /* Storyboards */,
 				3A2516C125AEE2AF00793D7F /* ViewControllers */,
 			);
@@ -127,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2516C425AEE39700793D7F /* Assets */,
+				3A2D7E1825B09744008466D7 /* Fonts */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -182,8 +200,30 @@
 			children = (
 				3A2516D225AEE78100793D7F /* UIStoryboard+Extension.swift */,
 				3A2516D525AEE7C600793D7F /* UIViewcontroller+Extension.swift */,
+				3A2D7E2025B0987E008466D7 /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3A2D7E1225B08AEF008466D7 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A2D7E1325B08B03008466D7 /* MovieTVTextField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		3A2D7E1825B09744008466D7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3AC9434725B09D5400CEF09E /* Calibri-Bold-Italic.ttf */,
+				3A2D7E1A25B09760008466D7 /* Calibri-Bold.ttf */,
+				3A2D7E1E25B09761008466D7 /* Calibri-Italic.ttf */,
+				3A2D7E1D25B09761008466D7 /* Calibri-Light-Italic.ttf */,
+				3A2D7E1B25B09760008466D7 /* Calibri-Light.ttf */,
+				3A2D7E1C25B09760008466D7 /* Calibri-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		3A336BE325AF2D46007C1DA1 /* NetworkingFramework */ = {
@@ -331,9 +371,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A2516BE25AEE17F00793D7F /* Settings.bundle in Resources */,
+				3AC9435425B09E1B00CEF09E /* Calibri-Regular.ttf in Resources */,
+				3AC9435525B09E1B00CEF09E /* Calibri-Light-Italic.ttf in Resources */,
 				3AAD1F1C25AEDD7200D40AA8 /* LaunchScreen.storyboard in Resources */,
+				3AC9435325B09E1B00CEF09E /* Calibri-Light.ttf in Resources */,
+				3AC9435625B09E1B00CEF09E /* Calibri-Bold-Italic.ttf in Resources */,
+				3AC9435825B09E1B00CEF09E /* Calibri-Italic.ttf in Resources */,
 				3AAD1F1925AEDD7200D40AA8 /* Assets.xcassets in Resources */,
 				3A336BD025AF28A3007C1DA1 /* Login.storyboard in Resources */,
+				3AC9435725B09E1B00CEF09E /* Calibri-Bold.ttf in Resources */,
 				3AAD1F1725AEDD7100D40AA8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,11 +403,13 @@
 				3A2516D925AEE8B700793D7F /* UserDefaultsHelper.swift in Sources */,
 				3A2516CD25AEE72E00793D7F /* MainViewController.swift in Sources */,
 				3AAD1F1025AEDD7100D40AA8 /* AppDelegate.swift in Sources */,
+				3A2D7E1425B08B03008466D7 /* MovieTVTextField.swift in Sources */,
 				3A336BFD25AF43AD007C1DA1 /* AuthenticationViewModel.swift in Sources */,
 				3A25170B25AEECA900793D7F /* BackwardsCompactableHelper.swift in Sources */,
 				3A2516D625AEE7C600793D7F /* UIViewcontroller+Extension.swift in Sources */,
 				3A336BD325AF29BB007C1DA1 /* URLHelper.swift in Sources */,
 				3A2516D325AEE78100793D7F /* UIStoryboard+Extension.swift in Sources */,
+				3A2D7E2125B0987E008466D7 /* UIFont+Extension.swift in Sources */,
 				3AAD1F1225AEDD7100D40AA8 /* SceneDelegate.swift in Sources */,
 				3A336BD925AF2B2E007C1DA1 /* RequestTokenModel.swift in Sources */,
 			);
