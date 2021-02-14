@@ -20,11 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         BackwardsCompactableHelper.setDefaultAPIKeyIfNeeded()
-        
-        let rootVC = UserDefaultsHelper.shared.requestToken == nil ? LoginViewController.createModule() : MainViewController.createModule()
-        
-        window?.rootViewController = rootVC
-        window?.makeKeyAndVisible()
+        BackwardsCompactableHelper.handleAppStarting(with: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -57,4 +53,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

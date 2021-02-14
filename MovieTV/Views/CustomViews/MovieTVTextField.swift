@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable class MovieTVTextField: UIView {
-    lazy var txtField: UITextField = {
+    let txtField: UITextField = {
         let temp = UITextField()
         temp.font = UIFont.light_body_m
         temp.textColor = UIColor(named: "C100")
@@ -17,7 +17,7 @@ import UIKit
         return temp
     }()
     
-    lazy var placeHolder: UILabel = {
+    let placeHolder: UILabel = {
         let temp = PlaceHolder()
         temp.textColor = UIColor(named: "S70")
         temp.font = .light_body_l
@@ -25,7 +25,7 @@ import UIKit
         return temp
     }()
     
-    lazy var separatorView: UIView = {
+    let separatorView: UIView = {
         let temp = UIView()
         temp.backgroundColor = UIColor(named: "S30")
         temp.translatesAutoresizingMaskIntoConstraints = false

@@ -19,6 +19,9 @@ class UserDefaultsHelper {
     
     @UserDefaultValue(key: "request_token")
     var requestToken: String?
+    
+    @UserDefaultValue(key: "session_id")
+    var sessionID: String?
 }
 
 @propertyWrapper struct UserDefaultValue<T> {

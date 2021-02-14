@@ -40,7 +40,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome from MovieTV 🥳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-bt-LhG">
                                                 <rect key="frame" x="0.0" y="54" width="350" height="20"/>
                                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
-                                                <color key="textColor" red="0.21176470588235294" green="0.24705882352941178" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.36078431372549019" green="0.40392156862745099" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -87,42 +87,85 @@
                                 <rect key="frame" x="0.0" y="810" width="414" height="86"/>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.9137254901960784" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysd-CC-HDi">
-                                <rect key="frame" x="283" y="778" width="99" height="64"/>
-                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chopa_character" translatesAutoresizingMaskIntoConstraints="NO" id="61d-d4-Dtq">
+                                <rect key="frame" x="286.5" y="44" width="95.5" height="135.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="99" id="BzQ-bC-PV5"/>
-                                    <constraint firstAttribute="height" constant="64" id="RG4-nb-Xge"/>
+                                    <constraint firstAttribute="width" secondItem="61d-d4-Dtq" secondAttribute="height" multiplier="191:271" id="yig-jY-ySY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="20"/>
-                                <state key="normal" title="Log in">
-                                    <color key="titleColor" red="0.92941176469999998" green="0.93333333330000001" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6EN-dG-AQE">
+                                <rect key="frame" x="283" y="778" width="99" height="64"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2s-zR-CGj">
+                                        <rect key="frame" x="0.0" y="0.0" width="99" height="64"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="1Wj-vf-VU2">
+                                                <rect key="frame" x="33.5" y="16" width="32" height="32.5"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="1Wj-vf-VU2" firstAttribute="centerY" secondItem="B2s-zR-CGj" secondAttribute="centerY" id="TNf-Z9-aEq"/>
+                                            <constraint firstItem="1Wj-vf-VU2" firstAttribute="centerX" secondItem="B2s-zR-CGj" secondAttribute="centerX" id="xiZ-ab-Zf7"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysd-CC-HDi" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="99" height="64"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.92941176469999998" green="0.93333333330000001" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickLoginBtn:" destination="mUS-cU-4sF" eventType="touchUpInside" id="8qJ-kf-oUb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="0rA-Sv-WjV"/>
+                                    <constraint firstAttribute="bottom" secondItem="B2s-zR-CGj" secondAttribute="bottom" id="BeA-Hh-UQp"/>
+                                    <constraint firstAttribute="trailing" secondItem="B2s-zR-CGj" secondAttribute="trailing" id="Kia-O9-tIp"/>
+                                    <constraint firstAttribute="trailing" secondItem="ysd-CC-HDi" secondAttribute="trailing" id="PCK-24-ACL"/>
+                                    <constraint firstAttribute="bottom" secondItem="ysd-CC-HDi" secondAttribute="bottom" id="WW5-vl-6zu"/>
+                                    <constraint firstAttribute="width" constant="99" id="Yco-aw-k5h"/>
+                                    <constraint firstItem="ysd-CC-HDi" firstAttribute="leading" secondItem="6EN-dG-AQE" secondAttribute="leading" id="few-qp-6aB"/>
+                                    <constraint firstItem="ysd-CC-HDi" firstAttribute="top" secondItem="6EN-dG-AQE" secondAttribute="top" id="k2b-GH-8xS"/>
+                                    <constraint firstItem="B2s-zR-CGj" firstAttribute="leading" secondItem="6EN-dG-AQE" secondAttribute="leading" id="nZ9-nI-xWz"/>
+                                    <constraint firstItem="B2s-zR-CGj" firstAttribute="top" secondItem="6EN-dG-AQE" secondAttribute="top" id="pKT-ZH-0qR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d8T-vs-vcs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="61d-d4-Dtq" firstAttribute="top" secondItem="d8T-vs-vcs" secondAttribute="top" id="2f9-Ja-PYr"/>
                             <constraint firstItem="d8T-vs-vcs" firstAttribute="bottom" secondItem="Yvt-Cg-IJP" secondAttribute="top" constant="52" id="4ca-8i-eE8"/>
                             <constraint firstItem="cJI-wC-7Qa" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" id="9RG-fc-37p"/>
                             <constraint firstItem="cJI-wC-7Qa" firstAttribute="leading" secondItem="41M-Kj-2oe" secondAttribute="leading" id="Fzb-op-jVK"/>
                             <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" constant="32" id="IcP-6Z-9ll"/>
                             <constraint firstItem="41M-Kj-2oe" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" constant="32" id="JkK-f6-qrX"/>
-                            <constraint firstItem="ysd-CC-HDi" firstAttribute="trailing" secondItem="41M-Kj-2oe" secondAttribute="trailing" id="KQX-S3-D1I"/>
                             <constraint firstItem="41M-Kj-2oe" firstAttribute="top" secondItem="cJI-wC-7Qa" secondAttribute="bottom" id="Ksx-w3-iZP"/>
+                            <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="6EN-dG-AQE" secondAttribute="trailing" constant="32" id="MDY-Vl-txJ"/>
                             <constraint firstItem="Yvt-Cg-IJP" firstAttribute="leading" secondItem="d8T-vs-vcs" secondAttribute="leading" id="Ysg-0L-13k"/>
                             <constraint firstItem="d8T-vs-vcs" firstAttribute="trailing" secondItem="Yvt-Cg-IJP" secondAttribute="trailing" id="dA7-m1-Hle"/>
                             <constraint firstItem="Yvt-Cg-IJP" firstAttribute="bottom" secondItem="i8G-qV-sK0" secondAttribute="bottom" id="di0-oX-scP"/>
+                            <constraint firstItem="61d-d4-Dtq" firstAttribute="trailing" secondItem="cJI-wC-7Qa" secondAttribute="trailing" id="f4c-n4-Ed7"/>
                             <constraint firstItem="cJI-wC-7Qa" firstAttribute="top" secondItem="d8T-vs-vcs" secondAttribute="top" id="k4f-KU-ggA"/>
                             <constraint firstItem="41M-Kj-2oe" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" id="oAn-Cn-97n"/>
-                            <constraint firstItem="ysd-CC-HDi" firstAttribute="centerY" secondItem="Yvt-Cg-IJP" secondAttribute="top" id="oP0-dY-ACB"/>
+                            <constraint firstItem="6EN-dG-AQE" firstAttribute="centerY" secondItem="Yvt-Cg-IJP" secondAttribute="top" id="ocI-k8-Nve"/>
+                            <constraint firstItem="61d-d4-Dtq" firstAttribute="bottom" secondItem="DBY-XK-Ved" secondAttribute="top" id="pPl-dc-K8t"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="footerView" destination="Yvt-Cg-IJP" id="Oxa-i4-uVW"/>
                         <outlet property="helloLbl" destination="DBY-XK-Ved" id="Efy-ed-BWB"/>
+                        <outlet property="loginArrowImgView" destination="1Wj-vf-VU2" id="LhE-o2-Xjx"/>
                         <outlet property="loginBtn" destination="ysd-CC-HDi" id="yfA-MY-MUQ"/>
+                        <outlet property="loginBtnContainerView" destination="6EN-dG-AQE" id="Qff-Lw-tFm"/>
+                        <outlet property="loginBtnWidthConstraint" destination="Yco-aw-k5h" id="xPY-Fq-ZtD"/>
                         <outlet property="passTxtField" destination="pJv-bH-JYm" id="Tjo-Va-AQC"/>
                         <outlet property="userNameTxtField" destination="lOB-Al-AIK" id="MPl-fB-OoL"/>
+                        <outlet property="welcomeLbl" destination="iPx-bt-LhG" id="wQv-Ji-wZH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqv-eT-BIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -131,6 +174,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chopa_character" width="382" height="542"/>
+        <image name="login_arrow_icon" width="32" height="32.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

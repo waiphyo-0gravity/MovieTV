@@ -10,13 +10,19 @@ import UIKit
 
 extension UIView {
     static func easeSpringAnimation(
-        withDuration: TimeInterval,
-        delay: TimeInterval,
-        usingSpringWithDamping: CGFloat,
-        initialSpringVelocity: CGFloat,
-        options: UIView.AnimationOptions,
+        isAnimate: Bool = true,
+        withDuration: TimeInterval = 0.5,
+        delay: TimeInterval = 0,
+        usingSpringWithDamping: CGFloat = 0.8,
+        initialSpringVelocity: CGFloat = 0.8,
+        options: UIView.AnimationOptions = [.curveEaseInOut],
         animations: @escaping () -> Void,
         completion: ((Bool)->Void)? = nil) {
+        guard isAnimate else {
+            animations()
+            completion?(true)
+            return
+        }
         Self.animate(
             withDuration: withDuration,
             delay: delay,

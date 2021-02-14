@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -14,28 +14,31 @@
             <objects>
                 <viewController storyboardIdentifier="mainviewcontroller" id="BYZ-38-t0r" customClass="MainViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <userGuides>
+                            <userLayoutGuide location="264" affinity="minY"/>
+                        </userGuides>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-VU-ndZ" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
-                                <rect key="frame" x="16" y="421" width="382" height="64"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ODR-h3-3nI" customClass="MainTableView" customModule="MovieTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="FkC-KZ-l5m"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolderTxt" value="adsfasdfasdf"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Mz0-VU-ndZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TPK-5z-RgM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mz0-VU-ndZ" secondAttribute="trailing" constant="16" id="dvF-ej-4Ii"/>
-                            <constraint firstItem="Mz0-VU-ndZ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="f9o-fU-jCS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ODR-h3-3nI" secondAttribute="trailing" id="7ni-i4-iZp"/>
+                            <constraint firstItem="ODR-h3-3nI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hXD-nU-EXu"/>
+                            <constraint firstItem="ODR-h3-3nI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="o7O-l6-y2Q"/>
+                            <constraint firstAttribute="bottom" secondItem="ODR-h3-3nI" secondAttribute="bottom" id="pkD-Kn-yVo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mKj-oA-uOA" customClass="MainNavigationItem" customModule="MovieTV" customModuleProvider="target"/>
+                    <connections>
+                        <outlet property="mainTableView" destination="ODR-h3-3nI" id="vXQ-oT-v3R"/>
+                        <outlet property="tableView" destination="ODR-h3-3nI" id="ywD-AZ-W7D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
