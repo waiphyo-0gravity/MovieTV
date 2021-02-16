@@ -9,33 +9,35 @@
 import Foundation
 
 struct MovieDetailModel: Codable {
-    let id: Int
-    let imdbID: String
-    let budget: Int
-    let genres: [GenreModel]
-    let homepage: String
-    let adult: Bool
-    let originalLanguage: String
-    let productionCompanies: [ProductionCompanyModel]
-    let revenue: Int
-    let runtime: Int
-    let status: String
-    let videos: MovieTrailerModel
-    let credits: MovieCreditsModel
+    let id: Int?
+    let imdbID: String?
+    let budget: Int?
+    let genres: [GenreModel]?
+    let homepage: String?
+    let adult: Bool?
+    let originalLanguage: String?
+    let productionCompanies: [ProductionCompanyModel]?
+    let revenue: Int?
+    let runtime: Int?
+    let status: String?
+    let videos: MovieTrailerModel?
+    let credits: MovieCreditsModel?
+    let releases: MovieReleaseDatesModel?
     
     enum CodingKeys: String, CodingKey {
         case id, budget, genres, homepage, adult, revenue, runtime, status, videos, credits
         case imdbID = "imdb_id"
         case originalLanguage = "original_language"
         case productionCompanies = "production_companies"
+        case releases = "release_dates"
     }
 }
 
 struct ProductionCompanyModel: Codable {
-    let id: Int
+    let id: Int?
     let logoPath: String?
-    let name: String
-    let originCountry: String
+    let name: String?
+    let originCountry: String?
     
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -45,33 +47,33 @@ struct ProductionCompanyModel: Codable {
 }
 
 struct MovieTrailerModel: Codable {
-    let results: [MovieTrailerVideo]
+    let results: [MovieTrailerVideo]?
     
     struct MovieTrailerVideo: Codable {
-        let id: String
-        let key: String
-        let name: String
-        let site: String
-        let type: String
+        let id: String?
+        let key: String?
+        let name: String?
+        let site: String?
+        let type: String?
     }
 }
 
 struct MovieCreditsModel: Codable {
-    let cast: [CastCrewModel]
-    let crew: [CastCrewModel]
+    let cast: [CastCrewModel]?
+    let crew: [CastCrewModel]?
     
     struct CastCrewModel: Codable {
-        let adult: Bool
-        let gender: Int
-        let id: Int
-        let knownForDepartment: String
-        let name: String
-        let originalName: String
-        let popularity: Double
+        let adult: Bool?
+        let gender: Int?
+        let id: Int?
+        let knownForDepartment: String?
+        let name: String?
+        let originalName: String?
+        let popularity: Double?
         let profilePath: String?
         let castID: Int?
         let character: String?
-        let creditID: String
+        let creditID: String?
         let order: Int?
         let department: String?
         let job: String?
@@ -84,5 +86,29 @@ struct MovieCreditsModel: Codable {
             case castID = "cast_id"
             case creditID = "credit_id"
         }
+    }
+}
+
+struct MovieReleaseDatesModel: Codable {
+    let results: [ResultsModel]?
+    
+    var usableCertification: CertificationModel? {
+        return results?.first(where: { $0.isoID == "US" })?.certifications?.first
+    }
+    
+    struct ResultsModel: Codable {
+        let isoID: String?
+        let certifications: [CertificationModel]?
+        
+        enum CodingKeys: String, CodingKey {
+            case isoID = "iso_3166_1"
+            case certifications = "release_dates"
+        }
+    }
+    
+    struct CertificationModel: Codable {
+        let certification: String?
+        let note: String?
+        let type: Int?
     }
 }

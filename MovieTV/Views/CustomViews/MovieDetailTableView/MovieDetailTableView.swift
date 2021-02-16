@@ -32,6 +32,15 @@ class MovieDetailTableView: UITableView {
         contentInset = .init(top: Self.topInset, left: 0, bottom: 0, right: 0)
     }
     
+    private func handleDataChanged() {
+        beginUpdates()
+        reloadRows(at: [
+                    IndexPath(row: 0, section: 0),
+                    IndexPath(row: 3, section: 0)
+        ], with: .automatic)
+        endUpdates()
+    }
+    
     weak var customDelegate: MovieDetailTableViewDelegate?
     
     var data: MovieModel? {
@@ -42,12 +51,17 @@ class MovieDetailTableView: UITableView {
     
     var movieDetailData: MovieDetailModel? {
         didSet {
-            beginUpdates()
-            reloadRows(at: [
-                        IndexPath(row: 0, section: 0),
-                        IndexPath(row: 3, section: 0)
-            ], with: .automatic)
-            endUpdates()
+            handleDataChanged()
+        }
+    }
+    
+    var certificatedRating: String? {
+        didSet {
+            let currentCertificate = movieDetailData?.releases?.usableCertification?.certification
+            guard certificatedRating != nil,
+                  currentCertificate?.isEmpty != false || currentCertificate != certificatedRating else { return }
+            
+            handleDataChanged()
         }
     }
     
@@ -69,7 +83,7 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
             return UITableView.automaticDimension
         }
         
-        let isCastEmpty = (movieDetailData?.credits.cast.count ?? 0) == 0
+        let isCastEmpty = (movieDetailData?.credits?.cast?.count ?? 0) == 0
         
         return isCastEmpty ? 0 : UITableView.automaticDimension
     }
@@ -96,9 +110,13 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
     private func getTitleTableCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = dequeueReusableCell(withIdentifier: MovieDetailTitleTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MovieDetailTitleTableViewCell else { return UITableViewCell() }
         
+        let pgTxt = certificatedRating ?? movieDetailData?.releases?.usableCertification?.certification
+        
         cell.movieTitleLbl.text = data?.title
-        cell.movieReleasedDateLbl.text = DateFomatterHelper.changeDateFormat(from: data?.releaseDate, fromFormat: .year_month_day_dash, toFormat: .day_month_year)
-        cell.pgLbl.text = nil
+        cell.setReleaseDate(date: data?.releaseDate)
+        
+        cell.pgLbl.text = pgTxt
+        cell.pgLblBgView.alpha = pgTxt?.isEmpty == false ? 1 : 0
         cell.setDuration(from: movieDetailData?.runtime)
         
         return cell
@@ -124,7 +142,7 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
     private func getCastTableCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = dequeueReusableCell(withIdentifier: MovieDetailCastTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MovieDetailCastTableViewCell else { return UITableViewCell() }
         
-        cell.castCollectionView.data = movieDetailData?.credits.cast ?? []
+        cell.castCollectionView.data = movieDetailData?.credits?.cast ?? []
         
         return cell
     }

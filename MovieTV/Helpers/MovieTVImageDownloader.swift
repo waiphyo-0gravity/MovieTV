@@ -30,10 +30,6 @@ class MovieTVImageDownloader {
             return
         }
         
-        if let imgView = imgView {
-            imageViewMapper[imgView] = url
-        }
-        
         if let imgCache = imgCaches.object(forKey: url) {
             DispatchQueue.main.async {
                 response?(imgCache)
@@ -41,7 +37,17 @@ class MovieTVImageDownloader {
             return
         }
         
-        URLSession.shared.dataTask(with: url as URL) {[weak self] (data, resp, error) in
+        if let imgView = imgView {
+            imageViewMapper[imgView] = url
+        }
+        
+        URLSession.shared.dataTask(with: url as URL) {[weak self, imgView] (data, resp, error) in
+            defer {
+                if let imgMapIndex = self?.imageViewMapper.firstIndex(where: { $0.key == imgView }) {
+                    self?.imageViewMapper.remove(at: imgMapIndex)
+                }
+            }
+            
             guard let data = data,
                   let img = UIImage(data: data) else {
                 DispatchQueue.main.async {
@@ -54,10 +60,6 @@ class MovieTVImageDownloader {
             
             if let imgView = imgView, self?.imageViewMapper[imgView] != url {
                 return
-            }
-            
-            if let imgMapIndex = self?.imageViewMapper.firstIndex(where: { $0.key == imgView }) {
-                self?.imageViewMapper.remove(at: imgMapIndex)
             }
             
             DispatchQueue.main.async {

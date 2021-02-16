@@ -27,37 +27,65 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR5-eH-sBh">
-                        <rect key="frame" x="26" y="48" width="304" height="79.5"/>
+                        <rect key="frame" x="26" y="48" width="304" height="24"/>
                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="24"/>
                         <color key="textColor" name="C300"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="QAk-jn-4ES">
-                        <rect key="frame" x="26" y="143.5" width="159" height="17.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="QAk-jn-4ES">
+                        <rect key="frame" x="26" y="88" width="202" height="69"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ST-18-kIS">
-                                <rect key="frame" x="0.0" y="0.0" width="37" height="17.5"/>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
-                                <color key="textColor" name="S70"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5f-Wl-lDp">
-                                <rect key="frame" x="61" y="0.0" width="37" height="17.5"/>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
-                                <color key="textColor" name="S70"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKD-2g-WrH">
-                                <rect key="frame" x="122" y="0.0" width="37" height="17.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRf-me-H47">
+                                <rect key="frame" x="0.0" y="3.5" width="50" height="62"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ST-18-kIS">
+                                        <rect key="frame" x="6" y="6" width="38" height="50"/>
+                                        <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.65098039215686276" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4ST-18-kIS" secondAttribute="bottom" constant="6" id="Dmt-rO-anC"/>
+                                    <constraint firstItem="4ST-18-kIS" firstAttribute="top" secondItem="IRf-me-H47" secondAttribute="top" constant="6" id="M1Q-eA-G2k"/>
+                                    <constraint firstItem="4ST-18-kIS" firstAttribute="leading" secondItem="IRf-me-H47" secondAttribute="leading" constant="6" id="Tkz-da-b1l"/>
+                                    <constraint firstAttribute="trailing" secondItem="4ST-18-kIS" secondAttribute="trailing" constant="6" id="dMO-kK-IBG"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euM-mZ-sEH">
+                                <rect key="frame" x="76" y="2" width="50" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5f-Wl-lDp">
+                                        <rect key="frame" x="4" y="4" width="42" height="57"/>
+                                        <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
+                                        <color key="textColor" name="S70"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="K5f-Wl-lDp" secondAttribute="bottom" constant="4" id="FYH-6O-vKD"/>
+                                    <constraint firstItem="K5f-Wl-lDp" firstAttribute="top" secondItem="euM-mZ-sEH" secondAttribute="top" constant="4" id="Sz1-JE-Swv"/>
+                                    <constraint firstItem="K5f-Wl-lDp" firstAttribute="leading" secondItem="euM-mZ-sEH" secondAttribute="leading" constant="4" id="Wd9-EV-wdq"/>
+                                    <constraint firstAttribute="trailing" secondItem="K5f-Wl-lDp" secondAttribute="trailing" constant="4" id="xrW-4y-jIQ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKD-2g-WrH">
+                                <rect key="frame" x="152" y="27" width="50" height="15"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
                                 <color key="textColor" name="S70"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="euM-mZ-sEH" secondAttribute="bottom" constant="2" id="J8q-te-Rte"/>
+                            <constraint firstItem="euM-mZ-sEH" firstAttribute="top" secondItem="QAk-jn-4ES" secondAttribute="top" constant="2" id="Tda-rx-wq8"/>
+                        </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJl-cG-I9K" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
                         <rect key="frame" x="354" y="48" width="56" height="56"/>
-                        <color key="backgroundColor" red="0.98823529409999999" green="0.58039215690000001" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="P300"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="56" id="6Nm-eD-OjO"/>
                             <constraint firstAttribute="height" constant="56" id="E1a-eT-pGh"/>
@@ -74,7 +102,7 @@
                     <constraint firstItem="QAk-jn-4ES" firstAttribute="top" secondItem="DR5-eH-sBh" secondAttribute="bottom" constant="16" id="1QV-ah-FYK"/>
                     <constraint firstItem="ZJl-cG-I9K" firstAttribute="leading" secondItem="DR5-eH-sBh" secondAttribute="trailing" constant="24" id="AHv-b8-zcR"/>
                     <constraint firstItem="DR5-eH-sBh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="E6e-IG-3rH"/>
-                    <constraint firstAttribute="bottom" secondItem="QAk-jn-4ES" secondAttribute="bottom" constant="20" id="KLa-Qg-4yZ"/>
+                    <constraint firstAttribute="bottom" secondItem="QAk-jn-4ES" secondAttribute="bottom" constant="24" id="KLa-Qg-4yZ"/>
                     <constraint firstItem="ZJl-cG-I9K" firstAttribute="top" secondItem="DR5-eH-sBh" secondAttribute="top" id="dGD-6y-8Ll"/>
                     <constraint firstItem="DR5-eH-sBh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="48" id="kXL-Lb-cd8"/>
                     <constraint firstItem="QAk-jn-4ES" firstAttribute="leading" secondItem="DR5-eH-sBh" secondAttribute="leading" id="npe-kX-xNj"/>
@@ -88,6 +116,8 @@
                 <outlet property="movieReleasedDateLbl" destination="4ST-18-kIS" id="ryC-Mp-32y"/>
                 <outlet property="movieTitleLbl" destination="DR5-eH-sBh" id="Z5d-2g-L7w"/>
                 <outlet property="pgLbl" destination="K5f-Wl-lDp" id="Qs3-Ri-fyw"/>
+                <outlet property="pgLblBgView" destination="euM-mZ-sEH" id="kGz-4h-6fd"/>
+                <outlet property="releasedDateBgView" destination="IRf-me-H47" id="cux-td-NY5"/>
                 <outlet property="wishListBtn" destination="ZJl-cG-I9K" id="cfn-R7-beC"/>
             </connections>
             <point key="canvasLocation" x="-62.318840579710148" y="139.62053571428569"/>
@@ -97,6 +127,9 @@
         <image name="add_to_wishlist_icon" width="24" height="24"/>
         <namedColor name="C300">
             <color red="0.21199999749660492" green="0.24699999392032623" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="P300">
+            <color red="0.98799997568130493" green="0.57999998331069946" blue="0.68599998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="S70">
             <color red="0.6940000057220459" green="0.6940000057220459" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

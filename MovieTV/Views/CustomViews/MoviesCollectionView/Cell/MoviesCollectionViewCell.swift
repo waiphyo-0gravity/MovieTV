@@ -21,7 +21,10 @@ class MoviesCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
             let imgURL = URLHelper.Image.customWidth(500, data?.posterPath).urlStr
             imgView.setImg(url: imgURL)
             titleLbl.text = data?.title
-            ratingLbl.text = "\(data?.voteAverage ?? 0)"
+            
+            let isVoteAverageInValid = data?.voteAverage == 0 || data?.voteAverage == nil
+            
+            ratingLbl.text = isVoteAverageInValid ? "N/A" : "\(data?.voteAverage ?? 0)"
         }
     }
     

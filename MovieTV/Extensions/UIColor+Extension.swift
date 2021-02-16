@@ -16,4 +16,16 @@ extension UIColor {
     @nonobjc class var S10: UIColor {
         return UIColor(named: "S10")!
     }
+    
+    @nonobjc class var S70: UIColor {
+        return UIColor(named: "S70")!
+    }
+    
+    @nonobjc class var R100: UIColor {
+        return UIColor(named: "R100")!
+    }
+    
+    @nonobjc class var G100: UIColor {
+        return UIColor(named: "G100")!
+    }
 }

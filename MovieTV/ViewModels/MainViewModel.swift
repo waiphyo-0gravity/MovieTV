@@ -16,13 +16,21 @@ protocol MainViewModelProtocol {
     var movieList: MovieListModel? { get set }
     
     func viewDidLoad()
+    func changedTagSelection(at index: Int)
     func showMovieDetailVC(at movieIndex: Int, from vc: UIViewController?)
 }
 
 class MainViewModel: MainViewModelProtocol {
     func viewDidLoad() {
         webService?.getGenres()
-        webService?.getMovieList(for: movieListType)
+        webService?.getMovieList(for: movieListType, genres: selectedGenreIDs)
+    }
+    
+    func changedTagSelection(at index: Int) {
+        genres[index].isSelected.toggle()
+        selectedGenreIDs = genres.compactMap({ $0.isSelected ? $0.id : nil })
+        
+        webService?.getMovieList(for: movieListType, genres: selectedGenreIDs)
     }
     
     func showMovieDetailVC(at movieIndex: Int, from vc: UIViewController?) {
@@ -59,9 +67,11 @@ class MainViewModel: MainViewModelProtocol {
     
     var movieListType: MovieListType = .inTheater {
         didSet {
-            webService?.getMovieList(for: movieListType)
+            webService?.getMovieList(for: movieListType, genres: selectedGenreIDs)
         }
     }
+    
+    private var selectedGenreIDs: [Int] = []
     
     enum MovieListType: CaseIterable {
         case inTheater, upComing, popular, recommendations

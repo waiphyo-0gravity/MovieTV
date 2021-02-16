@@ -14,19 +14,19 @@ struct MovieListModel: Codable {
 
 struct MovieModel: Codable {
     let id: Int
-    let title: String
+    let title: String?
     let genreIDs: [Int]
-    let originalLanguage: String
-    let originalTitle: String
-    let posterPath: String
-    let video: Bool
-    let voteAverage: Double
-    let overview: String
-    let releaseDate: String
-    var voteCount: Int
-    let adult: Bool
-    let backdropPath: String
-    let popularity: Double
+    let originalLanguage: String?
+    let originalTitle: String?
+    let posterPath: String?
+    let video: Bool?
+    let voteAverage: Double?
+    let overview: String?
+    let releaseDate: String?
+    var voteCount: Int?
+    let adult: Bool?
+    let backdropPath: String?
+    let popularity: Double?
     
     enum CodingKeys: String, CodingKey {
         case genreIDs = "genre_ids"

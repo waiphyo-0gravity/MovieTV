@@ -8,15 +8,11 @@
 
 import UIKit
 
+protocol TagCollectionViewDelegate: AnyObject {
+    func handleTagSelection(for index: Int)
+}
+
 class TagCollectionView: UICollectionView {
-    var data = [GenreModel]()
-    
-    var isSelectionEnable: Bool = true {
-        didSet {
-            reloadData()
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         initial()
@@ -30,6 +26,16 @@ class TagCollectionView: UICollectionView {
         dataSource = self
         delegate = self
     }
+    
+    var data = [GenreModel]()
+    
+    var isSelectionEnable: Bool = true {
+        didSet {
+            reloadData()
+        }
+    }
+    
+    weak var customDelegate: TagCollectionViewDelegate?
 }
 
 //  MARK: - Collection view delegates.
@@ -57,6 +63,8 @@ extension TagCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
     func handleTagSelection(for cell: UICollectionViewCell) {
         guard let indexPath = indexPath(for: cell) else { return }
         
+        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        customDelegate?.handleTagSelection(for: indexPath.row)
         data[indexPath.row].isSelected.toggle()
     }
 }

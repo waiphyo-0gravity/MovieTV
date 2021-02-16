@@ -14,7 +14,7 @@ protocol MovieListWebServiceInputProtocol {
     var apiKey: String? { get }
     
     func getGenres()
-    func getMovieList(for listType: MainViewModel.MovieListType)
+    func getMovieList(for listType: MainViewModel.MovieListType, genres: [Int])
 }
 
 protocol MovieListWebServiceOutputProtocol: AnyObject {
@@ -44,15 +44,22 @@ class MovieListWebService: MovieListWebServiceInputProtocol {
             }
     }
     
-    func getMovieList(for listType: MainViewModel.MovieListType) {
+    func getMovieList(for listType: MainViewModel.MovieListType, genres: [Int]) {
         guard let url = URLHelper.MovieList.movieList(listType).url else { return }
         
         movieListReq?.cancel()
         
-        movieListReq = NetworkingFramework.request(url: url, method: .get, urlQueries: [
+        var queries = [
             URLQueryItem(name: "api_key", value: apiKey),
             URLQueryItem(name: "language", value: "en-US")
-        ])
+        ]
+        
+        if genres.count != 0 {
+            let genre = genres.reduce("", { $0 + ($0 == "" ? "" : ",")  + "\($1)" })
+            queries.append(URLQueryItem(name: "with_genres", value: genre))
+        }
+        
+        movieListReq = NetworkingFramework.request(url: url, method: .get, urlQueries: queries)
             .response(dataType: MovieListModel.self) {[weak self] (data, response, error) in
                 self?.movieListReq = nil
                 

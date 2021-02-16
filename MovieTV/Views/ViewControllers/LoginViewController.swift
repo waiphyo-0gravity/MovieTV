@@ -16,7 +16,6 @@ protocol LoginViewProtocol: AnyObject {
 }
 
 class LoginViewController: ViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()

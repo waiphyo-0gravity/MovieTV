@@ -11,6 +11,7 @@ import UIKit
 protocol MovieDetailViewModelProtocol: AnyObject {
     var view: MovieDetailViewProtocol? { get set }
     var data: MovieModel? { get set }
+    var imdbData: OMDBDataModel? { get set }
     var movieDetailData: MovieDetailModel? { get set }
     var webService: MovieDetailWebServiceInputProtocol? { get set }
     
@@ -22,6 +23,12 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
         guard let movieID = data?.id else { return }
         
         webService?.getMovieDetail(for: movieID)
+    }
+    
+    private func getIMDBRating() {
+        guard let imdbID = movieDetailData?.imdbID else { return }
+        
+        webService?.getIMDBRating(for: imdbID)
     }
     
     static func createModule(with data: MovieModel?) -> UIViewController? {
@@ -41,6 +48,7 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
     
     weak var view: MovieDetailViewProtocol?
     var data: MovieModel?
+    var imdbData: OMDBDataModel?
     var movieDetailData: MovieDetailModel?
     var webService: MovieDetailWebServiceInputProtocol?
 }
@@ -50,7 +58,19 @@ extension MovieDetailViewModel: MovieDetailWebServiceOutputProtocol {
     func responseFromMovieDetail(isSuccess: Bool, data: MovieDetailModel?, error: Error?) {
         if isSuccess, let data = data {
             movieDetailData = data
+            getIMDBRating()
             view?.handleMovieDetailChanged()
+        } else {
+            view?.failedMovieDetail(with: error)
+        }
+    }
+    
+    func responseFromIMDRating(isSuccess: Bool, data: OMDBDataModel?, error: Error?) {
+        if isSuccess, let data = data {
+            imdbData = data
+            view?.handleIMDBRatingChanged()
+        } else {
+            view?.failedIMDBRating(with: error)
         }
     }
 }

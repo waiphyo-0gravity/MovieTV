@@ -11,6 +11,7 @@ import UIKit
 protocol MainTableViewDelegate: AnyObject {
     func choosedMovie(at indexPath: IndexPath)
     func changedMovieType(to type: MainViewModel.MovieListType)
+    func changedTagSelection(at index: Int)
 }
 
 class MainTableView: UITableView {
@@ -58,7 +59,7 @@ class MainTableView: UITableView {
 }
 
 //  MARK: - Table view delegates & datasources.
-extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTableViewCellDelegate, MainTitleTableViewCellDelegate {
+extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTableViewCellDelegate, MainTitleTableViewCellDelegate, TagCollectionViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
@@ -92,6 +93,7 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
             return UITableViewCell()
         }
         
+        cell.collectionView.customDelegate = self
         cell.collectionView.data = tagData
         cell.collectionView.reloadData()
         
@@ -111,16 +113,32 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
     }
     
     func handleMovieTypeChanged(to type: MainViewModel.MovieListType) {
+        resetMovieCollectionViewOffset { [weak self] in
+            self?.customDelegate?.changedMovieType(to: type)
+        }
+    }
+    
+    func handleTagSelection(for index: Int) {
+        resetMovieCollectionViewOffset { [weak self] in
+            self?.customDelegate?.changedTagSelection(at: index)
+        }
+    }
+    
+    func choosedMovie(at indexPath: IndexPath) {
+        customDelegate?.choosedMovie(at: indexPath)
+    }
+    
+    private func resetMovieCollectionViewOffset(with execuation: (()->Void)?) {
         guard let cell = cellForRow(at: IndexPath(row: 2, section: 0)) as? MainBodyTableViewCell,
               cell.movieCollectionView.data.count != 0 else {
-            customDelegate?.changedMovieType(to: type)
+            execuation?()
             return
         }
         
         dispatchWorkItem?.cancel()
         
         dispatchWorkItem = DispatchWorkItem(block: {[weak self] in
-            self?.customDelegate?.changedMovieType(to: type)
+            execuation?()
             self?.dispatchWorkItem = nil
         })
         
@@ -129,9 +147,5 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
         guard let dispatchWorkItem = dispatchWorkItem else { return }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: dispatchWorkItem)
-    }
-    
-    func choosedMovie(at indexPath: IndexPath) {
-        customDelegate?.choosedMovie(at: indexPath)
     }
 }

@@ -14,10 +14,12 @@ protocol MovieDetailWebServiceInputProtocol {
     var apiKey: String? { get }
     
     func getMovieDetail(for movieID: Int)
+    func getIMDBRating(for imdbID: String)
 }
 
 protocol MovieDetailWebServiceOutputProtocol: AnyObject {
     func responseFromMovieDetail(isSuccess: Bool, data: MovieDetailModel?, error: Error?)
+    func responseFromIMDRating(isSuccess: Bool, data: OMDBDataModel?, error: Error?)
 }
 
 //  MARK: - Declare optional functions.
@@ -43,6 +45,22 @@ class MovieDetailWebService: MovieDetailWebServiceInputProtocol {
             }
     }
     
+    func getIMDBRating(for imdbID: String) {
+        guard let url = URLHelper.MovieList.imdb.url else { return }
+        
+        NetworkingFramework.request(url: url, method: .get, urlQueries: [
+            URLQueryItem(name: "apikey", value: URLHelper.omdbAPIKey),
+            URLQueryItem(name: "i", value: imdbID)
+        ])
+            .response(dataType: OMDBDataModel.self) {[weak self] (data, response, error) in
+                guard let data = data else {
+                    self?.viewModel?.responseFromIMDRating(isSuccess: false, data: nil, error: error)
+                    return
+                }
+                
+                self?.viewModel?.responseFromIMDRating(isSuccess: true, data: data, error: error)
+            }
+    }
     
     weak var viewModel: MovieDetailWebServiceOutputProtocol?
     

@@ -16,8 +16,10 @@ protocol URLHelperProtocol {
 enum URLHelper {
     static let version = "3"
     static let baseURL = "https://api.themoviedb.org/\(version)"
-    static let movieID = "2"
+    static let omdbBaseURL = "http://www.omdbapi.com/?"
     static let imgBaseURL = "https://image.tmdb.org/t/p"
+    static let movieID = "2"
+    static let omdbAPIKey = "c38199c1"
     
     enum Image {
         case original(String?), customWidth(Int, String?)
@@ -56,10 +58,15 @@ enum URLHelper {
     }
     
     enum MovieList: URLHelperProtocol {
-        case genres, movieList(MainViewModel.MovieListType), movieDetail
+        case genres, movieList(MainViewModel.MovieListType), movieDetail, imdb
         
         var url: URL? {
-            return URL(string: "\(URLHelper.baseURL)\(path)")
+            switch self {
+            case .imdb:
+                return URL(string: "\(URLHelper.omdbBaseURL)")
+            default:
+                return URL(string: "\(URLHelper.baseURL)\(path)")
+            }
         }
         
         var path: String {
@@ -70,6 +77,8 @@ enum URLHelper {
                 return getMoveListPath(for: type)
             case .movieDetail:
                 return "/movie/"
+            case .imdb:
+                return ""
             }
         }
         

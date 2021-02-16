@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,10 +30,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp" translatesAutoresizingMaskIntoConstraints="NO" id="1Tv-Vl-fB4" customClass="FlexableCornerRadiusImgView" customModule="MovieTV" customModuleProvider="target">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="157-vI-kzn" customClass="MainTopMediaScrollView" customModule="MovieTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4F6-Fc-j7A">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4F6-Fc-j7A" customClass="MovieDetailRatingView" customModule="MovieTV" customModuleProvider="target">
                                 <rect key="frame" x="36" y="268" width="426" height="96"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WHq-8J-JYK">
@@ -110,19 +111,26 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-Ca-Qgo">
                                                 <rect key="frame" x="241.5" y="0.0" width="104.5" height="96"/>
                                                 <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imdb_logo" translatesAutoresizingMaskIntoConstraints="NO" id="WEe-dN-r35">
+                                                        <rect key="frame" x="30" y="7.5" width="44" height="23.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="WEe-dN-r35" secondAttribute="height" multiplier="15:8" id="1Kh-iU-VY8"/>
+                                                            <constraint firstAttribute="width" constant="44" id="ejG-hh-qJ2"/>
+                                                        </constraints>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTS-4Y-Q5o" userLabel="Top">
-                                                        <rect key="frame" x="31.5" y="10.5" width="41.5" height="21"/>
+                                                        <rect key="frame" x="33.5" y="37.5" width="37" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Z43-j6-vD9"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
                                                         <color key="textColor" name="C100"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSA-td-9Wi">
-                                                        <rect key="frame" x="33.5" y="39.5" width="37" height="17.5"/>
-                                                        <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
-                                                        <color key="textColor" name="C100"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1v-hv-aSc">
+                                                        <rect key="frame" x="36" y="62.5" width="32" height="15.5"/>
+                                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="13"/>
+                                                        <color key="textColor" name="C75"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -130,15 +138,20 @@
                                                 <constraints>
                                                     <constraint firstItem="JTS-4Y-Q5o" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gSd-Ca-Qgo" secondAttribute="leading" id="14x-5H-dtD"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JTS-4Y-Q5o" secondAttribute="trailing" id="1EI-qY-Ibf"/>
-                                                    <constraint firstItem="vSA-td-9Wi" firstAttribute="centerX" secondItem="gSd-Ca-Qgo" secondAttribute="centerX" id="HnQ-1n-pNC"/>
+                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="C1v-hv-aSc" secondAttribute="bottom" id="9rm-29-OMI"/>
+                                                    <constraint firstItem="C1v-hv-aSc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gSd-Ca-Qgo" secondAttribute="leading" id="Bnh-Ln-lYA"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C1v-hv-aSc" secondAttribute="trailing" id="SwP-15-i61"/>
                                                     <constraint firstItem="JTS-4Y-Q5o" firstAttribute="centerX" secondItem="gSd-Ca-Qgo" secondAttribute="centerX" id="Vcy-5j-6aw"/>
-                                                    <constraint firstItem="vSA-td-9Wi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gSd-Ca-Qgo" secondAttribute="leading" id="XR1-x8-LWO"/>
-                                                    <constraint firstItem="vSA-td-9Wi" firstAttribute="top" secondItem="JTS-4Y-Q5o" secondAttribute="bottom" constant="8" id="mHI-pI-jyi"/>
-                                                    <constraint firstItem="vSA-td-9Wi" firstAttribute="centerY" secondItem="gSd-Ca-Qgo" secondAttribute="centerY" id="q5b-vi-RfB"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vSA-td-9Wi" secondAttribute="trailing" id="s77-5t-Uk6"/>
+                                                    <constraint firstItem="C1v-hv-aSc" firstAttribute="centerX" secondItem="gSd-Ca-Qgo" secondAttribute="centerX" id="WkM-9o-553"/>
+                                                    <constraint firstItem="C1v-hv-aSc" firstAttribute="top" secondItem="JTS-4Y-Q5o" secondAttribute="bottom" constant="4" id="fZu-1j-yvX"/>
+                                                    <constraint firstItem="JTS-4Y-Q5o" firstAttribute="centerY" secondItem="gSd-Ca-Qgo" secondAttribute="centerY" id="qNI-tE-GGO"/>
+                                                    <constraint firstItem="WEe-dN-r35" firstAttribute="centerX" secondItem="gSd-Ca-Qgo" secondAttribute="centerX" id="zJF-NH-Klq"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="WEe-dN-r35" firstAttribute="centerY" secondItem="GcM-dY-h2b" secondAttribute="centerY" id="MLw-NW-OkD"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -154,28 +167,32 @@
                         <viewLayoutGuide key="safeArea" id="KKr-db-R60"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1Tv-Vl-fB4" firstAttribute="leading" secondItem="KKr-db-R60" secondAttribute="leading" id="18x-cm-nbo"/>
+                            <constraint firstAttribute="top" secondItem="157-vI-kzn" secondAttribute="top" id="2MM-Yv-za3"/>
                             <constraint firstAttribute="trailing" secondItem="DTV-Z8-eJT" secondAttribute="trailing" id="3PM-gL-JFg"/>
-                            <constraint firstItem="KKr-db-R60" firstAttribute="trailing" secondItem="1Tv-Vl-fB4" secondAttribute="trailing" id="INe-4T-gTf"/>
                             <constraint firstItem="DTV-Z8-eJT" firstAttribute="top" secondItem="KKr-db-R60" secondAttribute="top" id="Jjp-lA-Hvv"/>
                             <constraint firstItem="4F6-Fc-j7A" firstAttribute="leading" secondItem="KKr-db-R60" secondAttribute="leading" constant="36" id="Mbd-z2-wtn"/>
-                            <constraint firstItem="1Tv-Vl-fB4" firstAttribute="bottom" secondItem="KKr-db-R60" secondAttribute="top" constant="256" id="O0M-a7-9Zo"/>
-                            <constraint firstAttribute="top" secondItem="1Tv-Vl-fB4" secondAttribute="top" id="UuH-CW-zSC"/>
+                            <constraint firstItem="157-vI-kzn" firstAttribute="leading" secondItem="q6W-j0-GOO" secondAttribute="leading" id="Xi5-yc-kkS"/>
                             <constraint firstAttribute="trailing" secondItem="4F6-Fc-j7A" secondAttribute="trailing" constant="-48" id="dcE-n0-fJ2"/>
                             <constraint firstAttribute="bottom" secondItem="DTV-Z8-eJT" secondAttribute="bottom" id="fa0-iM-XpC"/>
-                            <constraint firstItem="4F6-Fc-j7A" firstAttribute="centerY" secondItem="1Tv-Vl-fB4" secondAttribute="bottom" constant="16" id="pej-MF-RFq"/>
+                            <constraint firstItem="157-vI-kzn" firstAttribute="bottom" secondItem="KKr-db-R60" secondAttribute="top" constant="256" id="gL2-Le-Z0B"/>
+                            <constraint firstAttribute="trailing" secondItem="157-vI-kzn" secondAttribute="trailing" id="orQ-RT-ePQ"/>
                             <constraint firstItem="DTV-Z8-eJT" firstAttribute="leading" secondItem="q6W-j0-GOO" secondAttribute="leading" id="y7G-Xv-smT"/>
+                            <constraint firstItem="4F6-Fc-j7A" firstAttribute="centerY" secondItem="157-vI-kzn" secondAttribute="bottom" constant="16" id="z4H-p7-hj3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2gU-Eh-r2l" customClass="MovieDetailNavigationItem" customModule="MovieTV" customModuleProvider="target"/>
                     <connections>
-                        <outlet property="movieCoverImgView" destination="1Tv-Vl-fB4" id="C5P-Ag-uh8"/>
-                        <outlet property="movieCoverImgViewBottomConstraint" destination="O0M-a7-9Zo" id="1BV-Zt-i9Q"/>
+                        <outlet property="imdbRatingContainerView" destination="gSd-Ca-Qgo" id="N0u-Uf-Ntl"/>
+                        <outlet property="imdbScoreLbl" destination="JTS-4Y-Q5o" id="OcC-el-v0l"/>
+                        <outlet property="imdbVoteCountLbl" destination="C1v-hv-aSc" id="n5S-Zd-LG0"/>
+                        <outlet property="movieCoverImgViewBottomConstraint" destination="gL2-Le-Z0B" id="g98-IL-UzH"/>
                         <outlet property="movieDetailTableView" destination="DTV-Z8-eJT" id="Sbu-qb-6iJ"/>
                         <outlet property="ratingBtn" destination="GcM-dY-h2b" id="nT6-Sj-Mjq"/>
                         <outlet property="ratingContainerView" destination="4F6-Fc-j7A" id="4eG-OH-twa"/>
+                        <outlet property="ratingContainerViewCenterYConstraint" destination="z4H-p7-hj3" id="9CN-Rg-YyU"/>
                         <outlet property="ratingCountLbl" destination="tEP-Ki-Gp4" id="aEv-Jh-QKs"/>
                         <outlet property="ratingRatioLbl" destination="KOG-FK-QoQ" id="S1a-Uv-qR2"/>
+                        <outlet property="topMediaScrollView" destination="157-vI-kzn" id="xgH-dr-gBv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLJ-ei-PVD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -184,9 +201,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="imdb_logo" width="2127" height="1024"/>
         <image name="star_fill_icon" width="24" height="24"/>
         <image name="star_stroke_icon" width="24" height="24"/>
-        <image name="temp" width="4000" height="2253"/>
         <namedColor name="C100">
             <color red="0.36100000143051147" green="0.40400001406669617" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

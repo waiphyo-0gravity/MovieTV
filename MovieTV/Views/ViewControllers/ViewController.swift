@@ -9,5 +9,7 @@
 import UIKit
 
 open class ViewController: UIViewController {
-    
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
+    }
 }

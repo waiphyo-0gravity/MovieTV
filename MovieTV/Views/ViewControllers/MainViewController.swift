@@ -29,6 +29,10 @@ class MainNavViewcontroller: UINavigationController, UIGestureRecognizerDelegate
         return .slide
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
@@ -36,11 +40,6 @@ class MainNavViewcontroller: UINavigationController, UIGestureRecognizerDelegate
 }
 
 class MainViewController: UIViewController {
-    
-    @IBOutlet weak var tableView: MainTableView!
-    
-    var viewModel: MainViewModelProtocol?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.viewDidLoad()
@@ -71,6 +70,9 @@ class MainViewController: UIViewController {
         mainNavItem?.searchBtn.addTarget(self, action: #selector(clickedSearchBtn(_:)), for: .touchUpInside)
     }
     
+    @IBOutlet weak var mainTableView: MainTableView!
+    @IBOutlet weak var tableView: MainTableView!
+    
     var mainNavItem: MainNavigationItem? {
         return navigationItem as? MainNavigationItem
     }
@@ -79,13 +81,17 @@ class MainViewController: UIViewController {
         return navigationController as? MainNavViewcontroller
     }
     
-    @IBOutlet weak var mainTableView: MainTableView!
+    var viewModel: MainViewModelProtocol?
 }
 
 //  MARK: - Main table custom delegates.
 extension MainViewController: MainTableViewDelegate {
     func changedMovieType(to type: MainViewModel.MovieListType) {
         viewModel?.movieListType = type
+    }
+    
+    func changedTagSelection(at index: Int) {
+        viewModel?.changedTagSelection(at: index)
     }
     
     func choosedMovie(at indexPath: IndexPath) {
