@@ -12,6 +12,7 @@ protocol MainTableViewDelegate: AnyObject {
     func choosedMovie(at indexPath: IndexPath)
     func changedMovieType(to type: MainViewModel.MovieListType)
     func changedTagSelection(at index: Int)
+    func reachPaging()
 }
 
 class MainTableView: UITableView {
@@ -22,11 +23,21 @@ class MainTableView: UITableView {
     
     var titleData = MainViewModel.MovieListType.allCases
     
+    var isPagingInclude: Bool = false
+    
     var movieListData: [MovieModel]? {
         didSet {
-            beginUpdates()
-            reloadRows(at: [IndexPath(row: 2, section: 0)], with: oldValue == nil ? .fade : .none)
-            endUpdates()
+            let indexPath = IndexPath(row: 2, section: 0)
+            
+            guard let cell = cellForRow(at: indexPath) as? MainBodyTableViewCell else {
+                beginUpdates()
+                reloadRows(at: [indexPath], with: oldValue == nil ? .fade : .none)
+                endUpdates()
+                return
+            }
+            
+            cell.movieCollectionView.isPagingInclude = isPagingInclude
+            cell.movieCollectionView.data = movieListData ?? []
         }
     }
     
@@ -77,6 +88,17 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 104
+        case 1:
+            return 74
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+    
     private func getTitleCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = dequeueReusableCell(withIdentifier: MainTitleTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MainTitleTableViewCell else {
             return UITableViewCell()
@@ -104,8 +126,7 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
         guard let cell = dequeueReusableCell(withIdentifier: MainBodyTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MainBodyTableViewCell else {
             return UITableViewCell()
         }
-        
-        
+        cell.movieCollectionView.isPagingInclude = isPagingInclude
         cell.movieCollectionView.data = movieListData ?? []
         cell.delegate = self
         
@@ -126,6 +147,10 @@ extension MainTableView: UITableViewDataSource, UITableViewDelegate, MainBodyTab
     
     func choosedMovie(at indexPath: IndexPath) {
         customDelegate?.choosedMovie(at: indexPath)
+    }
+    
+    func reachPaging() {
+        customDelegate?.reachPaging()
     }
     
     private func resetMovieCollectionViewOffset(with execuation: (()->Void)?) {

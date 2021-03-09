@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Calibri-Bold.ttf">
+            <string>Calibri-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SearchCollectionViewCell" customModule="MovieTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="243" height="396"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="243" height="396"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fiJ-00-11e">
+                        <rect key="frame" x="0.0" y="0.0" width="243" height="396"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5C9-vr-hsM">
+                        <rect key="frame" x="0.0" y="346" width="243" height="50"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mtJ-CO-UeW">
+                            <rect key="frame" x="0.0" y="0.0" width="243" height="50"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHn-4l-DRg">
+                                    <rect key="frame" x="16" y="8" width="211" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="PK9-eS-Lzu"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
+                                    <color key="textColor" name="MenuGradient"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="gHn-4l-DRg" secondAttribute="bottom" constant="8" id="2bH-el-qDK"/>
+                                <constraint firstItem="gHn-4l-DRg" firstAttribute="leading" secondItem="mtJ-CO-UeW" secondAttribute="leading" constant="16" id="Kie-Gr-zGX"/>
+                                <constraint firstAttribute="trailing" secondItem="gHn-4l-DRg" secondAttribute="trailing" constant="16" id="fJx-FP-JAH"/>
+                                <constraint firstItem="gHn-4l-DRg" firstAttribute="top" secondItem="mtJ-CO-UeW" secondAttribute="top" constant="8" id="tU6-jw-20S"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="regular"/>
+                    </visualEffectView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2I-Iy-Pct" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="243" height="396"/>
+                        <connections>
+                            <action selector="clickedActionBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WV0-MR-J3n"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="fiJ-00-11e" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1Ss-jl-VEe"/>
+                <constraint firstAttribute="trailing" secondItem="w2I-Iy-Pct" secondAttribute="trailing" id="Via-PQ-5gk"/>
+                <constraint firstAttribute="bottom" secondItem="5C9-vr-hsM" secondAttribute="bottom" id="ddd-oO-GCa"/>
+                <constraint firstAttribute="bottom" secondItem="fiJ-00-11e" secondAttribute="bottom" id="f1f-Tr-GR5"/>
+                <constraint firstAttribute="bottom" secondItem="w2I-Iy-Pct" secondAttribute="bottom" id="ifv-cd-ZrM"/>
+                <constraint firstItem="w2I-Iy-Pct" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mWU-vF-lxo"/>
+                <constraint firstItem="5C9-vr-hsM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oGG-bJ-dBI"/>
+                <constraint firstItem="w2I-Iy-Pct" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ov1-ph-XBh"/>
+                <constraint firstAttribute="trailing" secondItem="5C9-vr-hsM" secondAttribute="trailing" id="q1X-7O-Ym6"/>
+                <constraint firstItem="fiJ-00-11e" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zDj-ba-hLQ"/>
+                <constraint firstAttribute="trailing" secondItem="fiJ-00-11e" secondAttribute="trailing" id="zta-CT-bPz"/>
+            </constraints>
+            <size key="customSize" width="243" height="396"/>
+            <connections>
+                <outlet property="actionBtn" destination="w2I-Iy-Pct" id="cOR-W9-WZ9"/>
+                <outlet property="imgView" destination="fiJ-00-11e" id="elb-J5-FXw"/>
+                <outlet property="movieNameLbl" destination="gHn-4l-DRg" id="5v3-hg-E2C"/>
+            </connections>
+            <point key="canvasLocation" x="-15.217391304347828" y="224.33035714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="MenuGradient">
+            <color red="0.024000000208616257" green="0.024000000208616257" blue="0.030999999493360519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

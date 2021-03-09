@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MovieTVTextFieldDelegate: UITextFieldDelegate {
+    
+}
+
 @IBDesignable class MovieTVTextField: UIView {
     let txtField: UITextField = {
         let temp = UITextField()
@@ -50,6 +54,8 @@ import UIKit
             txtField.isSecureTextEntry = isSecureEntry
         }
     }
+    
+    weak var delegate: UITextFieldDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -97,15 +103,23 @@ import UIKit
 
 extension MovieTVTextField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.textFieldDidBeginEditing?(textField)
+        
         guard textField.text?.isEmpty != false else { return }
         
         animatePlaceHolderLbl(isMove: true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.textFieldDidEndEditing?(textField)
+        
         guard textField.text?.isEmpty != false else { return }
         
         animatePlaceHolderLbl(isMove: false)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldReturn?(textField) ?? true
     }
 }
 

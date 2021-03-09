@@ -88,23 +88,50 @@
                                                         <color key="textColor" name="C100"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-dY-h2b" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7e-AE-p4t">
+                                                        <rect key="frame" x="16.5" y="7.5" width="24" height="24"/>
+                                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20S-GA-ZcZ">
+                                                        <rect key="frame" x="0.0" y="7.5" width="40.5" height="24"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-dY-h2b">
                                                         <rect key="frame" x="40.5" y="7.5" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="bdv-mD-UK8"/>
                                                             <constraint firstAttribute="height" constant="24" id="cgT-kg-coa"/>
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemOrangeColor"/>
-                                                        <state key="normal" image="star_stroke_icon"/>
+                                                        <state key="normal" image="rating_icon"/>
+                                                        <connections>
+                                                            <action selector="clickedRatingBtn:" destination="yKa-KW-A8O" eventType="touchUpInside" id="oT3-wi-Rj3"/>
+                                                        </connections>
                                                     </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3p-tN-NMf">
+                                                        <rect key="frame" x="64.5" y="7.5" width="40.5" height="24"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="20S-GA-ZcZ" firstAttribute="bottom" secondItem="GcM-dY-h2b" secondAttribute="bottom" id="0n0-5b-Qzf"/>
+                                                    <constraint firstItem="20S-GA-ZcZ" firstAttribute="leading" secondItem="849-Fy-yht" secondAttribute="leading" id="233-kX-5PN"/>
                                                     <constraint firstItem="GcM-dY-h2b" firstAttribute="centerX" secondItem="849-Fy-yht" secondAttribute="centerX" id="2nb-lp-che"/>
+                                                    <constraint firstItem="GcM-dY-h2b" firstAttribute="leading" secondItem="D7e-AE-p4t" secondAttribute="trailing" id="6VR-9i-zWW"/>
+                                                    <constraint firstItem="D7e-AE-p4t" firstAttribute="width" secondItem="GcM-dY-h2b" secondAttribute="width" id="8WF-vI-zzC"/>
+                                                    <constraint firstItem="X3p-tN-NMf" firstAttribute="top" secondItem="GcM-dY-h2b" secondAttribute="top" id="EWG-cM-eoL"/>
+                                                    <constraint firstItem="X3p-tN-NMf" firstAttribute="bottom" secondItem="GcM-dY-h2b" secondAttribute="bottom" id="JCB-5N-CIs"/>
                                                     <constraint firstItem="AEq-Ip-QMt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="849-Fy-yht" secondAttribute="leading" id="Peg-Tg-DEM"/>
+                                                    <constraint firstItem="D7e-AE-p4t" firstAttribute="top" secondItem="GcM-dY-h2b" secondAttribute="top" id="PvV-Hn-50T"/>
+                                                    <constraint firstItem="X3p-tN-NMf" firstAttribute="leading" secondItem="GcM-dY-h2b" secondAttribute="trailing" id="Yhh-ue-AMH"/>
                                                     <constraint firstItem="AEq-Ip-QMt" firstAttribute="centerY" secondItem="849-Fy-yht" secondAttribute="centerY" id="anp-tP-ZKq"/>
                                                     <constraint firstItem="AEq-Ip-QMt" firstAttribute="top" secondItem="GcM-dY-h2b" secondAttribute="bottom" constant="8" id="auf-0U-wVJ"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AEq-Ip-QMt" secondAttribute="trailing" id="dbB-qu-5DR"/>
+                                                    <constraint firstItem="20S-GA-ZcZ" firstAttribute="trailing" secondItem="GcM-dY-h2b" secondAttribute="leading" id="ecv-KG-gtO"/>
+                                                    <constraint firstItem="D7e-AE-p4t" firstAttribute="height" secondItem="GcM-dY-h2b" secondAttribute="height" id="fgV-g8-Go5"/>
+                                                    <constraint firstItem="20S-GA-ZcZ" firstAttribute="top" secondItem="GcM-dY-h2b" secondAttribute="top" id="loK-fd-cuv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="X3p-tN-NMf" secondAttribute="trailing" id="xam-1a-i5O"/>
                                                     <constraint firstItem="AEq-Ip-QMt" firstAttribute="centerX" secondItem="849-Fy-yht" secondAttribute="centerX" id="yYv-YB-Cdr"/>
                                                 </constraints>
                                             </view>
@@ -180,8 +207,9 @@
                             <constraint firstItem="4F6-Fc-j7A" firstAttribute="centerY" secondItem="157-vI-kzn" secondAttribute="bottom" constant="16" id="z4H-p7-hj3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2gU-Eh-r2l" customClass="MovieDetailNavigationItem" customModule="MovieTV" customModuleProvider="target"/>
+                    <navigationItem key="navigationItem" id="6dX-Yb-U6H" customClass="MovieDetailNavigationItem" customModule="MovieTV" customModuleProvider="target"/>
                     <connections>
+                        <outlet property="imdbLogoImgView" destination="WEe-dN-r35" id="4AO-Oa-P6y"/>
                         <outlet property="imdbRatingContainerView" destination="gSd-Ca-Qgo" id="N0u-Uf-Ntl"/>
                         <outlet property="imdbScoreLbl" destination="JTS-4Y-Q5o" id="OcC-el-v0l"/>
                         <outlet property="imdbVoteCountLbl" destination="C1v-hv-aSc" id="n5S-Zd-LG0"/>
@@ -191,6 +219,7 @@
                         <outlet property="ratingContainerView" destination="4F6-Fc-j7A" id="4eG-OH-twa"/>
                         <outlet property="ratingContainerViewCenterYConstraint" destination="z4H-p7-hj3" id="9CN-Rg-YyU"/>
                         <outlet property="ratingCountLbl" destination="tEP-Ki-Gp4" id="aEv-Jh-QKs"/>
+                        <outlet property="ratingProgressView" destination="D7e-AE-p4t" id="ttl-24-MbE"/>
                         <outlet property="ratingRatioLbl" destination="KOG-FK-QoQ" id="S1a-Uv-qR2"/>
                         <outlet property="topMediaScrollView" destination="157-vI-kzn" id="xgH-dr-gBv"/>
                     </connections>
@@ -199,11 +228,189 @@
             </objects>
             <point key="canvasLocation" x="12" y="115"/>
         </scene>
+        <!--Rating View Controller-->
+        <scene sceneID="26h-e4-CIF">
+            <objects>
+                <viewController storyboardIdentifier="ratingviewcontroller" id="Aod-sM-LNU" customClass="RatingViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TiM-Zn-63G">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="56"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj5-bV-4Xe">
+                                <rect key="frame" x="140" y="52" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
+                                <color key="textColor" name="C100"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRH-R5-m0a">
+                                <rect key="frame" x="-136" y="60" width="184" height="24"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="757-Hl-SLQ">
+                                <rect key="frame" x="232" y="60" width="48" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWS-Pg-CkF" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="-3" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7K5-Av-FNi"/>
+                                            <constraint firstAttribute="width" constant="30" id="w8Q-nc-3QS"/>
+                                        </constraints>
+                                        <state key="normal" image="rating_increase_icon"/>
+                                        <connections>
+                                            <action selector="clickedIncreaseBtn:" destination="Aod-sM-LNU" eventType="touchUpInside" id="9Lt-H7-rAe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="vWS-Pg-CkF" firstAttribute="leading" secondItem="757-Hl-SLQ" secondAttribute="leading" constant="8" id="8Z9-V1-32q"/>
+                                    <constraint firstItem="vWS-Pg-CkF" firstAttribute="centerY" secondItem="757-Hl-SLQ" secondAttribute="centerY" id="WwT-SA-sOX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cO5-ym-x6e">
+                                <rect key="frame" x="0.0" y="60" width="48" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNR-SA-K4b" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="-3" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="MOc-oc-JQd"/>
+                                            <constraint firstAttribute="height" constant="30" id="bkM-1J-ILR"/>
+                                        </constraints>
+                                        <state key="normal" image="rating_reduce_icon"/>
+                                        <connections>
+                                            <action selector="clickedReduceBtn:" destination="Aod-sM-LNU" eventType="touchUpInside" id="aKf-Rq-m0V"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RNR-SA-K4b" secondAttribute="trailing" constant="8" id="Oui-bW-uyw"/>
+                                    <constraint firstItem="RNR-SA-K4b" firstAttribute="centerY" secondItem="cO5-ym-x6e" secondAttribute="centerY" id="w0c-8o-Wln"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-SH-rZF">
+                                <rect key="frame" x="48" y="60" width="184" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqY-41-Qga">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="HTf-F3-qEd"/>
+                                            <constraint firstAttribute="height" constant="24" id="V80-DR-6uI"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" image="rating_icon"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1r6-1i-oxq">
+                                        <rect key="frame" x="24" y="0.0" width="16" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="ZCo-xF-hvJ"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5K-we-oG3">
+                                        <rect key="frame" x="40" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="19X-m8-zPX"/>
+                                            <constraint firstAttribute="width" constant="24" id="Syt-2k-xlb"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" image="rating_icon"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJl-sw-LBc">
+                                        <rect key="frame" x="64" y="0.0" width="16" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="UUH-dk-IIn"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2a-FQ-Evd">
+                                        <rect key="frame" x="80" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="4Ig-o5-nto"/>
+                                            <constraint firstAttribute="height" constant="24" id="9Kc-S7-5hy"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" image="rating_icon"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-CM-dVH">
+                                        <rect key="frame" x="104" y="0.0" width="16" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="nd8-Ls-Pbj"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ys-Po-0aY">
+                                        <rect key="frame" x="120" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="r2f-l5-ntJ"/>
+                                            <constraint firstAttribute="height" constant="24" id="vug-f3-IDl"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" image="rating_icon"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTZ-dC-MGF">
+                                        <rect key="frame" x="144" y="0.0" width="16" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="sMe-it-cXK"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lso-mJ-LDQ">
+                                        <rect key="frame" x="160" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="DQv-wW-8uU"/>
+                                            <constraint firstAttribute="height" constant="24" id="FH1-jR-3X7"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <state key="normal" image="rating_icon"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jhz-eb-Pw5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="757-Hl-SLQ" firstAttribute="bottom" secondItem="gfI-SH-rZF" secondAttribute="bottom" id="2BG-QR-4bq"/>
+                            <constraint firstItem="cO5-ym-x6e" firstAttribute="bottom" secondItem="gfI-SH-rZF" secondAttribute="bottom" id="4v4-Ku-9YP"/>
+                            <constraint firstItem="gfI-SH-rZF" firstAttribute="top" secondItem="bj5-bV-4Xe" secondAttribute="bottom" constant="8" id="7pg-ua-ObD"/>
+                            <constraint firstItem="Jhz-eb-Pw5" firstAttribute="trailing" secondItem="757-Hl-SLQ" secondAttribute="trailing" id="7wQ-z3-Y9J"/>
+                            <constraint firstItem="bj5-bV-4Xe" firstAttribute="centerX" secondItem="Jhz-eb-Pw5" secondAttribute="centerX" id="9Zg-Un-4AR"/>
+                            <constraint firstItem="bj5-bV-4Xe" firstAttribute="top" secondItem="Jhz-eb-Pw5" secondAttribute="top" constant="8" id="DE9-qv-4Bp"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gfI-SH-rZF" secondAttribute="trailing" constant="16" id="GrT-dR-iKQ"/>
+                            <constraint firstItem="gfI-SH-rZF" firstAttribute="centerX" secondItem="TiM-Zn-63G" secondAttribute="centerX" id="UwX-ap-Hvh"/>
+                            <constraint firstItem="cO5-ym-x6e" firstAttribute="trailing" secondItem="gfI-SH-rZF" secondAttribute="leading" id="Yzh-sZ-0KK"/>
+                            <constraint firstItem="757-Hl-SLQ" firstAttribute="leading" secondItem="gfI-SH-rZF" secondAttribute="trailing" id="ZFe-Wp-8Ab"/>
+                            <constraint firstItem="757-Hl-SLQ" firstAttribute="top" secondItem="gfI-SH-rZF" secondAttribute="top" id="c5l-QV-07A"/>
+                            <constraint firstItem="cO5-ym-x6e" firstAttribute="leading" secondItem="Jhz-eb-Pw5" secondAttribute="leading" id="cUB-bN-Nxw"/>
+                            <constraint firstItem="gfI-SH-rZF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TiM-Zn-63G" secondAttribute="leading" constant="16" id="h5Z-Hm-D2R"/>
+                            <constraint firstItem="NRH-R5-m0a" firstAttribute="top" secondItem="gfI-SH-rZF" secondAttribute="top" id="ig7-se-Jja"/>
+                            <constraint firstItem="NRH-R5-m0a" firstAttribute="trailing" secondItem="gfI-SH-rZF" secondAttribute="leading" id="lQd-5H-Znj"/>
+                            <constraint firstItem="NRH-R5-m0a" firstAttribute="width" secondItem="gfI-SH-rZF" secondAttribute="width" id="mdt-C4-Msc"/>
+                            <constraint firstItem="NRH-R5-m0a" firstAttribute="bottom" secondItem="gfI-SH-rZF" secondAttribute="bottom" id="rpj-ly-04l"/>
+                            <constraint firstItem="cO5-ym-x6e" firstAttribute="top" secondItem="gfI-SH-rZF" secondAttribute="top" id="yz9-YH-nQ6"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="216" height="56"/>
+                    <size key="freeformSize" width="280" height="56"/>
+                    <connections>
+                        <outlet property="increaseActionBtn" destination="vWS-Pg-CkF" id="ui4-J3-lFh"/>
+                        <outlet property="ratingProgressView" destination="NRH-R5-m0a" id="1wS-Pg-CDL"/>
+                        <outlet property="reduceActionBtn" destination="RNR-SA-K4b" id="NpH-zi-tCp"/>
+                        <outlet property="stackView" destination="gfI-SH-rZF" id="f1y-jR-S3I"/>
+                        <outlet property="startCountLbl" destination="bj5-bV-4Xe" id="HJV-lX-af2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7ag-sm-P3z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="859" y="115"/>
+        </scene>
     </scenes>
     <resources>
         <image name="imdb_logo" width="2127" height="1024"/>
+        <image name="rating_icon" width="24" height="24"/>
+        <image name="rating_increase_icon" width="24" height="24"/>
+        <image name="rating_reduce_icon" width="24" height="24"/>
         <image name="star_fill_icon" width="24" height="24"/>
-        <image name="star_stroke_icon" width="24" height="24"/>
         <namedColor name="C100">
             <color red="0.36100000143051147" green="0.40400001406669617" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

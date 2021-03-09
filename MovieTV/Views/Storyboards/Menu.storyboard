@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Calibri-Bold.ttf">
+            <string>Calibri-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="UZu-c6-PFx">
+            <objects>
+                <viewController storyboardIdentifier="menuviewcontroller" id="oKg-BO-ODW" customClass="MenuViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vwV-nN-296">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6GS-YA-oEM">
+                                <rect key="frame" x="0.0" y="44" width="300" height="730"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menusidenavtableviewcell" id="lw0-Hl-drN" customClass="MenuSideNavTableViewCell" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="300" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lw0-Hl-drN" id="P9F-WF-EVv">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-B6-wrn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="65"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzG-eH-0UP">
+                                                            <rect key="frame" x="26" y="16.5" width="32" height="32"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_fill_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aAc-FE-rTX">
+                                                                    <rect key="frame" x="8" y="8" width="16" height="16"/>
+                                                                    <color key="tintColor" systemColor="systemOrangeColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="Hq4-Z0-AKK"/>
+                                                                        <constraint firstAttribute="width" constant="16" id="VBz-gB-fmR"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="aAc-FE-rTX" secondAttribute="bottom" constant="8" id="Kaq-6X-qL4"/>
+                                                                <constraint firstItem="aAc-FE-rTX" firstAttribute="top" secondItem="VzG-eH-0UP" secondAttribute="top" constant="8" id="cgA-fp-P3g"/>
+                                                                <constraint firstAttribute="trailing" secondItem="aAc-FE-rTX" secondAttribute="trailing" constant="8" id="qMf-d7-5JA"/>
+                                                                <constraint firstItem="aAc-FE-rTX" firstAttribute="leading" secondItem="VzG-eH-0UP" secondAttribute="leading" constant="8" id="s3B-Rw-r0c"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ratings" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaw-mE-0V0">
+                                                            <rect key="frame" x="66" y="24" width="208" height="17"/>
+                                                            <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
+                                                            <color key="textColor" name="C300"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="VzG-eH-0UP" firstAttribute="centerY" secondItem="bv4-B6-wrn" secondAttribute="centerY" id="1u8-zY-mL7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="uaw-mE-0V0" secondAttribute="trailing" constant="26" id="2Ai-W2-zJP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uaw-mE-0V0" secondAttribute="bottom" constant="24" id="4bL-yT-bz6"/>
+                                                        <constraint firstItem="VzG-eH-0UP" firstAttribute="leading" secondItem="bv4-B6-wrn" secondAttribute="leading" constant="26" id="Me1-8I-ek8"/>
+                                                        <constraint firstItem="uaw-mE-0V0" firstAttribute="leading" secondItem="aAc-FE-rTX" secondAttribute="trailing" constant="16" id="QEZ-DK-iZh"/>
+                                                        <constraint firstItem="uaw-mE-0V0" firstAttribute="top" secondItem="bv4-B6-wrn" secondAttribute="top" constant="24" id="itf-q3-Lbm"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RL-pA-MUO" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="65"/>
+                                                    <connections>
+                                                        <action selector="clickedActionBtn:" destination="lw0-Hl-drN" eventType="touchUpInside" id="4Md-Z1-Oqj"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVV-vN-JSG">
+                                                    <rect key="frame" x="26" y="64" width="248" height="1"/>
+                                                    <color key="backgroundColor" name="S60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="nJD-ZS-UKQ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="bv4-B6-wrn" firstAttribute="top" secondItem="P9F-WF-EVv" secondAttribute="top" id="CKl-ev-Epp"/>
+                                                <constraint firstAttribute="bottom" secondItem="bv4-B6-wrn" secondAttribute="bottom" id="EHE-Iw-UrT"/>
+                                                <constraint firstAttribute="bottom" secondItem="6RL-pA-MUO" secondAttribute="bottom" id="KsI-2n-2OB"/>
+                                                <constraint firstAttribute="trailing" secondItem="6RL-pA-MUO" secondAttribute="trailing" id="PGh-0j-gjf"/>
+                                                <constraint firstAttribute="bottom" secondItem="oVV-vN-JSG" secondAttribute="bottom" id="XQo-ya-VNj"/>
+                                                <constraint firstAttribute="trailing" secondItem="bv4-B6-wrn" secondAttribute="trailing" id="b5W-x3-J3j"/>
+                                                <constraint firstAttribute="trailing" secondItem="oVV-vN-JSG" secondAttribute="trailing" constant="26" id="bXT-TK-XrS"/>
+                                                <constraint firstItem="oVV-vN-JSG" firstAttribute="leading" secondItem="P9F-WF-EVv" secondAttribute="leading" constant="26" id="dP7-vq-d5z"/>
+                                                <constraint firstItem="6RL-pA-MUO" firstAttribute="leading" secondItem="P9F-WF-EVv" secondAttribute="leading" id="mJI-oR-ANT"/>
+                                                <constraint firstItem="bv4-B6-wrn" firstAttribute="leading" secondItem="P9F-WF-EVv" secondAttribute="leading" id="oJn-V5-sCD"/>
+                                                <constraint firstItem="6RL-pA-MUO" firstAttribute="top" secondItem="P9F-WF-EVv" secondAttribute="top" id="yjo-dp-uHQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="actionBtn" destination="6RL-pA-MUO" id="1K2-A4-dJr"/>
+                                            <outlet property="containerView" destination="bv4-B6-wrn" id="R2e-hD-hQf"/>
+                                            <outlet property="imgContainerView" destination="VzG-eH-0UP" id="9yQ-on-JCT"/>
+                                            <outlet property="imgView" destination="aAc-FE-rTX" id="3Is-mQ-dRX"/>
+                                            <outlet property="navTitleLbl" destination="uaw-mE-0V0" id="GIO-yI-mKR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAh-VU-DKI" customClass="MovieDetailRatingView" customModule="MovieTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4IO-Vr-XQ6" customClass="WaveView" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="282" width="414" height="22"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="bKH-mX-ezv"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                                <color key="value" name="S10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4IO-Vr-XQ6" secondAttribute="bottom" id="aPX-LP-8xH"/>
+                                    <constraint firstAttribute="trailing" secondItem="4IO-Vr-XQ6" secondAttribute="trailing" id="dZK-oY-Sda"/>
+                                    <constraint firstItem="4IO-Vr-XQ6" firstAttribute="leading" secondItem="MAh-VU-DKI" secondAttribute="leading" id="sIC-XM-ojo"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-3b-Fck" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                <rect key="frame" x="26" y="774" width="64" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GzD-3b-Fck" secondAttribute="height" multiplier="1:1" id="0pE-aj-luE"/>
+                                    <constraint firstAttribute="width" constant="64" id="KEq-ee-FQn"/>
+                                </constraints>
+                                <color key="tintColor" name="Primary100_Adapt"/>
+                                <state key="normal" image="logout_icon"/>
+                                <connections>
+                                    <action selector="clickedLogoutBtn:" destination="oKg-BO-ODW" eventType="touchUpInside" id="iDg-Hf-1gg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1e3-dO-JSa"/>
+                        <color key="backgroundColor" name="S10"/>
+                        <constraints>
+                            <constraint firstItem="GzD-3b-Fck" firstAttribute="leading" secondItem="1e3-dO-JSa" secondAttribute="leading" constant="26" id="51i-Da-6fa"/>
+                            <constraint firstItem="1e3-dO-JSa" firstAttribute="bottom" secondItem="GzD-3b-Fck" secondAttribute="bottom" constant="24" id="9rs-XR-rTm"/>
+                            <constraint firstAttribute="trailing" secondItem="MAh-VU-DKI" secondAttribute="trailing" id="Hqc-UO-4ng"/>
+                            <constraint firstItem="6GS-YA-oEM" firstAttribute="leading" secondItem="1e3-dO-JSa" secondAttribute="leading" id="PvV-yC-rsg"/>
+                            <constraint firstItem="6GS-YA-oEM" firstAttribute="trailing" secondItem="1e3-dO-JSa" secondAttribute="leading" constant="300" id="TMX-U0-fJs"/>
+                            <constraint firstItem="6GS-YA-oEM" firstAttribute="top" secondItem="1e3-dO-JSa" secondAttribute="top" id="Wn7-Fk-uKV"/>
+                            <constraint firstItem="MAh-VU-DKI" firstAttribute="leading" secondItem="vwV-nN-296" secondAttribute="leading" id="hCk-Va-2ya"/>
+                            <constraint firstItem="MAh-VU-DKI" firstAttribute="bottom" secondItem="1e3-dO-JSa" secondAttribute="top" constant="260" id="irD-Vr-84b"/>
+                            <constraint firstItem="GzD-3b-Fck" firstAttribute="top" secondItem="6GS-YA-oEM" secondAttribute="bottom" id="okl-Gq-t97"/>
+                            <constraint firstAttribute="top" secondItem="MAh-VU-DKI" secondAttribute="top" id="p4Q-yh-ISr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoutBtn" destination="GzD-3b-Fck" id="lW1-T7-Fgw"/>
+                        <outlet property="tableView" destination="6GS-YA-oEM" id="k8M-mt-gQB"/>
+                        <outlet property="tableViewTrailingConstraint" destination="TMX-U0-fJs" id="etf-EH-Hdm"/>
+                        <outlet property="topViewBottomConstraint" destination="irD-Vr-84b" id="6SH-8i-l5Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7TO-aZ-afG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-55.072463768115945" y="168.75"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logout_icon" width="16" height="16"/>
+        <image name="star_fill_icon" width="24" height="24"/>
+        <namedColor name="C300">
+            <color red="0.21199999749660492" green="0.24699999392032623" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary100_Adapt">
+            <color red="0.075000002980232239" green="0.082000002264976501" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="S10">
+            <color red="0.96899998188018799" green="0.97600001096725464" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="S60">
+            <color red="0.83099997043609619" green="0.83499997854232788" blue="0.83899998664855957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

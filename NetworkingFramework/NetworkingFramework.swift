@@ -11,6 +11,7 @@ import UIKit
 public typealias QueryParameters = [URLQueryItem]
 public typealias RequestHeaders = [String: String]
 public typealias NetworkResponseHandler<Data: Decodable> = (Data?, HTTPURLResponse?, Error?)->Void
+public typealias NetworkRawResponseHandler = (Data?, HTTPURLResponse?, Error?)->Void
 
 open class NetworkingFramework {
     private let urlReq: URLRequest!
@@ -95,6 +96,20 @@ extension NetworkingFramework {
                 }
                 
                 complection?(json, urlResponse, error)
+            }
+        }
+        
+        sessionTask.resume()
+        return sessionTask
+    }
+    
+    @discardableResult
+    open func response(complection: NetworkRawResponseHandler?) -> URLSessionDataTask {
+        let sessionTask = URLSession.shared.dataTask(with: urlReq) { (data, urlResponse, error) in
+            let urlResponse = urlResponse as? HTTPURLResponse
+            
+            DispatchQueue.main.async {
+                complection?(data, urlResponse, error)
             }
         }
         

@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainViewProtocol: NSObjectProtocol {
     var viewModel: MainViewModelProtocol? { get set }
+    var mainContainer: MainContainerViewDelegate? { get set }
     
     func changedGenresList()
     func failedGenresList(with error: Error?)
@@ -18,50 +19,41 @@ protocol MainViewProtocol: NSObjectProtocol {
 }
 
 class MainNavViewcontroller: UINavigationController, UIGestureRecognizerDelegate {
-    
-    var isStatusBarHidden: Bool = false
-    
-    override var prefersStatusBarHidden: Bool {
-        return isStatusBarHidden
-    }
-    
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return [.portrait, .portraitUpsideDown]
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
     }
 }
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.viewDidLoad()
         initial()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainContainer?.changeStatusBar(to: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mainNavigationController?.isStatusBarHidden = false
-        mainNavigationController?.setNeedsStatusBarAppearanceUpdate()
+        mainContainer?.changeMenuPanGesture(isEnable: true)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
-    @objc func clickedMenuBtn(_ sender: UIButton) {
-        UserDefaultsHelper.shared.sessionID = nil
-        dismiss(animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        mainContainer?.changeMenuPanGesture(isEnable: false)
     }
     
-    @objc func clickedSearchBtn(_ sender: Any) {
-        guard let loginVC = UIViewController.LoginViewController else { return }
-        
-        navigationController?.pushViewController(loginVC, animated: true)
+    @objc func clickedMenuBtn(_ sender: UIButton) {
+        mainContainer?.handleMenuClick()
+    }
+    
+    @objc func clickedSearchBtn(_ sender: UIButton) {
+        viewModel?.showSearchVC(from: self)
     }
     
     private func initial() {
@@ -82,6 +74,7 @@ class MainViewController: UIViewController {
     }
     
     var viewModel: MainViewModelProtocol?
+    weak var mainContainer: MainContainerViewDelegate?
 }
 
 //  MARK: - Main table custom delegates.
@@ -95,7 +88,15 @@ extension MainViewController: MainTableViewDelegate {
     }
     
     func choosedMovie(at indexPath: IndexPath) {
-        viewModel?.showMovieDetailVC(at: indexPath.row, from: self)
+        viewModel?.showMovieDetailVC(at: indexPath.row, from: self, mainContainer: mainContainer)
+    }
+    
+    func reachPaging() {
+        viewModel?.callMovieListNextPage()
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
 
@@ -106,6 +107,8 @@ extension MainViewController: MainViewProtocol {
     }
     
     func changedMovieList() {
+        mainTableView.isPagingInclude = viewModel?.isMovieListIncludePaging == true
+        print(viewModel?.movieList?.results.count, "huhuhu")
         mainTableView.movieListData = viewModel?.movieList?.results
     }
     

@@ -10,6 +10,7 @@ import UIKit
 
 protocol MovieDetailTableViewDelegate: AnyObject {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
+    func handleClickedFavorite()
 }
 
 class MovieDetailTableView: UITableView {
@@ -49,6 +50,21 @@ class MovieDetailTableView: UITableView {
         }
     }
     
+    var isFavourate: Bool = false {
+        didSet {
+            let indexPath = IndexPath(row: 0, section: 0)
+            guard let cell = cellForRow(at: indexPath) as? MovieDetailTitleTableViewCell else {
+                beginUpdates()
+                reloadRows(at: [indexPath], with: .automatic)
+                endUpdates()
+                return
+            }
+            
+            cell.isFavourate = isFavourate
+            cell.setFavourate(isFavourate: isFavourate, isAnimate: true)
+        }
+    }
+    
     var movieDetailData: MovieDetailModel? {
         didSet {
             handleDataChanged()
@@ -69,7 +85,7 @@ class MovieDetailTableView: UITableView {
 }
 
 //  MARK: - Table view delegates.
-extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
+extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, MovieDetailTitleTableViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -92,6 +108,11 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
         customDelegate?.scrollViewDidScroll(scrollView)
     }
     
+    func handleClickedFavorite() {
+        isFavourate.toggle()
+        customDelegate?.handleClickedFavorite()
+    }
+    
     private func getCell(for indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
@@ -112,12 +133,15 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource {
         
         let pgTxt = certificatedRating ?? movieDetailData?.releases?.usableCertification?.certification
         
+        cell.isFavourate = isFavourate
         cell.movieTitleLbl.text = data?.title
         cell.setReleaseDate(date: data?.releaseDate)
+        cell.setFavourate(isFavourate: isFavourate, isAnimate: false)
         
         cell.pgLbl.text = pgTxt
         cell.pgLblBgView.alpha = pgTxt?.isEmpty == false ? 1 : 0
         cell.setDuration(from: movieDetailData?.runtime)
+        cell.delegate = self
         
         return cell
     }

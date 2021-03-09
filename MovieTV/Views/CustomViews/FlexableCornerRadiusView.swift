@@ -56,7 +56,7 @@ class FlexableCornerRadiusView: UIView {
 }
 
 class FlexableCornerRadiusScrollView: UIScrollView {
-    var cornerRadiusData: (corners: UIRectCorner, cornerRadius: CGFloat) = (.allCorners, 0) {
+    var cornerRadiusData: (corners: UIRectCorner, cornerRadius: CGFloat) = (.bottomLeft, 0) {
         didSet {
             changeCornerRadiusPath()
         }

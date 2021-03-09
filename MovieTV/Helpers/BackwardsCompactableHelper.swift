@@ -22,7 +22,11 @@ class BackwardsCompactableHelper {
         barAppearance.barTintColor = .white
         barAppearance.shadowImage = UIImage()
         
-        let rootVC = UserDefaultsHelper.shared.sessionID == nil ? LoginViewModel.createModule() : MainViewModel.createModule(isIncludeNavigation: true)
+//        let rootVC = UserDefaultsHelper.shared.sessionID == nil ? LoginViewModel.createModule() : MainViewModel.createModule(isIncludeNavigation: true)
+        
+        let rootVC = UserDefaultsHelper.shared.sessionID == nil ? LoginViewModel.createModule() : MainContainerViewModel.createModule()
+        
+//        let rootVC = UIViewController.MainContainerViewController
         
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MovieDetailTitleTableViewCellDelegate: AnyObject {
+    func handleClickedFavorite()
+}
+
 class MovieDetailTitleTableViewCell: UITableViewCell, NibableCellProtocol {
 
     override func awakeFromNib() {
@@ -15,7 +19,10 @@ class MovieDetailTitleTableViewCell: UITableViewCell, NibableCellProtocol {
         initial()
     }
     
-    @IBAction func handleClickedWishListBtn(_ sender: Any) {
+    @IBAction func handleClickedFavoriteBtn(_ sender: Any) {
+        isFavourate.toggle()
+        setFavourate(isFavourate: isFavourate, isAnimate: true)
+        delegate?.handleClickedFavorite()
     }
     
     func setDuration(from second: Int?) {
@@ -37,13 +44,22 @@ class MovieDetailTitleTableViewCell: UITableViewCell, NibableCellProtocol {
         movieReleasedDateLbl.text = DateFomatterHelper.changeDateFormat(from: date, fromFormat: .year_month_day_dash, toFormat: .day_month_year)
     }
     
+    func setFavourate(isFavourate: Bool, isAnimate: Bool) {
+        if isAnimate {
+            favoriteBtn.bounceAnimation()
+        }
+        
+        self.favoriteBtn.setImage(UIImage(named: isFavourate ? "favorite_l_fill_icon" : "favorite_fill_icon"), for: .normal)
+        
+        UIView.easeSpringAnimation(isAnimate: isAnimate) {
+            self.favoriteBtn.backgroundColor = isFavourate ? .white : .P300
+            self.favoriteBtn.tintColor = isFavourate ? .P300 : .white
+        }
+    }
+    
     private func initial() {
-        wishListBtn.layer.cornerRadius = 18
-        wishListBtn.layer.shadowOffset = .init(width: -1, height: -2)
-        wishListBtn.layer.shadowRadius = 20
-        wishListBtn.layer.shadowPath = nil
-        wishListBtn.layer.shadowColor = UIColor.black.withAlphaComponent(0.08).cgColor
-        wishListBtn.layer.shadowOpacity = 1
+        favoriteBtn.layer.cornerRadius = 18
+        favoriteBtn.addAccentShadow()
         
         pgLblBgView.layer.cornerRadius = 8
         pgLblBgView.layer.borderWidth = 2
@@ -56,7 +72,10 @@ class MovieDetailTitleTableViewCell: UITableViewCell, NibableCellProtocol {
     @IBOutlet weak var movieReleasedDateLbl: UILabel!
     @IBOutlet weak var pgLbl: UILabel!
     @IBOutlet weak var movieDurationLbl: UILabel!
-    @IBOutlet weak var wishListBtn: MovieTVButton!
+    @IBOutlet weak var favoriteBtn: MovieTVButton!
     @IBOutlet weak var pgLblBgView: UIView!
     @IBOutlet weak var releasedDateBgView: UIView!
+    
+    weak var delegate: MovieDetailTitleTableViewCellDelegate?
+    var isFavourate: Bool = false
 }

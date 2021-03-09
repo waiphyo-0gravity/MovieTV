@@ -42,11 +42,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
         layer.masksToBounds = false
         imgView.layer.cornerRadius = 42
         imgContainerView.layer.cornerRadius = 42
-        imgContainerView.layer.shadowOffset = .init(width: -1, height: -2)
-        imgContainerView.layer.shadowRadius = 16
-        imgContainerView.layer.shadowPath = nil
-        imgContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.08).cgColor
-        imgContainerView.layer.shadowOpacity = 1
+        imgContainerView.addAccentShadow()
     }
 
     @IBOutlet weak var imgContainerView: UIView!

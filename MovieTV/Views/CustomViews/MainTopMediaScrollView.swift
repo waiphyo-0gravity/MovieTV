@@ -41,7 +41,9 @@ class MainTopMediaScrollView: FlexableCornerRadiusScrollView {
     }
     
     private func handleTrailerModelChanged() {
-        guard let trailers = data?.results else { return }
+        guard var trailers = data?.results else { return }
+        
+        trailers = Array(trailers[0..<min(4, trailers.count)])
         
         youtubePlayerViews =  trailers.compactMap { trailer in
             guard let id = trailer.key else { return nil }

@@ -10,14 +10,28 @@ import UIKit
 
 protocol MovieDetailViewProtocol: AnyObject {
     var viewModel: MovieDetailViewModelProtocol? { get set }
+    var mainContainer: MainContainerViewDelegate? { get set }
     
     func handleMovieDetailChanged()
     func failedMovieDetail(with error: Error?)
     func handleIMDBRatingChanged()
     func failedIMDBRating(with error: Error?)
+    func handleMovieStatesChanged()
+    func failedMovieStates(with error: Error?)
+    func handleWatchListStateChange()
+    func handleRatingStateChange()
+    func handleFavourateStateChange()
 }
 
-class MovieDetailViewController: ViewController {
+class MovieDetailViewController: ViewController, UIPopoverPresentationControllerDelegate {
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
@@ -26,11 +40,26 @@ class MovieDetailViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        statusBarHidableNavController?.changeStatusBar(isHidden: true)
+        mainContainer?.changeStatusBar(to: true)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    @IBAction func clickedRatingBtn(_ sender: UIButton) {
+        viewModel?.handleClickedRatingBtn(sender, from: self)
     }
     
     @objc func clickedNavBack() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func clickedWatchlistBtn() {
+        viewModel?.handleWatchMovieStateChange()
+        handleWatchListStateChange()
     }
     
     private func initial() {
@@ -47,19 +76,15 @@ class MovieDetailViewController: ViewController {
         let url = URLHelper.Image.customWidth(500, viewModel?.data?.posterPath).urlStr
         topMediaScrollView.movieCoverImgView.setImg(url: url)
         movieNavItem?.leftBackBtn.addTarget(self, action: #selector(clickedNavBack), for: .touchUpInside)
-        mainNavigationController?.isStatusBarHidden = true
-        mainNavigationController?.setNeedsStatusBarAppearanceUpdate()
+        movieNavItem?.watchListBtn.addTarget(self, action: #selector(clickedWatchlistBtn), for: .touchUpInside)
         
+        movieCoverImgViewBottomConstraint.constant = Self.coverBottomConstant
         topMediaScrollView.customDelegate = self
     }
     
     private func setUpRatingContainerView() {
         ratingContainerView.layer.cornerRadius = 96 / 2
-        ratingContainerView.layer.shadowOffset = .init(width: -1, height: -2)
-        ratingContainerView.layer.shadowRadius = 20
-        ratingContainerView.layer.shadowPath = nil
-        ratingContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.08).cgColor
-        ratingContainerView.layer.shadowOpacity = 1
+        ratingContainerView.addAccentShadow()
     }
     
     private func setUpRatingView() {
@@ -71,9 +96,15 @@ class MovieDetailViewController: ViewController {
         ratingCountLbl.text = isVoteAverageInValid ? "N/A" : "\(data?.voteCount ?? 0)"
     }
     
+    func handleWatchListStateChange() {
+        movieNavItem?.watchListBtn.tintColor = viewModel?.movieStates?.watchlist == true ? .R100 : .white
+    }
+    
     private func animateIMDBRatingView(isShow: Bool, isAnimate: Bool = true) {
         UIView.easeSpringAnimation(isAnimate: isAnimate) {[weak self] in
-            self?.imdbRatingContainerView.transform = isShow ? .identity : .init(translationX: 24, y: 0)
+            self?.imdbVoteCountLbl.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.imdbLogoImgView.transform = isShow ? .identity : .init(translationX: 0, y: -24)
+            self?.imdbScoreLbl.transform = isShow ? .identity : .init(scaleX: 0.009, y: 0.009)
             self?.imdbRatingContainerView.alpha = isShow ? 1 : 0
         }
     }
@@ -89,6 +120,8 @@ class MovieDetailViewController: ViewController {
     @IBOutlet weak var imdbRatingContainerView: UIView!
     @IBOutlet weak var imdbScoreLbl: UILabel!
     @IBOutlet weak var imdbVoteCountLbl: UILabel!
+    @IBOutlet weak var imdbLogoImgView: UIImageView!
+    @IBOutlet weak var ratingProgressView: UIView!
     
     var movieNavItem: MovieDetailNavigationItem? {
         return navigationItem as? MovieDetailNavigationItem
@@ -98,11 +131,16 @@ class MovieDetailViewController: ViewController {
         return navigationController as? MainNavViewcontroller
     }
     
+    private var statusBarHidableNavController: StatusBarHidableNavController? {
+        return navigationController as? StatusBarHidableNavController
+    }
+    
     static let coverBottomConstant: CGFloat = UIScreen.main.bounds.height * 0.3
     static let minCoverbottomConstant: CGFloat = 52
     static let minRatingContainerCenterYConstant: CGFloat = 16
     
     var viewModel: MovieDetailViewModelProtocol?
+    var mainContainer: MainContainerViewDelegate?
 }
 
 //  MARK: - Movie table view custom delegates.
@@ -124,9 +162,15 @@ extension MovieDetailViewController: MovieDetailTableViewDelegate, MainTopMediaS
         
         let percentage = calculateScrolledPercentage(const: newBottomConstant)
         
-        print(percentage)
+//        print(percentage)
         
         movieCoverImgViewBottomConstraint.constant = newBottomConstant
+        
+        topMediaScrollView.layoutIfNeeded()
+    }
+    
+    func handleClickedFavorite() {
+        viewModel?.handleFavourateMovieStateChange()
     }
     
     private func calculateScrolledPercentage(const: CGFloat) -> CGFloat {
@@ -157,7 +201,35 @@ extension MovieDetailViewController: MovieDetailViewProtocol {
         animateIMDBRatingView(isShow: true)
     }
     
+    func handleRatingStateChange() {
+        var ratedStars: Float = 0
+        
+        if case .ratedStatusData(let ratedData) = viewModel?.movieStates?.rated {
+            ratedStars = ratedData.value ?? 0
+        }
+        
+        ratedStars /= 10
+        
+        UIView.easeSpringAnimation {
+            self.ratingProgressView.transform = .init(translationX: CGFloat(ratedStars * 24), y: 0)
+        }
+    }
+    
+    func handleFavourateStateChange() {
+        movieDetailTableView.isFavourate = viewModel?.movieStates?.favorite == true
+    }
+    
     func failedIMDBRating(with error: Error?) {
+        print(error)
+    }
+    
+    func handleMovieStatesChanged() {
+        handleWatchListStateChange()
+        handleRatingStateChange()
+        handleFavourateStateChange()
+    }
+    
+    func failedMovieStates(with error: Error?) {
         print(error)
     }
 }

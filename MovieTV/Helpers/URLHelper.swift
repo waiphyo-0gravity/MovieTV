@@ -29,11 +29,11 @@ enum URLHelper {
             case .original(let url):
                 guard let url = url else { return nil }
                 
-                return "\(URLHelper.imgBaseURL)/original/\(url)"
+                return "\(URLHelper.imgBaseURL)/original\(url)"
             case .customWidth(let width, let url):
                 guard let url = url else { return nil}
                 
-                return "\(URLHelper.imgBaseURL)/w\(width)/\(url)"
+                return "\(URLHelper.imgBaseURL)/w\(width)\(url)"
             }
         }
     }
@@ -58,7 +58,7 @@ enum URLHelper {
     }
     
     enum MovieList: URLHelperProtocol {
-        case genres, movieList(MainViewModel.MovieListType), movieDetail, imdb
+        case genres, movieList(MainViewModel.MovieListType), movieDetail, imdb, movieStates(movieID: Int)
         
         var url: URL? {
             switch self {
@@ -79,6 +79,8 @@ enum URLHelper {
                 return "/movie/"
             case .imdb:
                 return ""
+            case .movieStates(let movieID):
+                return "/movie/\(movieID)/account_states"
             }
         }
         
@@ -92,6 +94,46 @@ enum URLHelper {
                 return "/movie/popular"
             case .recommendations:
                 return "/movie/\(URLHelper.movieID)/recommendations"
+            }
+        }
+    }
+    
+    enum Search: URLHelperProtocol {
+        case searchMovie
+        
+        var url: URL? {
+            return URL(string: "\(URLHelper.baseURL)\(path)")
+        }
+        
+        var path: String {
+            switch self {
+            case .searchMovie:
+                return "/search/movie"
+            }
+        }
+    }
+    
+    enum Account: URLHelperProtocol {
+        case addWatchList, addFavorite, addRatings(movieID: Int), watchList, ratedList, favorite
+        
+        var url: URL? {
+            return URL(string: "\(URLHelper.baseURL)\(path)")
+        }
+        
+        var path: String {
+            switch self {
+            case .favorite:
+                return "/account/0/favorite/movies"
+            case .watchList:
+                return "/account/0/watchlist/movies"
+            case .ratedList:
+                return "/account/0/rated/movies"
+            case .addWatchList:
+                return "/account/0/watchlist"
+            case .addFavorite:
+                return "/account/0/favorite"
+            case .addRatings(let movieID):
+                return "/movie/\(movieID)/rating"
             }
         }
     }

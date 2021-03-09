@@ -39,8 +39,8 @@ class FilterCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
             return
         }
         
-        UIView.transition(with: nameLbl, duration: 0.3, options: .transitionCrossDissolve) {
-            self.nameLbl.textColor = txtColor
+        UIView.transition(with: nameLbl, duration: 0.3, options: .transitionCrossDissolve) {[weak self] in
+            self?.nameLbl.textColor = txtColor
         }
     }
     

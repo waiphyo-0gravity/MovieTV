@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Container View Controller-->
+        <scene sceneID="hrn-EZ-dCJ">
+            <objects>
+                <viewController storyboardIdentifier="maincontainerviewcontroller" id="9sT-zr-Fjv" customClass="MainContainerViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ct0-Ud-suC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lWi-IJ-AIG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4i-BZ-1ev">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="P9r-3q-eeW"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="lWi-IJ-AIG" firstAttribute="leading" secondItem="ct0-Ud-suC" secondAttribute="leading" id="0zL-uG-uY1"/>
+                            <constraint firstItem="lWi-IJ-AIG" firstAttribute="top" secondItem="ct0-Ud-suC" secondAttribute="top" id="3tN-r0-j04"/>
+                            <constraint firstItem="X4i-BZ-1ev" firstAttribute="top" secondItem="ct0-Ud-suC" secondAttribute="top" id="8yx-Wr-5Ty"/>
+                            <constraint firstAttribute="bottom" secondItem="lWi-IJ-AIG" secondAttribute="bottom" id="F7u-Ev-78i"/>
+                            <constraint firstAttribute="trailing" secondItem="lWi-IJ-AIG" secondAttribute="trailing" id="V5D-h7-0rd"/>
+                            <constraint firstAttribute="bottom" secondItem="X4i-BZ-1ev" secondAttribute="bottom" id="kfV-HX-GON"/>
+                            <constraint firstAttribute="trailing" secondItem="X4i-BZ-1ev" secondAttribute="trailing" id="v8J-ZP-dyV"/>
+                            <constraint firstItem="X4i-BZ-1ev" firstAttribute="leading" secondItem="ct0-Ud-suC" secondAttribute="leading" id="whe-6o-R38"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="aboutMeContainerView" destination="lWi-IJ-AIG" id="mNT-JB-lVg"/>
+                        <outlet property="mainContainerView" destination="X4i-BZ-1ev" id="G2K-ZT-GGm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HmD-v1-NMc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-168" y="68"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

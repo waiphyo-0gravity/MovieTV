@@ -15,7 +15,7 @@ protocol LoginViewProtocol: AnyObject {
     func failedLogin(error: Error?)
 }
 
-class LoginViewController: ViewController {
+class LoginViewController: ViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
@@ -29,11 +29,7 @@ class LoginViewController: ViewController {
     }
     
     @IBAction func clickLoginBtn(_ sender: Any) {
-        view.endEditing(true)
-        
-        currentViewState = .update
-        
-        viewModel?.logIn(username: userNameTxtField.txtField.text, password: passTxtField.txtField.text)
+        makeLogin()
     }
     
     @objc private func handleKeyboard(notification: NSNotification) {
@@ -52,6 +48,19 @@ class LoginViewController: ViewController {
     
     @objc private func handleTxtFieldChange(_ txtField: UITextField) {
         handleInputFieldsChange()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch true {
+        case textField == userNameTxtField.txtField:
+            passTxtField.txtField.becomeFirstResponder()
+        case textField == passTxtField.txtField:
+            makeLogin()
+        default:
+            break
+        }
+        
+        return true
     }
     
 //    MARK: - Varuables declaration.
@@ -135,16 +144,30 @@ extension LoginViewController {
     private func setUpHelloLabel() {
         guard let text = helloLbl.text else { return }
         
-        let mutableText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont(name: "Calibri-Bold", size: 42.0)!])
-        mutableText.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "Calibri", size: 42)!, range: NSRange(location: 0, length: 5))
+        let mutableText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont(name: UIFont.FontStyle.bold.rawValue, size: 42.0)!])
+        mutableText.addAttribute(NSAttributedString.Key.font, value: UIFont(name: UIFont.FontStyle.regular.rawValue, size: 42)!, range: NSRange(location: 0, length: 5))
         helloLbl.attributedText = mutableText
     }
     
     private func bindActions() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        userNameTxtField.delegate = self
+        userNameTxtField.txtField.returnKeyType = .next
         userNameTxtField.txtField.addTarget(self, action: #selector(handleTxtFieldChange(_:)), for: .editingChanged)
+        
+        passTxtField.delegate = self
+        passTxtField.txtField.returnKeyType = .go
         passTxtField.txtField.addTarget(self, action: #selector(handleTxtFieldChange(_:)), for: .editingChanged)
+    }
+    
+    private func makeLogin() {
+        view.endEditing(true)
+        
+        currentViewState = .update
+        
+        viewModel?.logIn(username: userNameTxtField.txtField.text, password: passTxtField.txtField.text)
     }
     
 //    MARK: - Animations.

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Watchlist-->
+        <scene sceneID="plL-as-E0J">
+            <objects>
+                <viewController storyboardIdentifier="accountmoviesviewcontroller" id="Vhw-fU-cPN" customClass="AccountMoviesViewController" customModule="MovieTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YkT-RV-NaR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NYp-hl-ugl" customClass="SearchCollectionView" customModule="MovieTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="24" minimumInteritemSpacing="24" id="glb-j7-lyt">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mIU-Xw-UVM">
+                                <rect key="frame" x="197" y="56" width="20" height="20"/>
+                                <color key="color" name="Primary100_Adapt"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4jW-bD-koX"/>
+                        <color key="backgroundColor" name="S10"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="NYp-hl-ugl" secondAttribute="bottom" id="6JD-PC-Ibc"/>
+                            <constraint firstItem="mIU-Xw-UVM" firstAttribute="centerX" secondItem="4jW-bD-koX" secondAttribute="centerX" id="PTs-tN-YPd"/>
+                            <constraint firstItem="NYp-hl-ugl" firstAttribute="leading" secondItem="4jW-bD-koX" secondAttribute="leading" id="Zpw-NQ-m3Z"/>
+                            <constraint firstItem="4jW-bD-koX" firstAttribute="trailing" secondItem="NYp-hl-ugl" secondAttribute="trailing" id="lu5-SE-GR6"/>
+                            <constraint firstItem="NYp-hl-ugl" firstAttribute="top" secondItem="4jW-bD-koX" secondAttribute="top" id="wjw-sN-JEX"/>
+                            <constraint firstItem="mIU-Xw-UVM" firstAttribute="top" secondItem="4jW-bD-koX" secondAttribute="top" constant="12" id="zaX-PI-kbY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Watchlist" id="w9h-te-BTa"/>
+                    <connections>
+                        <outlet property="accountMoviesCollectionView" destination="NYp-hl-ugl" id="4PG-BK-cQT"/>
+                        <outlet property="activityIndicatorView" destination="mIU-Xw-UVM" id="xWN-la-N3g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfa-uI-8ne" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="81"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Primary100_Adapt">
+            <color red="0.075000002980232239" green="0.082000002264976501" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="S10">
+            <color red="0.96899998188018799" green="0.97600001096725464" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -12,14 +12,17 @@ import NetworkingFramework
 protocol MovieDetailWebServiceInputProtocol {
     var viewModel: MovieDetailWebServiceOutputProtocol? { get set }
     var apiKey: String? { get }
+    var sessionID: String? { get }
     
     func getMovieDetail(for movieID: Int)
     func getIMDBRating(for imdbID: String)
+    func getMovieStates(for movieID: Int)
 }
 
 protocol MovieDetailWebServiceOutputProtocol: AnyObject {
     func responseFromMovieDetail(isSuccess: Bool, data: MovieDetailModel?, error: Error?)
     func responseFromIMDRating(isSuccess: Bool, data: OMDBDataModel?, error: Error?)
+    func responseFromMovieStates(isSuccess: Bool, data: MovieStatesModel?, error: Error?)
 }
 
 //  MARK: - Declare optional functions.
@@ -62,7 +65,25 @@ class MovieDetailWebService: MovieDetailWebServiceInputProtocol {
             }
     }
     
+    func getMovieStates(for movieID: Int) {
+        guard let url = URLHelper.MovieList.movieStates(movieID: movieID).url else { return }
+        
+        NetworkingFramework.request(url: url, method: .get, urlQueries: [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "session_id", value: sessionID)
+        ])
+            .response(dataType: MovieStatesModel.self) {[weak self] (data, response, error) in
+                guard let data = data else {
+                    self?.viewModel?.responseFromMovieStates(isSuccess: false, data: nil, error: error)
+                    return
+                }
+                
+                self?.viewModel?.responseFromMovieStates(isSuccess: true, data: data, error: error)
+            }
+    }
+    
     weak var viewModel: MovieDetailWebServiceOutputProtocol?
     
     var apiKey: String? { UserDefaultsHelper.shared.apiKey }
+    var sessionID: String? { UserDefaultsHelper.shared.sessionID }
 }

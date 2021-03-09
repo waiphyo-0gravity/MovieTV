@@ -12,14 +12,14 @@ class MainNavigationItem: UINavigationItem {
     
     let menuBtn: MovieTVButton = {
         let temp = MovieTVButton()
-        temp.tintColor = UIColor(named: "Primary100")
+        temp.tintColor = UIColor.Primary100_Adapt
         temp.setImage(UIImage(named: "menu_icon"), for: .normal)
         return temp
     }()
     
     let searchBtn: MovieTVButton = {
         let temp = MovieTVButton()
-        temp.tintColor = UIColor(named: "Primary100")
+        temp.tintColor = UIColor.Primary100_Adapt
         temp.setImage(UIImage(named: "search_icon"), for: .normal)
         return temp
     }()

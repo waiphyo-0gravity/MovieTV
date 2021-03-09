@@ -27,16 +27,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR5-eH-sBh">
-                        <rect key="frame" x="26" y="48" width="304" height="24"/>
+                        <rect key="frame" x="26" y="48" width="304" height="28"/>
                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="24"/>
                         <color key="textColor" name="C300"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="QAk-jn-4ES">
-                        <rect key="frame" x="26" y="88" width="202" height="69"/>
+                        <rect key="frame" x="26" y="92" width="202" height="65"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRf-me-H47">
-                                <rect key="frame" x="0.0" y="3.5" width="50" height="62"/>
+                                <rect key="frame" x="0.0" y="1.5" width="50" height="62"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ST-18-kIS">
                                         <rect key="frame" x="6" y="6" width="38" height="50"/>
@@ -54,10 +54,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euM-mZ-sEH">
-                                <rect key="frame" x="76" y="2" width="50" height="65"/>
+                                <rect key="frame" x="76" y="2" width="50" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5f-Wl-lDp">
-                                        <rect key="frame" x="4" y="4" width="42" height="57"/>
+                                        <rect key="frame" x="4" y="4" width="42" height="53"/>
                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
                                         <color key="textColor" name="S70"/>
                                         <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKD-2g-WrH">
-                                <rect key="frame" x="152" y="27" width="50" height="15"/>
+                                <rect key="frame" x="152" y="24" width="50" height="17.5"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="15"/>
                                 <color key="textColor" name="S70"/>
                                 <nil key="highlightedColor"/>
@@ -90,9 +90,10 @@
                             <constraint firstAttribute="width" constant="56" id="6Nm-eD-OjO"/>
                             <constraint firstAttribute="height" constant="56" id="E1a-eT-pGh"/>
                         </constraints>
-                        <state key="normal" image="add_to_wishlist_icon"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="favorite_fill_icon"/>
                         <connections>
-                            <action selector="handleClickedWishListBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PDq-EQ-ZOb"/>
+                            <action selector="handleClickedFavoriteBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebN-Gg-VlV"/>
                         </connections>
                     </button>
                 </subviews>
@@ -112,19 +113,19 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="favoriteBtn" destination="ZJl-cG-I9K" id="6Yh-ud-bd9"/>
                 <outlet property="movieDurationLbl" destination="kKD-2g-WrH" id="FdF-Hh-CUn"/>
                 <outlet property="movieReleasedDateLbl" destination="4ST-18-kIS" id="ryC-Mp-32y"/>
                 <outlet property="movieTitleLbl" destination="DR5-eH-sBh" id="Z5d-2g-L7w"/>
                 <outlet property="pgLbl" destination="K5f-Wl-lDp" id="Qs3-Ri-fyw"/>
                 <outlet property="pgLblBgView" destination="euM-mZ-sEH" id="kGz-4h-6fd"/>
                 <outlet property="releasedDateBgView" destination="IRf-me-H47" id="cux-td-NY5"/>
-                <outlet property="wishListBtn" destination="ZJl-cG-I9K" id="cfn-R7-beC"/>
             </connections>
             <point key="canvasLocation" x="-62.318840579710148" y="139.62053571428569"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="add_to_wishlist_icon" width="24" height="24"/>
+        <image name="favorite_fill_icon" width="16" height="16"/>
         <namedColor name="C300">
             <color red="0.21199999749660492" green="0.24699999392032623" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

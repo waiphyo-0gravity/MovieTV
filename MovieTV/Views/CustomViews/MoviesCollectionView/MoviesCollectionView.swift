@@ -10,11 +10,13 @@ import UIKit
 
 protocol MoviesCollectionViewDelegate: AnyObject {
     func choosedMovie(at indexPath: IndexPath)
+    func reachPaging()
 }
 
 class MoviesCollectionView: UICollectionView {
     
     weak var customDelegate: MoviesCollectionViewDelegate?
+    var isPagingInclude: Bool = false
     
     var data: [MovieModel] = [] {
         didSet {
@@ -35,6 +37,7 @@ class MoviesCollectionView: UICollectionView {
     
     private func initial() {
         register(MoviesCollectionViewCell.createNib(), forCellWithReuseIdentifier: MoviesCollectionViewCell.CELL_IDENTIFIER)
+        register(PagingLoadingCollectionViewCell.createNib(), forCellWithReuseIdentifier: PagingLoadingCollectionViewCell.CELL_IDENTIFIER)
         contentInset = .init(top: 0, left: horizontalContentInset, bottom: 0, right: horizontalContentInset)
         dataSource = self
         delegate = self
@@ -45,14 +48,37 @@ class MoviesCollectionView: UICollectionView {
 //  MARK: - Collection view delegates.
 extension MoviesCollectionView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MoviesCollectionViewCellDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return data.count + (isPagingInclude ? 1 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.CELL_IDENTIFIER, for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
+        switch true {
+        case indexPath.row < data.count:
+            return getMovieCollectionCell(cellForItemAt: indexPath)
+        default:
+            return getPagingCell(cellForItemAt: indexPath)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard indexPath.row >= data.count else { return }
+        
+        customDelegate?.reachPaging()
+    }
+    
+    private func getMovieCollectionCell(cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.CELL_IDENTIFIER, for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
         
         cell.data = data[indexPath.row]
         cell.delegate = self
+        
+        return cell
+    }
+    
+    private func getPagingCell(cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: PagingLoadingCollectionViewCell.CELL_IDENTIFIER, for: indexPath) as? PagingLoadingCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.activityIndicator.startAnimating()
         
         return cell
     }

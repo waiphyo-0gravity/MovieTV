@@ -28,4 +28,28 @@ extension UIColor {
     @nonobjc class var G100: UIColor {
         return UIColor(named: "G100")!
     }
+    
+    @nonobjc class var Primary100_Adapt: UIColor {
+        return UIColor(named: "Primary100_Adapt")!
+    }
+    
+    @nonobjc class var Primary100: UIColor {
+        return UIColor(named: "Primary100")!
+    }
+    
+    @nonobjc class var MenuGradient: UIColor {
+        return UIColor(named: "MenuGradient")!
+    }
+    
+    @nonobjc class var P300: UIColor {
+        return UIColor(named: "P300")!
+    }
+    
+    @nonobjc class var C75: UIColor {
+        return UIColor(named: "C75")!
+    }
+    
+    @nonobjc class var C300: UIColor {
+        return UIColor(named: "C300")!
+    }
 }

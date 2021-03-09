@@ -14,8 +14,13 @@ protocol MovieDetailViewModelProtocol: AnyObject {
     var imdbData: OMDBDataModel? { get set }
     var movieDetailData: MovieDetailModel? { get set }
     var webService: MovieDetailWebServiceInputProtocol? { get set }
+    var accountWebService: AccountWebServiceInputProtocol? { get set }
+    var movieStates: MovieStatesModel? { get set }
     
     func viewDidLoad()
+    func handleWatchMovieStateChange()
+    func handleFavourateMovieStateChange()
+    func handleClickedRatingBtn(_ sender: UIButton, from vc: UIViewController?)
 }
 
 class MovieDetailViewModel: MovieDetailViewModelProtocol {
@@ -23,6 +28,7 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
         guard let movieID = data?.id else { return }
         
         webService?.getMovieDetail(for: movieID)
+        webService?.getMovieStates(for: movieID)
     }
     
     private func getIMDBRating() {
@@ -31,16 +37,60 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
         webService?.getIMDBRating(for: imdbID)
     }
     
-    static func createModule(with data: MovieModel?) -> UIViewController? {
+    func handleWatchMovieStateChange() {
+        guard let mediaID = data?.id else { return }
+        
+        movieStates?.watchlist?.toggle()
+        
+        accountWebService?.postWatchMovieList(mediaID: mediaID, isAdding: movieStates?.watchlist == true)
+    }
+    
+    func handleFavourateMovieStateChange() {
+        guard let mediaID = data?.id else { return }
+        
+        movieStates?.favorite?.toggle()
+        
+        accountWebService?.postFavouriteMovie(mediaID: mediaID, isAdding: movieStates?.favorite == true)
+    }
+    
+    func handleClickedRatingBtn(_ sender: UIButton, from vc: UIViewController?) {
+        guard let ratingVC = UIViewController.RatingViewController as? RatingViewController else { return }
+        
+        if case .ratedStatusData(let ratedData) = movieStates?.rated,
+           let ratedValue = ratedData.value {
+            ratingVC.currentRating = ratedValue / 2
+        }
+        
+        ratingVC.preferredContentSize = RatingViewController.ratingVCSize
+        
+        ratingVC.delegate = self
+        
+        ratingVC.modalPresentationStyle = .popover
+        
+        let popOverVC = ratingVC.popoverPresentationController
+        popOverVC?.delegate = vc as? UIPopoverPresentationControllerDelegate
+        popOverVC?.backgroundColor = .white
+        popOverVC?.sourceView = sender
+        popOverVC?.sourceRect = sender.bounds
+        popOverVC?.permittedArrowDirections = [.down, .up]
+        
+        vc?.present(ratingVC, animated: true)
+    }
+    
+    static func createModule(with data: MovieModel?, mainContainer: MainContainerViewDelegate?) -> UIViewController? {
         guard let viewController = UIViewController.MovieDetailViewController as? MovieDetailViewController else { return nil }
         
-        let viewModel: MovieDetailViewModelProtocol & MovieDetailWebServiceOutputProtocol = MovieDetailViewModel()
+        let viewModel: MovieDetailViewModelProtocol & MovieDetailWebServiceOutputProtocol & AccountWebServiceOutputProtocol = MovieDetailViewModel()
         var webService: MovieDetailWebServiceInputProtocol = MovieDetailWebService()
+        var accountWebService: AccountWebServiceInputProtocol = AccountWebService()
         
+        viewController.mainContainer = mainContainer
         viewController.viewModel = viewModel
         viewModel.view = viewController
         viewModel.data = data
         viewModel.webService = webService
+        viewModel.accountWebService = accountWebService
+        accountWebService.viewModel = viewModel
         webService.viewModel = viewModel
         
         return viewController
@@ -51,10 +101,33 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
     var imdbData: OMDBDataModel?
     var movieDetailData: MovieDetailModel?
     var webService: MovieDetailWebServiceInputProtocol?
+    var accountWebService: AccountWebServiceInputProtocol?
+    var movieStates: MovieStatesModel? = .init(id: 0, favorite: false, rated: .ratedStatus(false), watchlist: false)
+}
+//  MARK: - Rating view delegates.
+extension MovieDetailViewModel: RatingViewControllerDelegate {
+    func handleRatingChanged(rating: Float) {
+        guard let movieID = data?.id else { return }
+
+        if rating <= 0 {
+            accountWebService?.deleteRatingsMovie(movieID: movieID)
+            movieStates?.rated = .ratedStatus(false)
+        } else {
+            accountWebService?.postRatingsMovie(movieID: movieID, ratings: rating)
+            movieStates?.rated = .ratedStatusData(.init(value: rating))
+            
+            if movieStates?.watchlist != false {
+                movieStates?.watchlist = false
+                view?.handleWatchListStateChange()
+            }
+        }
+        
+        view?.handleRatingStateChange()
+    }
 }
 
 //  MARK: - WEB_SERVICE -> VIEW_MODEL
-extension MovieDetailViewModel: MovieDetailWebServiceOutputProtocol {
+extension MovieDetailViewModel: MovieDetailWebServiceOutputProtocol, AccountWebServiceOutputProtocol {
     func responseFromMovieDetail(isSuccess: Bool, data: MovieDetailModel?, error: Error?) {
         if isSuccess, let data = data {
             movieDetailData = data
@@ -71,6 +144,15 @@ extension MovieDetailViewModel: MovieDetailWebServiceOutputProtocol {
             view?.handleIMDBRatingChanged()
         } else {
             view?.failedIMDBRating(with: error)
+        }
+    }
+    
+    func responseFromMovieStates(isSuccess: Bool, data: MovieStatesModel?, error: Error?) {
+        if isSuccess, let data = data {
+            movieStates = data
+            view?.handleMovieStatesChanged()
+        } else {
+            view?.failedMovieStates(with: error)
         }
     }
 }

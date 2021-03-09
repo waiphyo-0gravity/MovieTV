@@ -22,7 +22,7 @@ class LoginViewModel: LoginViewModelProtocol {
     weak var view: LoginViewProtocol?
     var webService: AuthenticationWebServiceInputProtocol?
     
-    var mainViewController: UIViewController? { MainViewModel.createModule( isIncludeNavigation: true) }
+    var mainViewController: UIViewController? { MainContainerViewModel.createModule() }
     
     var sessionID: String? {
         get {
@@ -47,8 +47,8 @@ class LoginViewModel: LoginViewModelProtocol {
     func routToMainView(from view: UIViewController?) {
         guard let mainVC = mainViewController else { return }
         
-        mainVC.modalPresentationStyle = .fullScreen
-        view?.present(mainVC, animated: true)
+        UIApplication.shared.firstKeyWindow?.rootViewController = mainVC
+        UIApplication.shared.firstKeyWindow?.makeKeyAndVisible()
     }
     
     static func createModule() -> UIViewController? {

@@ -24,4 +24,24 @@ extension UIViewController {
     @nonobjc class var MovieDetailViewController: UIViewController? {
         return UIStoryboard.MovieDetail?.instantiateViewController(withIdentifier: "moviedetailviewcontroller")
     }
+    
+    @nonobjc class var MainContainerViewController: UIViewController? {
+        return UIStoryboard.MainContainer?.instantiateViewController(withIdentifier: "maincontainerviewcontroller")
+    }
+    
+    @nonobjc class var MenuViewController: UIViewController? {
+        return UIStoryboard.Menu?.instantiateViewController(withIdentifier: "menuviewcontroller")
+    }
+    
+    @nonobjc class var SearchViewController: UIViewController? {
+        return UIStoryboard.Search?.instantiateViewController(withIdentifier: "searchviewcontroller")
+    }
+    
+    @nonobjc class var AccountMoviesViewController: UIViewController? {
+        return UIStoryboard.AccountMovies?.instantiateViewController(withIdentifier: "accountmoviesviewcontroller")
+    }
+    
+    @nonobjc class var RatingViewController: UIViewController? {
+        return UIStoryboard.MovieDetail?.instantiateViewController(withIdentifier: "ratingviewcontroller")
+    }
 }

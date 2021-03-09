@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainBodyTableViewCellDelegate: AnyObject {
     func choosedMovie(at indexPath: IndexPath)
+    func reachPaging()
 }
 
 class MainBodyTableViewCell: UITableViewCell, NibableCellProtocol {
@@ -31,5 +32,9 @@ class MainBodyTableViewCell: UITableViewCell, NibableCellProtocol {
 extension MainBodyTableViewCell: MoviesCollectionViewDelegate {
     func choosedMovie(at indexPath: IndexPath) {
         delegate?.choosedMovie(at: indexPath)
+    }
+    
+    func reachPaging() {
+        delegate?.reachPaging()
     }
 }

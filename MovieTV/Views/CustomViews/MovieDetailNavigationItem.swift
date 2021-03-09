@@ -12,13 +12,21 @@ class MovieDetailNavigationItem: UINavigationItem {
     let leftBackBtn: MovieTVButton = {
         let temp = MovieTVButton(frame: .init(x: 0, y: 0, width: 40, height: 40))
         temp.layer.cornerRadius = 40 / 2
-        temp.layer.shadowOffset = .init(width: -1, height: -2)
-        temp.layer.shadowRadius = 20
-        temp.layer.shadowPath = nil
-        temp.layer.shadowColor = UIColor.black.withAlphaComponent(0.08).cgColor
-        temp.layer.shadowOpacity = 1
+        temp.addAccentShadow()
+        temp.adjustsImageWhenHighlighted = false
         temp.backgroundColor = .S10
         temp.setImage(UIImage(named: "back_icon"), for: .normal)
+        return temp
+    }()
+    
+    let watchListBtn: MovieTVButton = {
+        let temp = MovieTVButton(frame: .init(x: 0, y: 0, width: 40, height: 40))
+        temp.tintColor = .white
+        temp.layer.cornerRadius = 40 / 2
+        temp.addAccentShadow()
+        temp.adjustsImageWhenHighlighted = false
+        temp.backgroundColor = .Primary100
+        temp.setImage(UIImage(named: "watchlist_fill_icon"), for: .normal)
         return temp
     }()
     
@@ -32,5 +40,10 @@ class MovieDetailNavigationItem: UINavigationItem {
         leftSpace.width = 16
         let backBarButtonItem = UIBarButtonItem(customView: leftBackBtn)
         leftBarButtonItems = [leftSpace, backBarButtonItem]
+        
+        let rightSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        rightSpace.width = 16
+        let favourateBarButtonItem = UIBarButtonItem(customView: watchListBtn)
+        rightBarButtonItems = [rightSpace, favourateBarButtonItem]
     }
 }

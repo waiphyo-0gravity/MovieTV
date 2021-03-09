@@ -112,7 +112,9 @@ class TagCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
         statusVerticalShapeLayer.removeAllAnimations()
         let anim = CABasicAnimation(keyPath: "transform.rotation")
         anim.duration = isAnimate ? 0 : 0.3
-        anim.fromValue = value ? 0 : CGFloat.pi / 4
+        if isAnimate {
+            anim.fromValue = value ? 0 : CGFloat.pi / 4
+        }
         anim.toValue = value ? CGFloat.pi / 4 : 0
         anim.fillMode = .both
         anim.isRemovedOnCompletion = false
@@ -120,7 +122,9 @@ class TagCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
         
         let colorChangeAnim = CABasicAnimation(keyPath: "fillColor")
         colorChangeAnim.duration = isAnimate ? 0 : 0.3
-        colorChangeAnim.fromValue = value ? UIColor(named: "C75")?.cgColor : UIColor(named: "R100")?.cgColor
+        if isAnimate {
+            colorChangeAnim.fromValue = value ? UIColor(named: "C75")?.cgColor : UIColor(named: "R100")?.cgColor
+        }
         colorChangeAnim.toValue = value ? UIColor(named: "R100")?.cgColor : UIColor(named: "C75")?.cgColor
         colorChangeAnim.isRemovedOnCompletion = false
         colorChangeAnim.fillMode = .forwards
