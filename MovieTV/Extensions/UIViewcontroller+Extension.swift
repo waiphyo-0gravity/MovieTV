@@ -44,4 +44,8 @@ extension UIViewController {
     @nonobjc class var RatingViewController: UIViewController? {
         return UIStoryboard.MovieDetail?.instantiateViewController(withIdentifier: "ratingviewcontroller")
     }
+    
+    @nonobjc class var AboutMeViewController: UIViewController? {
+        return UIStoryboard.AboutMe?.instantiateViewController(withIdentifier: "aboutmeviewcontroller")
+    }
 }

@@ -47,8 +47,37 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
         handleMenuClick()
     }
     
-    @objc func handleMenuContainerPanGesture(_ gesture: UIPanGestureRecognizer) {
-        print(gesture)
+    @objc func handleTapAboutMeGesture(_ gesture: UIPanGestureRecognizer) {
+        let aboutMeReduceHeigh = (view.safeAreaInsets.top + view.safeAreaInsets.bottom + 24 * 2)
+        let aboutMeScale = (view.frame.size.height - aboutMeReduceHeigh) / view.frame.size.height
+        
+        guard aboutMeContainerView.transform != CGAffineTransform(scaleX: aboutMeScale, y: aboutMeScale) else {
+            animateMenuView(to: 1, isAnimate: true)
+            
+            tapGesture?.isEnabled = true
+            menuController?.view.isUserInteractionEnabled = true
+            changeMenuPanGesture(isEnable: true)
+            aboutMeController?.animateMsgViews(isShow: false)
+            aboutMeController?.memojiImgView.stopAnimating()
+            return
+        }
+        
+        changeMenuPanGesture(isEnable: false)
+        menuController?.view.isUserInteractionEnabled = false
+        tapGesture?.isEnabled = false
+        aboutMeController?.animateMsgViews(isShow: true)
+        aboutMeController?.memojiImgView.startAnimating()
+        
+        let mainReduceHeigh = (view.safeAreaInsets.top + view.safeAreaInsets.bottom + 24 * 2)
+        let mainScale = (view.frame.size.height - mainReduceHeigh) / view.frame.size.height
+        
+        let mainViewTransform = CGAffineTransform(translationX: UIScreen.main.bounds.width + 60, y: 0).concatenating(CGAffineTransform(scaleX: mainScale, y: mainScale)).concatenating(CGAffineTransform(rotationAngle: (.pi/45)))
+        
+        UIView.easeSpringAnimation {
+            self.aboutBlurView.alpha = 1
+            self.aboutMeContainerView.transform = CGAffineTransform(scaleX: aboutMeScale, y: aboutMeScale)
+            self.mainContainerView.transform = mainViewTransform
+        }
     }
     
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
@@ -93,9 +122,6 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     }
     
     private func setUpGestures() {
-        let pang = UIPanGestureRecognizer(target: self, action: #selector(handleMenuContainerPanGesture(_:)))
-        aboutMeContainerView.addGestureRecognizer(pang)
-        
         menuPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         view.addGestureRecognizer(menuPanGesture!)
         
@@ -130,7 +156,10 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     }
     
     private func setUpAboutMeView() {
-        aboutMeController = AboutMeViewController()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapAboutMeGesture(_:)))
+        aboutMeContainerView.addGestureRecognizer(tapGesture)
+        
+        aboutMeController = UIViewController.AboutMeViewController as? AboutMeViewController
         
         guard let aboutMeController = aboutMeController else { return }
         
@@ -144,6 +173,13 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
         aboutMeController.view.trailingAnchor.constraint(equalTo: aboutMeContainerView.trailingAnchor).isActive = true
         aboutMeController.view.topAnchor.constraint(equalTo: aboutMeContainerView.topAnchor).isActive = true
         aboutMeController.view.bottomAnchor.constraint(equalTo: aboutMeContainerView.bottomAnchor).isActive = true
+        
+        aboutBlurView.alpha = 0
+        view.insertSubview(aboutBlurView, belowSubview: aboutMeContainerView)
+        aboutBlurView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        aboutBlurView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        aboutBlurView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        aboutBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     private func setUpMainView() {
@@ -193,6 +229,7 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
             usingSpringWithDamping: isHide ? 1 : 0.8, animations: {[weak self] in
                 guard let self = self else { return }
                 
+                self.aboutBlurView.alpha = 0
                 self.mainContainerView.transform = mainViewTransform
                 self.aboutMeController?.view.layer.cornerRadius = isHide ? 0 : Self.containerViewsCornerRadius
                 self.mainNavController?.view.layer.cornerRadius = isHide ? 0 : Self.containerViewsCornerRadius
@@ -206,6 +243,13 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var mainContainerView: UIView!
     @IBOutlet weak var aboutMeContainerView: UIView!
+    
+    private let aboutBlurView: UIVisualEffectView = {
+        let temp = UIVisualEffectView()
+        temp.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        temp.translatesAutoresizingMaskIntoConstraints = false
+        return temp
+    }()
     
     static let containerViewsCornerRadius: CGFloat = 60
     static let mainContainerTranlationRatio: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 2.2 / 3

@@ -12,7 +12,7 @@ protocol RatingViewControllerDelegate: AnyObject {
     func handleRatingChanged(rating: Float)
 }
 
-class RatingViewController: UIViewController {
+class RatingViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
