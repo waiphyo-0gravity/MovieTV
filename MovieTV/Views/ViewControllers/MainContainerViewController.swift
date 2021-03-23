@@ -17,7 +17,7 @@ protocol MainContainerViewDelegate: AnyObject {
     func changeStatusBar(to hidden: Bool)
     func handleMenuClick()
     func changeMenuPanGesture(isEnable: Bool)
-    func menuSelectionChanged(to type: MenuViewController.MenuSideNavType)
+    func menuSelectionChanged(to type: MenuViewModel.MenuSideNavType)
 }
 
 class MainContainerViewController: ViewController, UIScrollViewDelegate {
@@ -41,6 +41,10 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
+    }
+    
+    override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        mainNavController?.transition(isShow: isShow, isAnimate: isAnimate, completion: completion)
     }
     
     @objc func handleTapGesture() {
@@ -296,7 +300,7 @@ extension MainContainerViewController: MainContainerViewDelegate {
         menuPanGesture?.isEnabled = isEnable
     }
     
-    func menuSelectionChanged(to type: MenuViewController.MenuSideNavType) {
+    func menuSelectionChanged(to type: MenuViewModel.MenuSideNavType) {
         isMenuShowed = false
         
         animateMenuView(to: 0)

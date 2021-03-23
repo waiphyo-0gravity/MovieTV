@@ -35,7 +35,6 @@ class MovieDetailViewController: ViewController, UIPopoverPresentationController
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
-        viewModel?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +42,11 @@ class MovieDetailViewController: ViewController, UIPopoverPresentationController
         statusBarHidableNavController?.changeStatusBar(isHidden: true)
         mainContainer?.changeStatusBar(to: true)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel?.viewDidAppear()
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -63,6 +67,7 @@ class MovieDetailViewController: ViewController, UIPopoverPresentationController
     }
     
     private func initial() {
+        movieDetailTableView.isGuestUser = viewModel?.mappedUserType == .guest
         movieDetailTableView.data = viewModel?.data
         movieDetailTableView.customDelegate = self
         
@@ -162,7 +167,7 @@ extension MovieDetailViewController: MovieDetailTableViewDelegate, MainTopMediaS
         
         let percentage = calculateScrolledPercentage(const: newBottomConstant)
         
-//        print(percentage)
+        topMediaScrollView.setBackgroundBlurViewAlpha(to: 1 - percentage)
         
         movieCoverImgViewBottomConstraint.constant = newBottomConstant
         

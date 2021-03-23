@@ -30,10 +30,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="157-vI-kzn" customClass="MainTopMediaScrollView" customModule="MovieTV" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhG-Ru-sEO" customClass="MainTopMediaScrollView" customModule="MovieTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </scrollView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4F6-Fc-j7A" customClass="MovieDetailRatingView" customModule="MovieTV" customModuleProvider="target">
                                 <rect key="frame" x="36" y="268" width="426" height="96"/>
                                 <subviews>
@@ -194,17 +194,17 @@
                         <viewLayoutGuide key="safeArea" id="KKr-db-R60"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="top" secondItem="157-vI-kzn" secondAttribute="top" id="2MM-Yv-za3"/>
                             <constraint firstAttribute="trailing" secondItem="DTV-Z8-eJT" secondAttribute="trailing" id="3PM-gL-JFg"/>
+                            <constraint firstAttribute="top" secondItem="ZhG-Ru-sEO" secondAttribute="top" id="7Ew-cp-wRs"/>
                             <constraint firstItem="DTV-Z8-eJT" firstAttribute="top" secondItem="KKr-db-R60" secondAttribute="top" id="Jjp-lA-Hvv"/>
                             <constraint firstItem="4F6-Fc-j7A" firstAttribute="leading" secondItem="KKr-db-R60" secondAttribute="leading" constant="36" id="Mbd-z2-wtn"/>
-                            <constraint firstItem="157-vI-kzn" firstAttribute="leading" secondItem="q6W-j0-GOO" secondAttribute="leading" id="Xi5-yc-kkS"/>
+                            <constraint firstItem="KKr-db-R60" firstAttribute="trailing" secondItem="ZhG-Ru-sEO" secondAttribute="trailing" id="YwR-IK-xYY"/>
+                            <constraint firstItem="4F6-Fc-j7A" firstAttribute="centerY" secondItem="ZhG-Ru-sEO" secondAttribute="bottom" constant="16" id="ZgN-LA-MrR"/>
+                            <constraint firstItem="ZhG-Ru-sEO" firstAttribute="leading" secondItem="KKr-db-R60" secondAttribute="leading" id="bgA-Xm-OZj"/>
                             <constraint firstAttribute="trailing" secondItem="4F6-Fc-j7A" secondAttribute="trailing" constant="-48" id="dcE-n0-fJ2"/>
                             <constraint firstAttribute="bottom" secondItem="DTV-Z8-eJT" secondAttribute="bottom" id="fa0-iM-XpC"/>
-                            <constraint firstItem="157-vI-kzn" firstAttribute="bottom" secondItem="KKr-db-R60" secondAttribute="top" constant="256" id="gL2-Le-Z0B"/>
-                            <constraint firstAttribute="trailing" secondItem="157-vI-kzn" secondAttribute="trailing" id="orQ-RT-ePQ"/>
+                            <constraint firstItem="ZhG-Ru-sEO" firstAttribute="bottom" secondItem="KKr-db-R60" secondAttribute="top" constant="256" id="hgf-nf-gK6"/>
                             <constraint firstItem="DTV-Z8-eJT" firstAttribute="leading" secondItem="q6W-j0-GOO" secondAttribute="leading" id="y7G-Xv-smT"/>
-                            <constraint firstItem="4F6-Fc-j7A" firstAttribute="centerY" secondItem="157-vI-kzn" secondAttribute="bottom" constant="16" id="z4H-p7-hj3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6dX-Yb-U6H" customClass="MovieDetailNavigationItem" customModule="MovieTV" customModuleProvider="target"/>
@@ -213,15 +213,15 @@
                         <outlet property="imdbRatingContainerView" destination="gSd-Ca-Qgo" id="N0u-Uf-Ntl"/>
                         <outlet property="imdbScoreLbl" destination="JTS-4Y-Q5o" id="OcC-el-v0l"/>
                         <outlet property="imdbVoteCountLbl" destination="C1v-hv-aSc" id="n5S-Zd-LG0"/>
-                        <outlet property="movieCoverImgViewBottomConstraint" destination="gL2-Le-Z0B" id="g98-IL-UzH"/>
+                        <outlet property="movieCoverImgViewBottomConstraint" destination="hgf-nf-gK6" id="sLt-tZ-TXW"/>
                         <outlet property="movieDetailTableView" destination="DTV-Z8-eJT" id="Sbu-qb-6iJ"/>
                         <outlet property="ratingBtn" destination="GcM-dY-h2b" id="nT6-Sj-Mjq"/>
                         <outlet property="ratingContainerView" destination="4F6-Fc-j7A" id="4eG-OH-twa"/>
-                        <outlet property="ratingContainerViewCenterYConstraint" destination="z4H-p7-hj3" id="9CN-Rg-YyU"/>
+                        <outlet property="ratingContainerViewCenterYConstraint" destination="ZgN-LA-MrR" id="zUr-T8-ov8"/>
                         <outlet property="ratingCountLbl" destination="tEP-Ki-Gp4" id="aEv-Jh-QKs"/>
                         <outlet property="ratingProgressView" destination="D7e-AE-p4t" id="ttl-24-MbE"/>
                         <outlet property="ratingRatioLbl" destination="KOG-FK-QoQ" id="S1a-Uv-qR2"/>
-                        <outlet property="topMediaScrollView" destination="157-vI-kzn" id="xgH-dr-gBv"/>
+                        <outlet property="topMediaScrollView" destination="ZhG-Ru-sEO" id="uqE-6t-tl7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLJ-ei-PVD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -16,15 +16,16 @@ protocol MovieDetailViewModelProtocol: AnyObject {
     var webService: MovieDetailWebServiceInputProtocol? { get set }
     var accountWebService: AccountWebServiceInputProtocol? { get set }
     var movieStates: MovieStatesModel? { get set }
+    var mappedUserType: UserDefaultsHelper.UserType? { get }
     
-    func viewDidLoad()
+    func viewDidAppear()
     func handleWatchMovieStateChange()
     func handleFavourateMovieStateChange()
     func handleClickedRatingBtn(_ sender: UIButton, from vc: UIViewController?)
 }
 
 class MovieDetailViewModel: MovieDetailViewModelProtocol {
-    func viewDidLoad() {
+    func viewDidAppear() {
         guard let movieID = data?.id else { return }
         
         webService?.getMovieDetail(for: movieID)
@@ -103,6 +104,7 @@ class MovieDetailViewModel: MovieDetailViewModelProtocol {
     var webService: MovieDetailWebServiceInputProtocol?
     var accountWebService: AccountWebServiceInputProtocol?
     var movieStates: MovieStatesModel? = .init(id: 0, favorite: false, rated: .ratedStatus(false), watchlist: false)
+    var mappedUserType: UserDefaultsHelper.UserType? { UserDefaultsHelper.shared.mappedUserType }
 }
 //  MARK: - Rating view delegates.
 extension MovieDetailViewModel: RatingViewControllerDelegate {

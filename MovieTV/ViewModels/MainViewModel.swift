@@ -16,7 +16,7 @@ protocol MainViewModelProtocol {
     var movieList: MovieListModel? { get set }
     var isMovieListIncludePaging: Bool { get }
     
-    func viewDidLoad()
+    func viewWillAppear()
     func changedTagSelection(at index: Int)
     func callMovieListNextPage()
     func showSearchVC(from vc: UIViewController?)
@@ -24,9 +24,14 @@ protocol MainViewModelProtocol {
 }
 
 class MainViewModel: MainViewModelProtocol {
-    func viewDidLoad() {
-        webService?.getGenres()
-        webService?.getMovieList(for: movieListType, genres: selectedGenreIDs, page: 1)
+    func viewWillAppear() {
+        if genres.count == 0 {
+            webService?.getGenres()
+        }
+        
+        if movieList == nil {
+            webService?.getMovieList(for: movieListType, genres: selectedGenreIDs, page: 1)
+        }
     }
     
     func changedTagSelection(at index: Int) {
@@ -46,7 +51,10 @@ class MainViewModel: MainViewModelProtocol {
         guard let fromVC = vc,
               let searchVC = SearchViewModel.createModule() else { return }
         
-        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.modalPresentationStyle = .custom
+        searchVC.transitioningDelegate = transitioningDelegate
+        searchVC.modalPresentationCapturesStatusBarAppearance = true
+        
         fromVC.present(searchVC, animated: true)
     }
     
@@ -96,6 +104,7 @@ class MainViewModel: MainViewModelProtocol {
     }
     
     private var selectedGenreIDs: [Int] = []
+    private let transitioningDelegate = MovieTVTransitioningDelegate()
     
     enum MovieListType: CaseIterable {
         case inTheater, upComing, popular, recommendations

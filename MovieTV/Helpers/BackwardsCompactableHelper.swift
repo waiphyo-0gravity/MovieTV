@@ -24,7 +24,7 @@ class BackwardsCompactableHelper {
         
 //        let rootVC = UserDefaultsHelper.shared.sessionID == nil ? LoginViewModel.createModule() : MainViewModel.createModule(isIncludeNavigation: true)
         
-        let rootVC = UserDefaultsHelper.shared.sessionID == nil ? LoginViewModel.createModule() : MainContainerViewModel.createModule()
+        let rootVC = UserDefaultsHelper.shared.userType == nil ? LoginViewModel.createModule() : MainContainerViewModel.createModule()
         
 //        let rootVC = UIViewController.MainContainerViewController
         

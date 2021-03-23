@@ -69,6 +69,22 @@ class SearchViewController: ViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: 0.3, animations: {[weak self] in
+            self?.view.alpha = isShow ? 1 : 0
+            self?.navigationController?.view.alpha = isShow ? 1 : 0
+            self?.searchNavController?.navigationBar.transform = isShow ? .identity : .init(translationX: 0, y: -24)
+            self?.searchContainerView.transform = isShow ? .identity : .init(translationX: -24, y: 0)
+            self?.cancelBtn.transform = isShow ? .identity : .init(translationX: 24, y: 0)
+            self?.searchCountLbl.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.searchCollectionView.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+        }, completion: completion)
+    }
+    
     @IBAction func clickedCancelBtn(_ sender: Any) {
         view.endEditing(true)
         dismiss(animated: true)
@@ -152,6 +168,7 @@ class SearchViewController: ViewController {
     @IBOutlet weak var searchCollectionView: SearchCollectionView!
     @IBOutlet weak var topViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchCountLbl: UILabel!
+    @IBOutlet weak var cancelBtn: MovieTVButton!
     
     private var searchNavController: StatusBarHidableNavController? {
         return navigationController as? StatusBarHidableNavController

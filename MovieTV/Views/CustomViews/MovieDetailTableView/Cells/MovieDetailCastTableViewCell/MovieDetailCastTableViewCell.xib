@@ -57,6 +57,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="castCollectionView" destination="UWN-D1-BdV" id="DYy-Yf-GuV"/>
+                <outlet property="titleLbl" destination="7Tf-EK-yD6" id="gOa-Sq-Oej"/>
+                <outlet property="titleTopConstraint" destination="bWi-ua-KUt" id="1Pg-fb-gHp"/>
             </connections>
             <point key="canvasLocation" x="186.95652173913044" y="161.71875"/>
         </tableViewCell>

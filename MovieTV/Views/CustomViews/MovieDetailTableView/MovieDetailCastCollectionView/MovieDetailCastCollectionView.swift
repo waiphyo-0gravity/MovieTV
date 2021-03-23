@@ -16,6 +16,8 @@ class MovieDetailCastCollectionView: UICollectionView {
         }
     }
     
+    var cellType: MovieDetailCastTableViewCell.CellType = .cast
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initial()
@@ -39,10 +41,10 @@ extension MovieDetailCastCollectionView: UICollectionViewDataSource, UICollectio
         
         let currentData = data[indexPath.row]
         
-        let url = URLHelper.Image.customWidth(500, currentData.profilePath).urlStr
+        let url = URLHelper.Image.customWidth(200, currentData.profilePath).urlStr
         cell.castProfileImgView.setImg(url: url)
         cell.castNameLbl.text = currentData.name
-        cell.castRoleLbl.text = currentData.character
+        cell.castRoleLbl.text = cellType == .cast ? currentData.character : currentData.job
         
         return cell
     }

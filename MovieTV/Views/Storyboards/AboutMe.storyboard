@@ -27,19 +27,19 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgW-xV-UlQ">
-                                        <rect key="frame" x="0.0" y="202.5" width="414" height="413"/>
+                                        <rect key="frame" x="0.0" y="189" width="414" height="440"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="U7a-2e-rLp">
-                                                <rect key="frame" x="116" y="24" width="274" height="365"/>
+                                                <rect key="frame" x="116" y="24" width="274" height="392"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lx6-oo-rtn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="44"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7Z-QY-d1L" customClass="FlexableCornerRadiusView" customModule="MovieTV" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="197" height="41"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="212" height="44"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Hi! This is me, Wai Phyo." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpJ-x5-aYp">
-                                                                        <rect key="frame" x="12" y="12" width="173" height="17"/>
+                                                                        <rect key="frame" x="12" y="12" width="188" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                         <color key="textColor" name="C100"/>
                                                                         <nil key="highlightedColor"/>
@@ -63,13 +63,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDd-gn-jVO">
-                                                        <rect key="frame" x="0.0" y="49" width="274" height="58"/>
+                                                        <rect key="frame" x="0.0" y="52" width="274" height="64"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNn-Ik-paF" customClass="FlexableCornerRadiusView" customModule="MovieTV" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="274" height="58"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="274" height="64"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="So, I decided to craft this app as my first portfolio thing." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-cN-ruC">
-                                                                        <rect key="frame" x="12" y="12" width="250" height="34"/>
+                                                                        <rect key="frame" x="12" y="12" width="250" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                         <color key="textColor" name="C100"/>
                                                                         <nil key="highlightedColor"/>
@@ -93,13 +93,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-dt-zxc">
-                                                        <rect key="frame" x="0.0" y="115" width="274" height="41"/>
+                                                        <rect key="frame" x="0.0" y="124" width="274" height="44"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLk-OB-cUU" customClass="FlexableCornerRadiusView" customModule="MovieTV" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="85" height="41"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="83.5" height="44"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Enjoy!!!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ow-qC-jYI">
-                                                                        <rect key="frame" x="12" y="12" width="61" height="17"/>
+                                                                        <rect key="frame" x="12" y="12" width="59.5" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -123,19 +123,19 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kjb-PD-hx2">
-                                                        <rect key="frame" x="0.0" y="164" width="274" height="110"/>
+                                                        <rect key="frame" x="0.0" y="176" width="274" height="116"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30I-AG-qfF" customClass="FlexableCornerRadiusView" customModule="MovieTV" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="12" width="255" height="98"/>
+                                                                <rect key="frame" x="0.0" y="12" width="267.5" height="104"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Ooops!!! Almost forgot😅. Here are my social media...." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCg-WV-Pc0">
-                                                                        <rect key="frame" x="12" y="12" width="231" height="34"/>
+                                                                        <rect key="frame" x="12" y="12" width="243.5" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                         <color key="textColor" name="C100"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JhW-dI-823">
-                                                                        <rect key="frame" x="12" y="54" width="176" height="32"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JhW-dI-823">
+                                                                        <rect key="frame" x="12" y="60" width="243.5" height="32"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZZ-VO-MHw">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -168,7 +168,7 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KnP-Dl-DlL">
-                                                                                <rect key="frame" x="48" y="0.0" width="32" height="32"/>
+                                                                                <rect key="frame" x="70.5" y="0.0" width="32" height="32"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="social_media_linkedin_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4iL-Xh-W2k">
                                                                                         <rect key="frame" x="6" y="6" width="20" height="20"/>
@@ -198,7 +198,7 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8a-Eh-Vg6">
-                                                                                <rect key="frame" x="96" y="0.0" width="32" height="32"/>
+                                                                                <rect key="frame" x="141" y="0.0" width="32" height="32"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="social_media_twitter_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wuF-WE-R6P">
                                                                                         <rect key="frame" x="4" y="4" width="24" height="24"/>
@@ -228,7 +228,7 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSW-rS-Mwm">
-                                                                                <rect key="frame" x="144" y="0.0" width="32" height="32"/>
+                                                                                <rect key="frame" x="211.5" y="0.0" width="32" height="32"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="social_media_reddit-icon" translatesAutoresizingMaskIntoConstraints="NO" id="KEh-iD-qKz">
                                                                                         <rect key="frame" x="4" y="4" width="24" height="24"/>
@@ -267,7 +267,7 @@
                                                                     <constraint firstItem="JhW-dI-823" firstAttribute="top" secondItem="QCg-WV-Pc0" secondAttribute="bottom" constant="8" id="ZMH-gi-L9q"/>
                                                                     <constraint firstItem="QCg-WV-Pc0" firstAttribute="leading" secondItem="30I-AG-qfF" secondAttribute="leading" constant="12" id="vmv-1C-NYD"/>
                                                                     <constraint firstItem="JhW-dI-823" firstAttribute="leading" secondItem="30I-AG-qfF" secondAttribute="leading" constant="12" id="x6h-lM-MJx"/>
-                                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JhW-dI-823" secondAttribute="trailing" constant="12" id="x7s-TX-grs"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="JhW-dI-823" secondAttribute="trailing" constant="12" id="x7s-TX-grs"/>
                                                                     <constraint firstAttribute="bottom" secondItem="JhW-dI-823" secondAttribute="bottom" constant="12" id="yde-cb-J2m"/>
                                                                 </constraints>
                                                             </view>
@@ -281,31 +281,31 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATE-E3-wXk">
-                                                        <rect key="frame" x="0.0" y="282" width="274" height="83"/>
+                                                        <rect key="frame" x="0.0" y="300" width="274" height="92"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhG-Nr-pVB" customClass="FlexableCornerRadiusView" customModule="MovieTV" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="264" height="83"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="264" height="92"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fwW-i9-ncR">
-                                                                        <rect key="frame" x="12" y="12" width="240" height="59"/>
+                                                                        <rect key="frame" x="12" y="12" width="240" height="68"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="And contact infos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWc-vb-ac2">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                                 <color key="textColor" name="C100"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTU-1V-Xy3">
-                                                                                <rect key="frame" x="0.0" y="21" width="240" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="24" width="240" height="20"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="751" text="✉️:waiphyo.995@gmail.com" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-TP-AZd">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
                                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                                         <color key="textColor" name="C100"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31v-0T-t5v" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
                                                                                         <connections>
                                                                                             <action selector="clickedMailContactActionBtn:" destination="pBs-ed-A3e" eventType="touchUpInside" id="Eaz-Zo-cRm"/>
                                                                                         </connections>
@@ -324,16 +324,16 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hcx-fB-wDv">
-                                                                                <rect key="frame" x="0.0" y="42" width="240" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="48" width="240" height="20"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="751" text="🤙:+959796516550" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lem-kT-3fZ">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
                                                                                         <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
                                                                                         <color key="textColor" name="C100"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ag4-is-D2h" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
                                                                                         <connections>
                                                                                             <action selector="clickedPhoneContactActionBtn:" destination="pBs-ed-A3e" eventType="touchUpInside" id="b9Y-UR-f7M"/>
                                                                                         </connections>

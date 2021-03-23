@@ -29,7 +29,7 @@ class MenuViewController: ViewController {
     }
     
     @IBAction func clickedLogoutBtn(_ sender: Any) {
-        mainContainerDelegate?.menuSelectionChanged(to: .logout)
+        mainContainerDelegate?.menuSelectionChanged(to: MenuViewModel.MenuSideNavType.logout)
     }
     
     private func initial() {
@@ -60,39 +60,18 @@ class MenuViewController: ViewController {
     
     var viewModel: MenuViewModelProtocol?
     weak var mainContainerDelegate: MainContainerViewDelegate?
-    
-    enum MenuSideNavType: CaseIterable {
-        case ratings, watchlist, favorite, logout
-        
-        static var navListType: [MenuSideNavType] {
-            return [.favorite, .watchlist, .ratings]
-        }
-        
-        var data: (title: String?, img: UIImage?, imgTinColor: UIColor?) {
-            switch self {
-            case .ratings:
-                return ("Ratings", UIImage(named: "star_fill_icon"), .systemOrange)
-            case .watchlist:
-                return ("Watchlist", UIImage(named: "watchlist_fill_icon"), .R100)
-            case .favorite:
-                return ("Favorite", UIImage(named: "favorite_fill_icon"), .P300)
-            default:
-                return (nil, nil, nil)
-            }
-        }
-    }
 }
 
 //  MARK: - Table view delegates.
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate, MenuSideNavTableViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MenuSideNavType.navListType.count
+        return MenuViewModel.MenuSideNavType.navListType.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "menusidenavtableviewcell", for: indexPath) as? MenuSideNavTableViewCell else { return UITableViewCell() }
         
-        let currentData = MenuSideNavType.navListType[indexPath.row].data
+        let currentData = MenuViewModel.MenuSideNavType.navListType[indexPath.row].data
         
         cell.navTitleLbl.text = currentData.title
         cell.imgView.image = currentData.img
@@ -111,7 +90,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate, MenuSi
     func handleSideNavSelection(for cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
-        mainContainerDelegate?.menuSelectionChanged(to: MenuSideNavType.navListType[indexPath.row])
+        mainContainerDelegate?.menuSelectionChanged(to: MenuViewModel.MenuSideNavType.navListType[indexPath.row])
     }
 }
 

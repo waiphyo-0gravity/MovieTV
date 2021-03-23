@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,19 +27,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJI-wC-7Qa">
-                                <rect key="frame" x="32" y="44" width="350" height="345"/>
+                                <rect key="frame" x="32" y="44" width="350" height="281.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Bhe-SA-8oy">
-                                        <rect key="frame" x="0.0" y="135.5" width="350" height="74"/>
+                                        <rect key="frame" x="0.0" y="98.5" width="350" height="84.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Beautiful," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBY-XK-Ved">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
                                                 <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="42"/>
                                                 <color key="textColor" red="0.21176470588235294" green="0.24705882352941178" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome from MovieTV 🥳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPx-bt-LhG">
-                                                <rect key="frame" x="0.0" y="54" width="350" height="20"/>
+                                                <rect key="frame" x="0.0" y="61" width="350" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                                 <color key="textColor" red="0.36078431372549019" green="0.40392156862745099" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -54,7 +55,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41M-Kj-2oe">
-                                <rect key="frame" x="32" y="389" width="350" height="128"/>
+                                <rect key="frame" x="32" y="325.5" width="350" height="255.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOB-Al-AIK" customClass="MovieTVTextField" customModule="MovieTV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
@@ -77,18 +78,83 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSecureEntry" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VvA-Hz-6IU">
+                                        <rect key="frame" x="0.0" y="160" width="350" height="15.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RzI-Fb-xzH">
+                                                <rect key="frame" x="165.5" y="0.0" width="19" height="15.5"/>
+                                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="13"/>
+                                                <color key="textColor" name="C75"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="RzI-Fb-xzH" firstAttribute="centerX" secondItem="VvA-Hz-6IU" secondAttribute="centerX" id="AlW-Vr-YqB"/>
+                                            <constraint firstAttribute="bottom" secondItem="RzI-Fb-xzH" secondAttribute="bottom" id="xFN-cA-qR6"/>
+                                            <constraint firstItem="RzI-Fb-xzH" firstAttribute="top" secondItem="VvA-Hz-6IU" secondAttribute="top" id="yH1-lX-bdF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXo-Iy-BVR">
+                                        <rect key="frame" x="0.0" y="207.5" width="350" height="48"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tmdb_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ufd-Wp-mNi">
+                                                <rect key="frame" x="16" y="15" width="56.5" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="oSb-iZ-cY6"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with TMDb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zg-sd-Zer">
+                                                <rect key="frame" x="108" y="14" width="134.5" height="20"/>
+                                                <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqW-Yf-1qi" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="48"/>
+                                                <connections>
+                                                    <action selector="clickLoginWithTMDbBtn:" destination="mUS-cU-4sF" eventType="touchUpInside" id="mfc-QR-x9C"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.050980392159999999" green="0.1450980392" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="YqW-Yf-1qi" secondAttribute="trailing" id="Fca-vc-vjh"/>
+                                            <constraint firstItem="YqW-Yf-1qi" firstAttribute="leading" secondItem="AXo-Iy-BVR" secondAttribute="leading" id="Fn8-7P-KtY"/>
+                                            <constraint firstItem="7Zg-sd-Zer" firstAttribute="centerY" secondItem="AXo-Iy-BVR" secondAttribute="centerY" id="QP5-XZ-ZBH"/>
+                                            <constraint firstItem="Ufd-Wp-mNi" firstAttribute="centerY" secondItem="AXo-Iy-BVR" secondAttribute="centerY" id="R24-Hs-xjs"/>
+                                            <constraint firstItem="Ufd-Wp-mNi" firstAttribute="leading" secondItem="AXo-Iy-BVR" secondAttribute="leading" constant="16" id="WU9-QZ-8wT"/>
+                                            <constraint firstItem="YqW-Yf-1qi" firstAttribute="top" secondItem="AXo-Iy-BVR" secondAttribute="top" id="feo-zu-Ded"/>
+                                            <constraint firstAttribute="bottom" secondItem="YqW-Yf-1qi" secondAttribute="bottom" id="hBT-pf-JAj"/>
+                                            <constraint firstAttribute="height" constant="48" id="jQf-v4-FSG"/>
+                                            <constraint firstItem="7Zg-sd-Zer" firstAttribute="centerX" secondItem="AXo-Iy-BVR" secondAttribute="centerX" id="ppA-bd-koz"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhs-uM-j3K">
-                                <rect key="frame" x="336" y="821" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yvt-Cg-IJP">
                                 <rect key="frame" x="0.0" y="810" width="414" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CF9-bT-Q9C" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
+                                        <rect key="frame" x="32" y="16" width="115" height="21"/>
+                                        <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="17"/>
+                                        <state key="normal" title="Tour as Guest?">
+                                            <color key="titleColor" name="B100"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickGuestBtn:" destination="mUS-cU-4sF" eventType="touchUpInside" id="xy4-8b-Fir"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.9137254901960784" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="top" secondItem="CF9-bT-Q9C" secondAttribute="bottom" constant="-37" id="EgU-Od-nem"/>
+                                    <constraint firstItem="CF9-bT-Q9C" firstAttribute="leading" secondItem="Yvt-Cg-IJP" secondAttribute="leading" constant="32" id="S4r-1L-zGI"/>
+                                    <constraint firstItem="CF9-bT-Q9C" firstAttribute="top" secondItem="Yvt-Cg-IJP" secondAttribute="top" constant="16" id="oE9-U7-Xfn"/>
+                                </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chopa_character" translatesAutoresizingMaskIntoConstraints="NO" id="61d-d4-Dtq">
-                                <rect key="frame" x="286.5" y="44" width="95.5" height="135.5"/>
+                                <rect key="frame" x="312.5" y="44" width="69.5" height="98.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="61d-d4-Dtq" secondAttribute="height" multiplier="191:271" id="yig-jY-ySY"/>
                                 </constraints>
@@ -151,19 +217,26 @@
                             <constraint firstItem="Yvt-Cg-IJP" firstAttribute="bottom" secondItem="i8G-qV-sK0" secondAttribute="bottom" id="di0-oX-scP"/>
                             <constraint firstItem="61d-d4-Dtq" firstAttribute="trailing" secondItem="cJI-wC-7Qa" secondAttribute="trailing" id="f4c-n4-Ed7"/>
                             <constraint firstItem="cJI-wC-7Qa" firstAttribute="top" secondItem="d8T-vs-vcs" secondAttribute="top" id="k4f-KU-ggA"/>
-                            <constraint firstItem="41M-Kj-2oe" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" id="oAn-Cn-97n"/>
+                            <constraint firstItem="41M-Kj-2oe" firstAttribute="centerY" secondItem="d8T-vs-vcs" secondAttribute="centerY" priority="750" id="oAn-Cn-97n"/>
                             <constraint firstItem="6EN-dG-AQE" firstAttribute="centerY" secondItem="Yvt-Cg-IJP" secondAttribute="top" id="ocI-k8-Nve"/>
                             <constraint firstItem="61d-d4-Dtq" firstAttribute="bottom" secondItem="DBY-XK-Ved" secondAttribute="top" id="pPl-dc-K8t"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="characterImgView" destination="61d-d4-Dtq" id="SYd-VL-ryl"/>
                         <outlet property="footerView" destination="Yvt-Cg-IJP" id="Oxa-i4-uVW"/>
+                        <outlet property="guestBtn" destination="CF9-bT-Q9C" id="hJA-xF-Cz6"/>
                         <outlet property="helloLbl" destination="DBY-XK-Ved" id="Efy-ed-BWB"/>
                         <outlet property="loginArrowImgView" destination="1Wj-vf-VU2" id="LhE-o2-Xjx"/>
                         <outlet property="loginBtn" destination="ysd-CC-HDi" id="yfA-MY-MUQ"/>
                         <outlet property="loginBtnContainerView" destination="6EN-dG-AQE" id="Qff-Lw-tFm"/>
                         <outlet property="loginBtnWidthConstraint" destination="Yco-aw-k5h" id="xPY-Fq-ZtD"/>
+                        <outlet property="loginWithTMDbActionBtn" destination="YqW-Yf-1qi" id="kbM-Br-nEx"/>
+                        <outlet property="loginWithTMDbBtnContainerView" destination="AXo-Iy-BVR" id="fVW-LG-B46"/>
+                        <outlet property="orSeparatorLbl" destination="RzI-Fb-xzH" id="zBW-oe-eZp"/>
                         <outlet property="passTxtField" destination="pJv-bH-JYm" id="Tjo-Va-AQC"/>
+                        <outlet property="stackView" destination="41M-Kj-2oe" id="ap8-7S-1Rj"/>
+                        <outlet property="topView" destination="cJI-wC-7Qa" id="heK-Yh-Ugs"/>
                         <outlet property="userNameTxtField" destination="lOB-Al-AIK" id="MPl-fB-OoL"/>
                         <outlet property="welcomeLbl" destination="iPx-bt-LhG" id="wQv-Ji-wZH"/>
                     </connections>
@@ -176,6 +249,13 @@
     <resources>
         <image name="chopa_character" width="382" height="542"/>
         <image name="login_arrow_icon" width="32" height="32.5"/>
+        <image name="tmdb_logo" width="56.5" height="24"/>
+        <namedColor name="B100">
+            <color red="0.0" green="0.39599999785423279" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="C75">
+            <color red="0.4779999852180481" green="0.54100000858306885" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

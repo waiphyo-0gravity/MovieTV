@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 protocol LoginViewProtocol: AnyObject {
     var viewModel: LoginViewModelProtocol? { get set }
     
-    func successLogin(data: CreateSessionModel)
+    func successLogin()
     func failedLogin(error: Error?)
 }
 
@@ -19,17 +20,43 @@ class LoginViewController: ViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
-        animateViews(isShow: false, isAnimate: false)
+        transition(isShow: false, isAnimate: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animateViews(isShow: true, isAnimate: true)
+        transition(isShow: true, isAnimate: true)
         handleInputFieldsChange(isAnimate: false)
+    }
+    
+    override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: 0.3, animations: {[weak self] in
+            self?.topView.alpha = isShow ? 1 : 0
+            self?.stackView.alpha = isShow ? 1 : 0
+            self?.footerView.alpha = isShow ? 1 : 0
+            self?.characterImgView.alpha = isShow ? 1 : 0
+            self?.loginBtnContainerView.alpha = isShow ? 1 : 0
+            self?.characterImgView.transform = isShow ? .identity : .init(translationX: 24, y: 0)
+            self?.helloLbl.transform = isShow ? .identity : .init(translationX: 0, y: -24)
+            self?.welcomeLbl.transform = isShow ? .identity : .init(translationX: -24, y: 0)
+            self?.footerView.transform = isShow ? .identity : .init(translationX: 0, y: 40)
+            self?.stackView.transform = isShow ? .identity : .init(translationX: 40, y: 0)
+            self?.loginBtnContainerView.transform = isShow ? .identity : .init(translationX: 0, y: 40)
+        }, completion: completion)
     }
     
     @IBAction func clickLoginBtn(_ sender: Any) {
         makeLogin()
+    }
+    
+    @IBAction func clickLoginWithTMDbBtn(_ sender: Any) {
+        view.endEditing(true)
+        viewModel?.logInWithOAuth()
+    }
+    
+    @IBAction func clickGuestBtn(_ sender: Any) {
+        view.endEditing(true)
+        viewModel?.loginAsGuest()
     }
     
     @objc private func handleKeyboard(notification: NSNotification) {
@@ -73,6 +100,13 @@ class LoginViewController: ViewController, UITextFieldDelegate {
     @IBOutlet weak var loginBtnWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginBtnContainerView: UIView!
     @IBOutlet weak var loginArrowImgView: UIImageView!
+    @IBOutlet weak var loginWithTMDbBtnContainerView: UIView!
+    @IBOutlet weak var orSeparatorLbl: UILabel!
+    @IBOutlet weak var loginWithTMDbActionBtn: MovieTVButton!
+    @IBOutlet weak var guestBtn: MovieTVButton!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var characterImgView: UIImageView!
+    @IBOutlet weak var topView: UIView!
     
     var viewModel: LoginViewModelProtocol?
     
@@ -113,9 +147,16 @@ class LoginViewController: ViewController, UITextFieldDelegate {
     }()
 }
 
+//  MARK: - ASWebAuthenticationSession
+extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window ?? ASPresentationAnchor()
+    }
+}
+
 //  MARK: - VIEW_MODEL -> VIEW
 extension LoginViewController: LoginViewProtocol {
-    func successLogin(data: CreateSessionModel) {
+    func successLogin() {
         viewModel?.routToMainView(from: self)
     }
     
@@ -130,6 +171,8 @@ extension LoginViewController {
         view.touchAroundToHideKeyboard()
         setUpHelloLabel()
         setUpLoginBtn()
+        setUpOAuthBtn()
+        setUpGuestBtn()
         bindActions()
     }
     
@@ -147,6 +190,32 @@ extension LoginViewController {
         let mutableText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont(name: UIFont.FontStyle.bold.rawValue, size: 42.0)!])
         mutableText.addAttribute(NSAttributedString.Key.font, value: UIFont(name: UIFont.FontStyle.regular.rawValue, size: 42)!, range: NSRange(location: 0, length: 5))
         helloLbl.attributedText = mutableText
+    }
+    
+    private func setUpOAuthBtn() {
+        loginWithTMDbActionBtn.specificAnimateView = loginWithTMDbBtnContainerView
+        loginWithTMDbBtnContainerView.layer.cornerRadius = 12
+        loginWithTMDbBtnContainerView.layer.borderWidth = 1
+        loginWithTMDbBtnContainerView.layer.borderColor = UIColor.S30.cgColor
+        loginWithTMDbBtnContainerView.addAccentShadow()
+    }
+    
+    private func setUpGuestBtn() {
+        let prefix = "Tour as "
+        let postfix = "Guest"
+        
+        let mutableAttributedStr = NSMutableAttributedString(string: "\(prefix)\(postfix)?", attributes: [
+            NSAttributedString.Key.foregroundColor: UIColor.C100,
+            NSAttributedString.Key.font: UIFont(name: UIFont.FontStyle.regular.rawValue, size: 15)!
+        ])
+        
+        let range = NSRange(location: prefix.count, length: postfix.count)
+        
+        mutableAttributedStr.addAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.B100
+        ], range: range)
+        
+        guestBtn.setAttributedTitle(mutableAttributedStr, for: .normal)
     }
     
     private func bindActions() {
@@ -171,45 +240,14 @@ extension LoginViewController {
     }
     
 //    MARK: - Animations.
-    private func animateViews(isShow: Bool, isAnimate: Bool, complection: ((Bool)->Void)? = nil) {
-        let duration: TimeInterval = 0.7
-        var delaiedTime: TimeInterval = 0
-        
-        [helloLbl, welcomeLbl, userNameTxtField, passTxtField, footerView, loginBtn].enumerated().forEach { (index, element) in
-            let delay: TimeInterval = Double(index) * 0.15
-            let translationX: CGFloat
-            let translationY: CGFloat
-            
-            delaiedTime += delay + duration
-            
-            switch true {
-            case element == self.helloLbl, element == self.welcomeLbl:
-                translationX = -40
-                translationY = 0
-            default:
-                translationX = 0
-                translationY = 40
-            }
-            
-            UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: duration, delay: delay, usingSpringWithDamping: 0.6, initialSpringVelocity: 0) {
-                element?.transform = isShow ? .identity : CGAffineTransform(translationX: translationX, y: translationY)
-                element?.alpha = isShow ? 1 : 0
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delaiedTime) {
-            complection?(true)
-        }
-    }
-    
     private func handleInputFieldsChange(isAnimate: Bool = true) {
         let isNeedToEnable = userNameTxtField.txtField.text?.isEmpty == false && passTxtField.txtField.text?.isEmpty == false
         
         loginBtn.isUserInteractionEnabled = isNeedToEnable
         
         UIView.easeSpringAnimation(isAnimate: isAnimate) {[weak self] in
-            self?.loginBtnContainerView.alpha = isNeedToEnable ? 1 : 0
-            self?.loginBtnContainerView.transform = isNeedToEnable ? .identity : CGAffineTransform.identity.translatedBy(x: 0, y: 24)
+            self?.loginBtnContainerView.backgroundColor = isNeedToEnable ? UIColor.systemOrange : UIColor.S70
+            self?.loginBtnContainerView.transform = isNeedToEnable ? .identity : CGAffineTransform.identity.scaledBy(x: 0.7, y: 0.7)
         }
     }
     

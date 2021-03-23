@@ -8,8 +8,16 @@
 
 import UIKit
 
-open class ViewController: UIViewController {
+protocol TransitioningProtocol {
+    func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool)->Void)?)
+}
+
+open class ViewController: UIViewController, TransitioningProtocol {
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [.portrait, .portraitUpsideDown]
+    }
+    
+    func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool)->Void)? = nil) {
+        completion?(true)
     }
 }

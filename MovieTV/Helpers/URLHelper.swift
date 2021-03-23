@@ -20,6 +20,7 @@ enum URLHelper {
     static let imgBaseURL = "https://image.tmdb.org/t/p"
     static let movieID = "2"
     static let omdbAPIKey = "c38199c1"
+    static let OAuthCallbackURLScheme = "movietv"
     
     enum Image {
         case original(String?), customWidth(Int, String?)
@@ -39,10 +40,15 @@ enum URLHelper {
     }
     
     enum Authentication: URLHelperProtocol {
-        case requestToken, requestTokenWithLogin, createSession
+        case requestToken, requestTokenWithLogin, createSession, createGuestSession, OAuthLogin(token: String)
         
         var url: URL? {
-            return URL(string: "\(URLHelper.baseURL)\(path)")
+            switch self {
+            case .OAuthLogin(let token):
+                return URL(string: "https://www.themoviedb.org/authenticate/\(token)?redirect_to=\(URLHelper.OAuthCallbackURLScheme)://")
+            default:
+                return URL(string: "\(URLHelper.baseURL)\(path)")
+            }
         }
         
         var path: String {
@@ -53,6 +59,10 @@ enum URLHelper {
                 return "/authentication/token/validate_with_login"
             case .createSession:
                 return "/authentication/session/new"
+            case .createGuestSession:
+                return "/authentication/guest_session/new"
+            case .OAuthLogin:
+                return ""
             }
         }
     }
@@ -114,7 +124,8 @@ enum URLHelper {
     }
     
     enum Account: URLHelperProtocol {
-        case addWatchList, addFavorite, addRatings(movieID: Int), watchList, ratedList, favorite
+        case addWatchList, addFavorite, addRatings(movieID: Int), watchList, favorite
+        case ratedList(userType: UserDefaultsHelper.UserType?, guestSessionID: String?)
         
         var url: URL? {
             return URL(string: "\(URLHelper.baseURL)\(path)")
@@ -126,8 +137,8 @@ enum URLHelper {
                 return "/account/0/favorite/movies"
             case .watchList:
                 return "/account/0/watchlist/movies"
-            case .ratedList:
-                return "/account/0/rated/movies"
+            case .ratedList(let userType, let guestSessionID):
+                return userType == .guest && guestSessionID != nil ? "/guest_session/\(guestSessionID!)/rated/movies" : "/account/0/rated/movies"
             case .addWatchList:
                 return "/account/0/watchlist"
             case .addFavorite:

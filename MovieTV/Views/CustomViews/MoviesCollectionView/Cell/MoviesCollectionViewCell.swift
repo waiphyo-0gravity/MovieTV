@@ -34,6 +34,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, NibableCellProtocol {
     }
     
     @IBAction func clickedActionBtn(_ sender: Any) {
+        print(superview?.convert(imgView.frame, to: nil), "justinbieber")
         delegate?.clickedMovie(for: self)
     }
     

@@ -18,23 +18,39 @@ protocol MainViewProtocol: NSObjectProtocol {
     func failedMovieList(with error: Error?)
 }
 
-class MainNavViewcontroller: UINavigationController, UIGestureRecognizerDelegate {
+class MainNavViewcontroller: UINavigationController, UIGestureRecognizerDelegate, TransitioningProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
     }
+    
+    func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool)->Void)? = nil) {
+        guard let lastVC = viewControllers.last as? ViewController else {
+            completion?(true)
+            return
+        }
+        
+        lastVC.transition(isShow: isShow, isAnimate: isAnimate, completion: completion)
+    }
 }
 
-class MainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class MainViewController: ViewController, UIPopoverPresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.viewDidLoad()
         initial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.viewWillAppear()
         mainContainer?.changeStatusBar(to: false)
+        
+        guard !isInitialTransitioning else {
+            return
+        }
+        
+        isInitialTransitioning = true
+        transition(isShow: true, isAnimate: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +62,15 @@ class MainViewController: UIViewController, UIPopoverPresentationControllerDeleg
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         mainContainer?.changeMenuPanGesture(isEnable: false)
+    }
+    
+    override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: 0.3, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {[weak self] in
+            self?.navigationController?.view.alpha = isShow ? 1 : 0
+            self?.tableView?.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.mainNavItem?.menuBtn.frame.origin.x = isShow ? 0 : -24
+            self?.mainNavItem?.searchBtn.frame.origin.x = isShow ? 0 : 24
+        }, completion: completion)
     }
     
     @objc func clickedMenuBtn(_ sender: UIButton) {
@@ -60,6 +85,7 @@ class MainViewController: UIViewController, UIPopoverPresentationControllerDeleg
         tableView.customDelegate = self
         mainNavItem?.menuBtn.addTarget(self, action: #selector(clickedMenuBtn(_:)), for: .touchUpInside)
         mainNavItem?.searchBtn.addTarget(self, action: #selector(clickedSearchBtn(_:)), for: .touchUpInside)
+        transition(isShow: false, isAnimate: false)
     }
     
     @IBOutlet weak var mainTableView: MainTableView!
@@ -75,6 +101,8 @@ class MainViewController: UIViewController, UIPopoverPresentationControllerDeleg
     
     var viewModel: MainViewModelProtocol?
     weak var mainContainer: MainContainerViewDelegate?
+    
+    private var isInitialTransitioning: Bool = false
 }
 
 //  MARK: - Main table custom delegates.
@@ -108,7 +136,6 @@ extension MainViewController: MainViewProtocol {
     
     func changedMovieList() {
         mainTableView.isPagingInclude = viewModel?.isMovieListIncludePaging == true
-        print(viewModel?.movieList?.results.count, "huhuhu")
         mainTableView.movieListData = viewModel?.movieList?.results
     }
     

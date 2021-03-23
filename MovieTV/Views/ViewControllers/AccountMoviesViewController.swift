@@ -32,6 +32,20 @@ class AccountMoviesViewController: ViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
+    override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        rightCloseBtn.frame.origin.x = isShow ? 24 : 0
+        rightCloseBtn.frame.origin.y = isShow ? -24 : 0
+        
+        UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: 0.3, animations: {[weak self] in
+            self?.navigationController?.view.alpha = isShow ? 1 : 0
+            self?.activityIndicatorView.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.accountMoviesCollectionView.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.navigationController?.navigationBar.transform = isShow ? .identity : .init(translationX: -24, y: 0)
+            self?.rightCloseBtn.frame.origin.x = isShow ? 0 : 24
+            self?.rightCloseBtn.frame.origin.y = isShow ? 0 : -24
+        }, completion: completion)
+    }
+    
     @objc func handleRightNavBtnClicked() {
         dismiss(animated: true)
     }

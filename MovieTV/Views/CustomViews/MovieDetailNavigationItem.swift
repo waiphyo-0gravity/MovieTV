@@ -15,11 +15,12 @@ class MovieDetailNavigationItem: UINavigationItem {
         temp.addAccentShadow()
         temp.adjustsImageWhenHighlighted = false
         temp.backgroundColor = .S10
+        temp.tintColor = .Primary100_Adapt
         temp.setImage(UIImage(named: "back_icon"), for: .normal)
         return temp
     }()
     
-    let watchListBtn: MovieTVButton = {
+    lazy var watchListBtn: MovieTVButton = {
         let temp = MovieTVButton(frame: .init(x: 0, y: 0, width: 40, height: 40))
         temp.tintColor = .white
         temp.layer.cornerRadius = 40 / 2
@@ -40,6 +41,8 @@ class MovieDetailNavigationItem: UINavigationItem {
         leftSpace.width = 16
         let backBarButtonItem = UIBarButtonItem(customView: leftBackBtn)
         leftBarButtonItems = [leftSpace, backBarButtonItem]
+        
+        guard UserDefaultsHelper.shared.mappedUserType == .normal else { return }
         
         let rightSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         rightSpace.width = 16

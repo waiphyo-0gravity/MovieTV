@@ -11,7 +11,7 @@ import UIKit
 protocol MainContainerViewModelProtocol {
     var view: MainContainerViewProtocol? { get set }
     
-    func handleNavSelection(for type: MenuViewController.MenuSideNavType, view: UIViewController?)
+    func handleNavSelection(for type: MenuViewModel.MenuSideNavType, view: UIViewController?)
 }
 
 class MainContainerViewModel: MainContainerViewModelProtocol {
@@ -26,11 +26,10 @@ class MainContainerViewModel: MainContainerViewModelProtocol {
         return view
     }
     
-    func handleNavSelection(for type: MenuViewController.MenuSideNavType, view: UIViewController?) {
+    func handleNavSelection(for type: MenuViewModel.MenuSideNavType, view: UIViewController?) {
         switch type {
         case .logout:
-            
-            let alertVC = AlertViewController(title: "Logout?", body: "Are you sure you want to log out?", alertType: .destructive, firstActionTitle: "Log out")
+            let alertVC = AlertViewController(title: "Logout?", body: "Are you sure you want to log out?", alertViewType: .bottom)
             let logoutBtn = AlertAction(title: "Log out", type: .destructive, handler: {[weak self] in
                 self?.logout(for: view)
             })
@@ -54,17 +53,25 @@ class MainContainerViewModel: MainContainerViewModelProtocol {
                 .createModule() else { return }
         
         UserDefaultsHelper.shared.sessionID = nil
+        UserDefaultsHelper.shared.userType = nil
         
-        UIApplication.shared.firstKeyWindow?.rootViewController = loginVC
-        UIApplication.shared.firstKeyWindow?.makeKeyAndVisible()
+        (view as? ViewController)?.transition(isShow: false, isAnimate: true) {_ in
+            UIApplication.shared.firstKeyWindow?.rootViewController = loginVC
+            UIApplication.shared.firstKeyWindow?.makeKeyAndVisible()
+        }
     }
     
     private func showAccountMovielistView(view: UIViewController?, type: AccountMoviesViewModel.MovieListType?) {
         guard let view = view, let watchListVC = AccountMoviesViewModel.createModule(movieListType: type) else { return }
         
-        watchListVC.modalPresentationStyle = .fullScreen
+        watchListVC.modalPresentationStyle = .custom
+        watchListVC.transitioningDelegate = transitioningDelegate
+        watchListVC.modalPresentationCapturesStatusBarAppearance = true
+        
         view.present(watchListVC, animated: true)
     }
     
     weak var view: MainContainerViewProtocol?
+    
+    private let transitioningDelegate = MovieTVTransitioningDelegate()
 }

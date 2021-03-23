@@ -44,6 +44,40 @@ extension UIView {
         }
     }
     
+    func bouncePopUpAnimation(isAnimate: Bool = true, completion: ((Bool)->Void)? = nil) {
+        guard isAnimate else {
+            transform = .identity
+            completion?(true)
+            return
+        }
+        
+//        transform = .init(scaleX: 0.0009, y: 0.0009)
+        
+        UIView.easeSpringAnimation(withDuration: 0.25, animations: {
+            self.transform = .init(scaleX: 1.05, y: 1.05)
+        })
+        
+        UIView.easeSpringAnimation(withDuration: 0.25, delay: 0.15, animations: {
+            self.transform = .identity
+        }, completion: completion)
+    }
+    
+    func bouncePopDownAnimation(isAnimate: Bool = true, completion: ((Bool)->Void)? = nil) {
+        guard isAnimate else {
+            transform = .init(scaleX: 0.0009, y: 0.0009)
+            completion?(true)
+            return
+        }
+        
+        UIView.easeSpringAnimation(withDuration: 0.25, animations: {
+            self.transform = .init(scaleX: 1.05, y: 1.05)
+        })
+        
+        UIView.easeSpringAnimation(withDuration: 0.25, delay: 0.15, animations: {
+            self.transform = .init(scaleX: 0.0009, y: 0.0009)
+        }, completion: completion)
+    }
+    
     func touchAroundToHideKeyboard(delegate: UIGestureRecognizerDelegate? = nil) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tapGesture)

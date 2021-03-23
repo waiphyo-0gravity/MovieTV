@@ -135,6 +135,7 @@
                     <navigationItem key="navigationItem" title="Search" id="FmY-zI-6LC"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="0Bk-gx-lXB" id="aKC-GQ-FiM"/>
+                        <outlet property="cancelBtn" destination="2Jo-lX-lgy" id="aGd-QL-d1k"/>
                         <outlet property="searchCollectionView" destination="bcB-qz-1fI" id="qjx-Nd-fZn"/>
                         <outlet property="searchContainerView" destination="W7v-Bo-N8R" id="q7j-tm-QjJ"/>
                         <outlet property="searchCountLbl" destination="1Tj-Ce-kRg" id="KTy-NJ-iSE"/>

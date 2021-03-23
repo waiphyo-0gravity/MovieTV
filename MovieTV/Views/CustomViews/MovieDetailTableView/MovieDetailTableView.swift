@@ -50,6 +50,8 @@ class MovieDetailTableView: UITableView {
         }
     }
     
+    var isGuestUser: Bool = false
+    
     var isFavourate: Bool = false {
         didSet {
             let indexPath = IndexPath(row: 0, section: 0)
@@ -87,7 +89,7 @@ class MovieDetailTableView: UITableView {
 //  MARK: - Table view delegates.
 extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, MovieDetailTitleTableViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,7 +97,7 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, Movi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard indexPath.row == 3 else {
+        guard indexPath.row >= 3 else {
             return UITableView.automaticDimension
         }
         
@@ -123,6 +125,8 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, Movi
             return getSummaryTableCell(for: indexPath)
         case 3:
             return getCastTableCell(for: indexPath)
+        case 4:
+            return getCrewTableCell(for: indexPath)
         default:
             return UITableViewCell()
         }
@@ -136,7 +140,12 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, Movi
         cell.isFavourate = isFavourate
         cell.movieTitleLbl.text = data?.title
         cell.setReleaseDate(date: data?.releaseDate)
-        cell.setFavourate(isFavourate: isFavourate, isAnimate: false)
+        
+        if isGuestUser {
+            cell.favoriteBtn.isHidden = true
+        } else {
+            cell.setFavourate(isFavourate: isFavourate, isAnimate: false)
+        }
         
         cell.pgLbl.text = pgTxt
         cell.pgLblBgView.alpha = pgTxt?.isEmpty == false ? 1 : 0
@@ -166,7 +175,17 @@ extension MovieDetailTableView: UITableViewDelegate, UITableViewDataSource, Movi
     private func getCastTableCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = dequeueReusableCell(withIdentifier: MovieDetailCastTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MovieDetailCastTableViewCell else { return UITableViewCell() }
         
+        cell.cellType = .cast
         cell.castCollectionView.data = movieDetailData?.credits?.cast ?? []
+        
+        return cell
+    }
+    
+    private func getCrewTableCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = dequeueReusableCell(withIdentifier: MovieDetailCastTableViewCell.CELL_IDENTIFIER, for: indexPath) as? MovieDetailCastTableViewCell else { return UITableViewCell() }
+        
+        cell.cellType = .crew
+        cell.castCollectionView.data = movieDetailData?.credits?.crew ?? []
         
         return cell
     }

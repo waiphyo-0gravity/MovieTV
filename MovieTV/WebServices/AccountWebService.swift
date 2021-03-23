@@ -13,6 +13,8 @@ protocol AccountWebServiceInputProtocol {
     var viewModel: AccountWebServiceOutputProtocol? { get set }
     var apiKey: String? { get }
     var sessionID: String? { get }
+    var guestSessionID: String? { get }
+    var mappedUserType: UserDefaultsHelper.UserType? { get }
     
     func getAccountMovieList(for type: AccountMoviesViewModel.MovieListType?, page: Int)
     func postWatchMovieList(mediaID: Int, isAdding: Bool)
@@ -40,15 +42,21 @@ class AccountWebService: AccountWebServiceInputProtocol {
         guard let type = type,
               let url = getAccountMovieUrl(for: type) else { return }
         
+        var urlQueries = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "sort_by", value: "created_at.desc"),
+            URLQueryItem(name: "page", value: "\(page)")
+        ]
+        
+        if mappedUserType == .normal {
+            urlQueries.append(URLQueryItem(name: "session_id", value: sessionID))
+        }
+        
         NetworkingFramework.request(
             url: url,
             method: .get,
-            urlQueries: [
-                URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "session_id", value: sessionID),
-                URLQueryItem(name: "sort_by", value: "created_at.desc"),
-                URLQueryItem(name: "page", value: "\(page)")
-            ]).response(dataType: MovieListModel.self) {[weak self] (data, response, error) in
+            urlQueries: urlQueries)
+            .response(dataType: MovieListModel.self) {[weak self] (data, response, error) in
                 self?.viewModel?.responseFromAccountMovieList(isSuccess: data != nil, data: data, error: error)
             }
     }
@@ -60,7 +68,7 @@ class AccountWebService: AccountWebServiceInputProtocol {
         case .watchList:
             return URLHelper.Account.watchList.url
         case .ratedList:
-            return URLHelper.Account.ratedList.url
+            return URLHelper.Account.ratedList(userType: mappedUserType, guestSessionID: guestSessionID).url
         default:
             return nil
         }
@@ -114,16 +122,20 @@ class AccountWebService: AccountWebServiceInputProtocol {
         postRatingMovie?.cancel()
         
         guard let url = URLHelper.Account.addRatings(movieID: movieID).url,
-              let apiKey = apiKey,
-              let sessionID = sessionID else { return }
+              let apiKey = apiKey else { return }
+        
+        var urlQueries = [URLQueryItem(name: "api_key", value: apiKey)]
+            
+        if mappedUserType == .normal {
+            urlQueries.append(URLQueryItem(name: "session_id", value: sessionID))
+        } else if mappedUserType == .guest {
+            urlQueries.append(URLQueryItem(name: "guest_session_id", value: guestSessionID))
+        }
         
         postRatingMovie = NetworkingFramework.request(
             url: url,
             method: .post,
-            urlQueries: [
-                URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "session_id", value: sessionID)
-            ], bodyParameters: [
+            urlQueries: urlQueries, bodyParameters: [
                 "value": ratings
             ]).response {[weak self] (_ , response, error) in
                 self?.viewModel?.responseFromPostRatingMovie(isSuccess: response?.statusCode == 200, error: error)
@@ -134,23 +146,29 @@ class AccountWebService: AccountWebServiceInputProtocol {
         postRatingMovie?.cancel()
         
         guard let url = URLHelper.Account.addRatings(movieID: movieID).url,
-              let apiKey = apiKey,
-              let sessionID = sessionID else { return }
+              let apiKey = apiKey else { return }
+        
+        var urlQueries = [URLQueryItem(name: "api_key", value: apiKey)]
+            
+        if mappedUserType == .normal {
+            urlQueries.append(URLQueryItem(name: "session_id", value: sessionID))
+        } else if mappedUserType == .guest {
+            urlQueries.append(URLQueryItem(name: "guest_session_id", value: guestSessionID))
+        }
         
         postRatingMovie = NetworkingFramework.request(
             url: url,
             method: .delete,
-            urlQueries: [
-                URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "session_id", value: sessionID)
-            ]).response {[weak self] (_ , response, error) in
+            urlQueries: urlQueries).response {[weak self] (_ , response, error) in
                 self?.viewModel?.responseFromPostRatingMovie(isSuccess: response?.statusCode == 200, error: error)
             }
     }
     
     weak var viewModel: AccountWebServiceOutputProtocol?
     var apiKey: String? { UserDefaultsHelper.shared.apiKey }
-    var sessionID: String? {UserDefaultsHelper.shared.sessionID }
+    var sessionID: String? { UserDefaultsHelper.shared.sessionID }
+    var guestSessionID: String? { UserDefaultsHelper.shared.guestSessionID }
+    var mappedUserType: UserDefaultsHelper.UserType? { UserDefaultsHelper.shared.mappedUserType }
     
     private var postWatchMovieList: URLSessionDataTask?
     private var postFavourateMovie: URLSessionDataTask?

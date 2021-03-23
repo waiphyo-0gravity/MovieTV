@@ -13,6 +13,8 @@ protocol MovieDetailWebServiceInputProtocol {
     var viewModel: MovieDetailWebServiceOutputProtocol? { get set }
     var apiKey: String? { get }
     var sessionID: String? { get }
+    var guestSessionID: String? { get }
+    var mappedUserType: UserDefaultsHelper.UserType? { get }
     
     func getMovieDetail(for movieID: Int)
     func getIMDBRating(for imdbID: String)
@@ -68,10 +70,15 @@ class MovieDetailWebService: MovieDetailWebServiceInputProtocol {
     func getMovieStates(for movieID: Int) {
         guard let url = URLHelper.MovieList.movieStates(movieID: movieID).url else { return }
         
-        NetworkingFramework.request(url: url, method: .get, urlQueries: [
-            URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "session_id", value: sessionID)
-        ])
+        var urlQueries = [URLQueryItem(name: "api_key", value: apiKey)]
+        
+        if mappedUserType == .normal {
+            urlQueries.append(URLQueryItem(name: "session_id", value: sessionID))
+        } else {
+            urlQueries.append(URLQueryItem(name: "guest_session_id", value: guestSessionID))
+        }
+        
+        NetworkingFramework.request(url: url, method: .get, urlQueries: urlQueries)
             .response(dataType: MovieStatesModel.self) {[weak self] (data, response, error) in
                 guard let data = data else {
                     self?.viewModel?.responseFromMovieStates(isSuccess: false, data: nil, error: error)
@@ -86,4 +93,6 @@ class MovieDetailWebService: MovieDetailWebServiceInputProtocol {
     
     var apiKey: String? { UserDefaultsHelper.shared.apiKey }
     var sessionID: String? { UserDefaultsHelper.shared.sessionID }
+    var guestSessionID: String? { UserDefaultsHelper.shared.guestSessionID }
+    var mappedUserType: UserDefaultsHelper.UserType? { UserDefaultsHelper.shared.mappedUserType }
 }

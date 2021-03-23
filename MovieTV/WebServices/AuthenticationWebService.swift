@@ -16,12 +16,14 @@ protocol AuthenticationWebServiceInputProtocol {
     func getRequestToken()
     func getRequestTokenWithLogin(bodyParameters: [String: Any])
     func createSession(bodyParameters: [String: Any])
+    func createGuestSession()
 }
 
 protocol AuthenticationWebServiceOutPutProtocol: AnyObject {
     func responseFromRequestToken(isSuccess: Bool, data: RequestTokenModel?, error: Error?)
     func responseFromRequestTokenWithLogin(isSuccess: Bool, data: RequestTokenModel?, error: Error?)
     func responseFromCreateSession(isSuccess: Bool, data: CreateSessionModel?, error: Error?)
+    func responseFromCreateGuestSession(isSuccess: Bool, data: CreateGuestSessionModel?, error: Error?)
 }
 
 class AuthenticationWebService: AuthenticationWebServiceInputProtocol {
@@ -49,6 +51,7 @@ class AuthenticationWebService: AuthenticationWebServiceInputProtocol {
     
     func getRequestTokenWithLogin(bodyParameters: [String : Any]) {
         guard let url = URLHelper.Authentication.requestTokenWithLogin.url else { return }
+        
         NetworkingFramework.request(
             url: url,
             method: .post,
@@ -67,6 +70,7 @@ class AuthenticationWebService: AuthenticationWebServiceInputProtocol {
     
     func createSession(bodyParameters: [String: Any]) {
         guard let url = URLHelper.Authentication.createSession.url else { return }
+        
         NetworkingFramework.request(
             url: url,
             method: .post,
@@ -80,6 +84,24 @@ class AuthenticationWebService: AuthenticationWebServiceInputProtocol {
             }
             
             self?.viewModel?.responseFromCreateSession(isSuccess: true, data: data, error: error)
+        }
+    }
+    
+    func createGuestSession() {
+        guard let url = URLHelper.Authentication.createGuestSession.url else { return }
+        
+        NetworkingFramework.request(
+            url: url,
+            method: .get,
+            urlQueries: [URLQueryItem(name: "api_key", value: apiKey)]
+        )
+        .response(dataType: CreateGuestSessionModel.self) {[weak self] (data, response, error) in
+            guard let data = data else {
+                self?.viewModel?.responseFromCreateGuestSession(isSuccess: false, data: nil, error: error)
+                return
+            }
+            
+            self?.viewModel?.responseFromCreateGuestSession(isSuccess: true, data: data, error: error)
         }
     }
 }

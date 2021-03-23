@@ -14,6 +14,10 @@ class UserDefaultsHelper {
         return UserDefaultsHelper()
     }
     
+    enum UserType: String {
+        case guest = "GUEST_USER", normal = "NROMAL_USER"
+    }
+    
     @UserDefaultValue(key: "api_key")
     var apiKey: String?
     
@@ -22,6 +26,14 @@ class UserDefaultsHelper {
     
     @UserDefaultValue(key: "session_id")
     var sessionID: String?
+    
+    @UserDefaultValue(key: "user_type")
+    var userType: String?
+    
+    @UserDefaultValue(key: "guest_session_id")
+    var guestSessionID: String?
+    
+    var mappedUserType: UserType? { UserType(rawValue: userType ?? "") }
 }
 
 @propertyWrapper struct UserDefaultValue<T> {

@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIColor {
+    @nonobjc class var B100: UIColor {
+        return UIColor(named: "B100")!
+    }
+    
     @nonobjc class var S30: UIColor {
         return UIColor(named: "S30")!
     }
@@ -47,6 +51,10 @@ extension UIColor {
     
     @nonobjc class var C75: UIColor {
         return UIColor(named: "C75")!
+    }
+    
+    @nonobjc class var C100: UIColor {
+        return UIColor(named: "C100")!
     }
     
     @nonobjc class var C300: UIColor {
