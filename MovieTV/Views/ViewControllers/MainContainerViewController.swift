@@ -41,6 +41,7 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
+        viewModel?.viewDidLoad()
     }
     
     override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
@@ -92,6 +93,7 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
         case .cancelled, .ended:
             defer {
                 animateMenuView(to: isMenuShowed ? 1 : 0)
+                menuController?.changeProfileAnimation(isShow: isMenuShowed)
             }
             
             let isNeedToChangeMenuState = velocityX.magnitude > 500 || translationX.magnitude >= view.frame.width / 3
@@ -114,6 +116,7 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
             }
             
             animateMenuView(to: max(0, percentage), isAnimate: false)
+            menuController?.changeProfileAnimation(isShow: percentage >= 0)
         }
     }
     
@@ -162,6 +165,8 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     private func setUpAboutMeView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapAboutMeGesture(_:)))
         aboutMeContainerView.addGestureRecognizer(tapGesture)
+        aboutMeContainerView.layer.shouldRasterize = true
+        aboutMeContainerView.layer.rasterizationScale = UIScreen.main.scale
         
         aboutMeController = UIViewController.AboutMeViewController as? AboutMeViewController
         
@@ -188,6 +193,8 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     
     private func setUpMainView() {
         mainNavController = MainViewModel.createModule(isIncludeNavigation: true, mainContainer: self) as? MainNavViewcontroller
+        mainContainerView.layer.shouldRasterize = true
+        mainContainerView.layer.rasterizationScale = UIScreen.main.scale
         
         guard let mainNavController = mainNavController else { return }
         
@@ -228,6 +235,14 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
         let menuScale = (view.frame.size.height + 96 * reversePercentage) / view.frame.size.height
         let menuTransform: CGAffineTransform = percentage != 1 ? CGAffineTransform(scaleX: menuScale, y: menuScale) : .identity
         
+        if isHide && aboutMeController?.view.layer.cornerRadius != 0 {
+            aboutMeController?.view.layer.cornerRadius = 0
+            mainNavController?.view.layer.cornerRadius = 0
+        } else if !isHide && aboutMeController?.view.layer.cornerRadius == 0 {
+            aboutMeController?.view.layer.cornerRadius = Self.containerViewsCornerRadius
+            mainNavController?.view.layer.cornerRadius = Self.containerViewsCornerRadius
+        }
+        
         UIView.easeSpringAnimation(
             isAnimate: isAnimate,
             usingSpringWithDamping: isHide ? 1 : 0.8, animations: {[weak self] in
@@ -235,8 +250,6 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
                 
                 self.aboutBlurView.alpha = 0
                 self.mainContainerView.transform = mainViewTransform
-                self.aboutMeController?.view.layer.cornerRadius = isHide ? 0 : Self.containerViewsCornerRadius
-                self.mainNavController?.view.layer.cornerRadius = isHide ? 0 : Self.containerViewsCornerRadius
                 self.menuController?.view.transform = menuTransform
                 self.aboutMeContainerView.transform = isHide ? .identity : CGAffineTransform(translationX: (Self.mainContainerTranlationRatio - 42) * percentage, y: 0).concatenating(CGAffineTransform(scaleX: aboutMeScale, y: aboutMeScale)).concatenating(CGAffineTransform(rotationAngle: (.pi/90) * percentage))
                 
@@ -250,7 +263,11 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     
     private let aboutBlurView: UIVisualEffectView = {
         let temp = UIVisualEffectView()
-        temp.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        if #available(iOS 13.0, *) {
+            temp.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        } else {
+            temp.effect = UIBlurEffect(style: .dark)
+        }
         temp.translatesAutoresizingMaskIntoConstraints = false
         return temp
     }()
@@ -264,13 +281,15 @@ class MainContainerViewController: ViewController, UIScrollViewDelegate {
     private var menuPanGesture: UIPanGestureRecognizer?
     private var tapGesture: UITapGestureRecognizer?
     private var mainNavController: MainNavViewcontroller?
-    private var menuController: MenuViewController?
+    private var menuController: (UIViewController & MenuViewControllerDelegate)?
     private var aboutMeController: AboutMeViewController?
     
     private var isMenuShowed: Bool = false {
         didSet {
             self.tapGesture?.isEnabled = isMenuShowed
             self.mainNavController?.view.isUserInteractionEnabled = !isMenuShowed
+            
+            menuController?.changeProfileAnimation(isShow: isMenuShowed)
         }
     }
 }

@@ -9,12 +9,6 @@
 import UIKit
 
 class BackwardsCompactableHelper {
-    static func setDefaultAPIKeyIfNeeded() {
-        guard UserDefaultsHelper.shared.apiKey == nil else { return }
-        
-        UserDefaultsHelper.shared.apiKey = "5d426f341099601fa75eea89f7598909"
-    }
-    
     static func handleAppStarting(with window: UIWindow?) {
         let barAppearance = UINavigationBar.appearance(whenContainedInInstancesOf: [MainNavViewcontroller.self])
         
@@ -31,7 +25,9 @@ class BackwardsCompactableHelper {
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        window?.overrideUserInterfaceStyle = .light
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
     }
 
 }

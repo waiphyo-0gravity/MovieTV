@@ -118,14 +118,25 @@
                                     <constraint firstAttribute="bottom" secondItem="1Tj-Ce-kRg" secondAttribute="bottom" constant="12" id="yKy-hX-0G2"/>
                                 </constraints>
                             </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="7EX-Pp-gWQ" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="147" width="414" height="715"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="search_lottie"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sbc-yy-MvJ"/>
                         <color key="backgroundColor" name="S10"/>
                         <constraints>
                             <constraint firstItem="bcB-qz-1fI" firstAttribute="leading" secondItem="Sbc-yy-MvJ" secondAttribute="leading" id="07s-Et-sbA"/>
+                            <constraint firstItem="Sbc-yy-MvJ" firstAttribute="trailing" secondItem="7EX-Pp-gWQ" secondAttribute="trailing" id="4Tc-AO-m1W"/>
+                            <constraint firstItem="Sbc-yy-MvJ" firstAttribute="bottom" secondItem="7EX-Pp-gWQ" secondAttribute="bottom" id="Mu1-6v-O9q"/>
                             <constraint firstItem="bcB-qz-1fI" firstAttribute="top" secondItem="Sbc-yy-MvJ" secondAttribute="top" constant="103" id="OzD-a9-21S"/>
+                            <constraint firstItem="7EX-Pp-gWQ" firstAttribute="top" secondItem="81B-fq-AYr" secondAttribute="bottom" id="PfN-GI-t0L"/>
                             <constraint firstItem="Sbc-yy-MvJ" firstAttribute="trailing" secondItem="81B-fq-AYr" secondAttribute="trailing" id="QFl-A1-9pI"/>
                             <constraint firstItem="81B-fq-AYr" firstAttribute="bottom" secondItem="Sbc-yy-MvJ" secondAttribute="top" constant="103" id="RYr-1s-mir"/>
+                            <constraint firstItem="7EX-Pp-gWQ" firstAttribute="leading" secondItem="Sbc-yy-MvJ" secondAttribute="leading" id="bMx-IL-mjh"/>
                             <constraint firstItem="81B-fq-AYr" firstAttribute="leading" secondItem="Sbc-yy-MvJ" secondAttribute="leading" id="cch-me-QVA"/>
                             <constraint firstItem="81B-fq-AYr" firstAttribute="top" secondItem="dUK-Vv-6dI" secondAttribute="top" id="esy-Vr-wlg"/>
                             <constraint firstAttribute="bottom" secondItem="bcB-qz-1fI" secondAttribute="bottom" id="h4m-my-5dD"/>
@@ -136,6 +147,7 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="0Bk-gx-lXB" id="aKC-GQ-FiM"/>
                         <outlet property="cancelBtn" destination="2Jo-lX-lgy" id="aGd-QL-d1k"/>
+                        <outlet property="lottieView" destination="7EX-Pp-gWQ" id="pCI-5G-7ZR"/>
                         <outlet property="searchCollectionView" destination="bcB-qz-1fI" id="qjx-Nd-fZn"/>
                         <outlet property="searchContainerView" destination="W7v-Bo-N8R" id="q7j-tm-QjJ"/>
                         <outlet property="searchCountLbl" destination="1Tj-Ce-kRg" id="KTy-NJ-iSE"/>
@@ -150,6 +162,9 @@
             <point key="canvasLocation" x="-72" y="139"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="7EX-Pp-gWQ"/>
+    </designables>
     <resources>
         <image name="search_icon" width="24" height="24"/>
         <namedColor name="C300">

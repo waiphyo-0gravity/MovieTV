@@ -140,9 +140,20 @@ class MainTopMediaScrollView: FlexableCornerRadiusView {
         bgBlurView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         animator.addAnimations {[weak self] in
-            self?.leftActionBtn.effect = UIBlurEffect(style: .systemThickMaterialLight)
-            self?.rightActionBtn.effect = UIBlurEffect(style: .systemThickMaterialLight)
-            self?.bgBlurView.effect = UIBlurEffect(style: .systemThickMaterialDark)
+            let btnBlurEffect: UIBlurEffect
+            let bgBlurEffect: UIBlurEffect
+            
+            if #available(iOS 13.0, *) {
+                btnBlurEffect = UIBlurEffect(style: .systemThickMaterialLight)
+                bgBlurEffect = UIBlurEffect(style: .systemThickMaterialDark)
+            } else {
+                btnBlurEffect = UIBlurEffect(style: .light)
+                bgBlurEffect = UIBlurEffect(style: .dark)
+            }
+            
+            self?.leftActionBtn.effect = btnBlurEffect
+            self?.rightActionBtn.effect = btnBlurEffect
+            self?.bgBlurView.effect = bgBlurEffect
         }
         
         animator.fractionComplete = 0.2

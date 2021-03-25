@@ -14,7 +14,7 @@ protocol SearchWebServiceInputProtocol {
     var apiKey: String? { get }
     var searchReq: URLSessionDataTask? { get }
     
-    func searchMovie(with keyword: String, page: Int)
+    func searchMovie(with keyword: String, page: Int, includeAdult: Bool)
 }
 
 protocol SearchWebServiceOutputProtocol: AnyObject {
@@ -22,7 +22,7 @@ protocol SearchWebServiceOutputProtocol: AnyObject {
 }
 
 class SearchWebService: SearchWebServiceInputProtocol {
-    func searchMovie(with keyword: String, page: Int) {
+    func searchMovie(with keyword: String, page: Int, includeAdult: Bool) {
         guard let url = URLHelper.Search.searchMovie.url else { return }
         
         searchReq?.cancel()
@@ -32,7 +32,7 @@ class SearchWebService: SearchWebServiceInputProtocol {
             method: .get,
             urlQueries: [
                 URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "include_adult", value: "false"),
+                URLQueryItem(name: "include_adult", value: includeAdult ? "true" : "false"),
                 URLQueryItem(name: "query", value: keyword),
                 URLQueryItem(name: "page", value: "\(page)")
             ], bodyParameters: nil)
@@ -48,7 +48,7 @@ class SearchWebService: SearchWebServiceInputProtocol {
     }
     
     weak var viewModel: SearchWebServiceOutputProtocol?
-    var apiKey: String? { UserDefaultsHelper.shared.apiKey }
+    var apiKey: String? { URLHelper.apiKey }
     
     private(set)var searchReq: URLSessionDataTask?
 }

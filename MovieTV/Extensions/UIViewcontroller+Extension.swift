@@ -48,4 +48,8 @@ extension UIViewController {
     @nonobjc class var AboutMeViewController: UIViewController? {
         return UIStoryboard.AboutMe?.instantiateViewController(withIdentifier: "aboutmeviewcontroller")
     }
+    
+    @nonobjc class var ProfileChooserViewController: UIViewController? {
+        return UIStoryboard.ProfileChooser?.instantiateViewController(withIdentifier: "profilechooserviewcontroller")
+    }
 }

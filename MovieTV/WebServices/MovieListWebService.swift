@@ -45,31 +45,6 @@ class MovieListWebService: MovieListWebServiceInputProtocol {
     }
     
     func getMovieList(for listType: MainViewModel.MovieListType, genres: [Int], page: Int) {
-        //        guard let url = URLHelper.MovieList.movieList(listType).url else { return }
-        //
-        //        movieListReq?.cancel()
-        //
-        //        var queries = [
-        //            URLQueryItem(name: "api_key", value: apiKey),
-        //            URLQueryItem(name: "language", value: "en-US")
-        //        ]
-        //
-        //        if genres.count != 0 {
-        //            let genre = genres.reduce("", { $0 + ($0 == "" ? "" : ",")  + "\($1)" })
-        //            queries.append(URLQueryItem(name: "with_genres", value: genre))
-        //        }
-        //
-        //        movieListReq = NetworkingFramework.request(url: url, method: .get, urlQueries: queries)
-        //            .response(dataType: MovieListModel.self) {[weak self] (data, response, error) in
-        //                self?.movieListReq = nil
-        //
-        //                guard let data = data else {
-        //                    self?.viewModel?.responseFromMovieList(isSuccess: false, data: nil, error: error)
-        //                    return
-        //                }
-        //
-        //                self?.viewModel?.responseFromMovieList(isSuccess: true, data: data, error: error)
-        //            }
         movieListReq = requestMovieList(for: listType, genres: genres, page: page)?
             .response(dataType: MovieListModel.self) {[weak self] (data, response, error) in
                 self?.movieListReq = nil
@@ -103,7 +78,7 @@ class MovieListWebService: MovieListWebServiceInputProtocol {
     }
     
     weak var viewModel: MovieListWebServiceOutputProtocol?
-    var apiKey: String? { UserDefaultsHelper.shared.apiKey }
+    var apiKey: String? { URLHelper.apiKey }
     
     private var movieListReq: URLSessionDataTask?
 }

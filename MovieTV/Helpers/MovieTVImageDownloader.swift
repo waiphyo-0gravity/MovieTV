@@ -22,6 +22,10 @@ class MovieTVImageDownloader {
         imgCaches.totalCostLimit = 50 * 1024 * 1024
     }
     
+    func clearCaches() {
+        imgCaches.removeAllObjects()
+    }
+    
     func download(url: String?, imgView: UIImageView?, response: MovieTVImageDownloaderResponse? = nil) {
         
         guard let urlStr = url,

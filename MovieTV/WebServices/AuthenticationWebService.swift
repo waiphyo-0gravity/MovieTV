@@ -30,7 +30,7 @@ class AuthenticationWebService: AuthenticationWebServiceInputProtocol {
     weak var viewModel: AuthenticationWebServiceOutPutProtocol?
     
     var apiKey: String? {
-        return UserDefaultsHelper.shared.apiKey
+        return URLHelper.apiKey
     }
     
     func getRequestToken() {

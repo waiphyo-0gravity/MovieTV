@@ -18,9 +18,6 @@ class UserDefaultsHelper {
         case guest = "GUEST_USER", normal = "NROMAL_USER"
     }
     
-    @UserDefaultValue(key: "api_key")
-    var apiKey: String?
-    
     @UserDefaultValue(key: "request_token")
     var requestToken: String?
     
@@ -32,6 +29,18 @@ class UserDefaultsHelper {
     
     @UserDefaultValue(key: "guest_session_id")
     var guestSessionID: String?
+    
+    @UserDefaultValue(key: "search_lottie_animation_name")
+    var searchLottieAnimationName: String?
+    
+    @UserDefaultValue(key: "adult_movie_key")
+    var isAdultMovieInclude: Bool?
+    
+    @UserDefaultValue(key: "avatar_animation_name")
+    var avatarName: String?
+    
+    @UserDefaultValue(key: "user_name")
+    var userName: String?
     
     var mappedUserType: UserType? { UserType(rawValue: userType ?? "") }
 }

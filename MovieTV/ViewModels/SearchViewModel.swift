@@ -13,7 +13,10 @@ protocol SearchViewModelProtocol: AnyObject {
     var webService: SearchWebServiceInputProtocol? { get set }
     var searchedMovies: MovieListModel? { get set }
     var isMovieListIncludePaging: Bool { get }
+    var isAdultMovieInclude: Bool { get }
+    var searchLottieAnimationName: String? { get set }
     
+    func viewDidLoad()
     func search(for keyword: String?)
     func callSearchMovieListNextPage(for keyword: String?)
     func showMovieDetail(at index: Int, view: UINavigationController?)
@@ -40,6 +43,10 @@ class SearchViewModel: SearchViewModelProtocol {
         return navVC
     }
     
+    func viewDidLoad() {
+        setNextSearchAnimation()
+    }
+    
     func search(for keyword: String?) {
         guard let keyword = keyword, keyword.isEmpty == false else {
             searchedMovies = nil
@@ -48,7 +55,7 @@ class SearchViewModel: SearchViewModelProtocol {
             return
         }
         
-        webService?.searchMovie(with: keyword, page: 1)
+        webService?.searchMovie(with: keyword, page: 1, includeAdult: isAdultMovieInclude)
     }
     
     func callSearchMovieListNextPage(for keyword: String?) {
@@ -61,13 +68,22 @@ class SearchViewModel: SearchViewModelProtocol {
         
         let page = (searchedMovies?.page ?? 0) + 1
         
-        webService?.searchMovie(with: keyword, page: page)
+        webService?.searchMovie(with: keyword, page: page, includeAdult: isAdultMovieInclude)
     }
     
     func showMovieDetail(at index: Int, view: UINavigationController?) {
         guard let movieDetailVC = MovieDetailViewModel.createModule(with: searchedMovies?.results[index], mainContainer: nil) else { return }
         
         view?.pushViewController(movieDetailVC, animated: true)
+    }
+    
+    private func setNextSearchAnimation() {
+        switch searchLottieAnimationName {
+        case "search_lottie":
+            searchLottieAnimationName = "search_option2_lottie"
+        default:
+            searchLottieAnimationName = "search_lottie"
+        }
     }
     
     weak var view: SearchViewProtocol?
@@ -79,6 +95,18 @@ class SearchViewModel: SearchViewModelProtocol {
         let totalPage = searchedMovies?.totalPages ?? 0
         return totalPage > page
     }
+    
+    var searchLottieAnimationName: String? {
+        get {
+            return UserDefaultsHelper.shared.searchLottieAnimationName
+        }
+        
+        set {
+            UserDefaultsHelper.shared.searchLottieAnimationName = newValue
+        }
+    }
+    
+    var isAdultMovieInclude: Bool { UserDefaultsHelper.shared.isAdultMovieInclude == true }
 }
 
 //  MARK: - WEB_SERVICE -> VIEW_MODEL

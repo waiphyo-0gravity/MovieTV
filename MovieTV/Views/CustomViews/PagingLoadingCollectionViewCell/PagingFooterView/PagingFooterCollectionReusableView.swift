@@ -35,7 +35,11 @@ class PagingFooterCollectionReusableView: UICollectionReusableView, NibableCellP
     let activityIndicator: UIActivityIndicatorView = {
         let temp = UIActivityIndicatorView()
         temp.color = UIColor.Primary100
-        temp.style = .medium
+        if #available(iOS 13.0, *) {
+            temp.style = .medium
+        } else {
+            temp.style = .gray
+        }
         temp.translatesAutoresizingMaskIntoConstraints = false
         return temp
     }()

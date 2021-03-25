@@ -14,21 +14,13 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
+			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>api_key</string>
+			<string>adult_movie_key</string>
 			<key>Key</key>
-			<string>api_key</string>
+			<string>adult_movie_key</string>
 			<key>DefaultValue</key>
-			<string>5d426f341099601fa75eea89f7598909</string>
-			<key>IsSecure</key>
-			<false/>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
+			<string>NO</string>
 		</dict>
 	</array>
 </dict>

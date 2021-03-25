@@ -8,6 +8,7 @@
 
 import UIKit
 import AuthenticationServices
+import SafariServices
 
 protocol LoginViewModelProtocol {
     var view: LoginViewProtocol? { get set }
@@ -16,11 +17,13 @@ protocol LoginViewModelProtocol {
     var sessionID: String? { get set }
     var guestSessionID: String? { get set }
     var userType: String? { get set }
+    var avatarName: String? { get set }
     
     func routToMainView(from view: UIViewController?)
     func logIn(username: String?, password: String?)
     func logInWithOAuth()
     func loginAsGuest()
+    func setDefaultAvatarProfile()
 }
 
 class LoginViewModel: LoginViewModelProtocol {
@@ -56,6 +59,12 @@ class LoginViewModel: LoginViewModelProtocol {
             UIApplication.shared.firstKeyWindow?.rootViewController = mainVC
             UIApplication.shared.firstKeyWindow?.makeKeyAndVisible()
         })
+    }
+    
+    func setDefaultAvatarProfile() {
+        guard avatarName == nil else { return }
+        
+        avatarName = ProfileChooserViewModel.ProfileData.makeRandom()?.rawValue
     }
     
     static func createModule() -> UIViewController? {
@@ -120,9 +129,21 @@ class LoginViewModel: LoginViewModelProtocol {
         }
     }
     
+    var avatarName: String? {
+        get {
+            return UserDefaultsHelper.shared.avatarName
+        }
+        
+        set {
+            UserDefaultsHelper.shared.avatarName = newValue
+        }
+    }
+    
     private var username: String?
     private var password: String?
     private var authenticationType: AuthenticationType = .normal
+    
+    private var authSession: AnyObject?
 }
 
 //  MARK: - Authentication process.
@@ -148,14 +169,28 @@ extension LoginViewModel {
     private func makeOAuthLogin(wit token: String) {
         guard let url = URLHelper.Authentication.OAuthLogin(token: token).url else { return }
         
-        let authSession = ASWebAuthenticationSession(url: url, callbackURLScheme: URLHelper.OAuthCallbackURLScheme, completionHandler: handleOAuthLoginComplection(_:_:))
-        
-        authSession.presentationContextProvider = view as? ASWebAuthenticationPresentationContextProviding
-        
-        authSession.start()
+        if #available(iOS 12.0, *) {
+            let asSuthSession = ASWebAuthenticationSession(url: url, callbackURLScheme: URLHelper.OAuthCallbackURLScheme, completionHandler: handleOAuthLoginComplection(_:_:))
+            
+            self.authSession = asSuthSession
+            
+            if #available(iOS 13.0, *) {
+                asSuthSession.presentationContextProvider = view as? ASWebAuthenticationPresentationContextProviding
+            }
+            
+            asSuthSession.start()
+        } else {
+            let sfAuthSession = SFAuthenticationSession(url: url, callbackURLScheme: URLHelper.OAuthCallbackURLScheme, completionHandler: handleOAuthLoginComplection(_:_:))
+            
+            self.authSession = sfAuthSession
+            
+            sfAuthSession.start()
+        }
     }
     
     private func handleOAuthLoginComplection(_ url: URL?, _ error: Error?) {
+        authSession = nil
+        
         guard let url = url else {
             view?.failedLogin(error: error)
             return

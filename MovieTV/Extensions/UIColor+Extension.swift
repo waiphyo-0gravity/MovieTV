@@ -25,6 +25,10 @@ extension UIColor {
         return UIColor(named: "S70")!
     }
     
+    @nonobjc class var Secondary100: UIColor {
+        return UIColor(named: "Secondary100")!
+    }
+    
     @nonobjc class var R100: UIColor {
         return UIColor(named: "R100")!
     }
@@ -39,6 +43,10 @@ extension UIColor {
     
     @nonobjc class var Primary100: UIColor {
         return UIColor(named: "Primary100")!
+    }
+    
+    @nonobjc class var ProfileBG: UIColor {
+        return UIColor(named: "ProfileBG")!
     }
     
     @nonobjc class var MenuGradient: UIColor {

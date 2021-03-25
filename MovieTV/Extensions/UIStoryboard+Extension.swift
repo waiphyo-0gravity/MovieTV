@@ -40,4 +40,8 @@ extension UIStoryboard {
     @nonobjc class var AboutMe: UIStoryboard? {
         return UIStoryboard(name: "AboutMe", bundle: nil)
     }
+    
+    @nonobjc class var ProfileChooser: UIStoryboard? {
+        return UIStoryboard(name: "ProfileChooser", bundle: nil)
+    }
 }

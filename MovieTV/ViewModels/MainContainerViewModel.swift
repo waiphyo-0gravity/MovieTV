@@ -10,7 +10,9 @@ import UIKit
 
 protocol MainContainerViewModelProtocol {
     var view: MainContainerViewProtocol? { get set }
+    var searchLottieAnimationName: String? { get set }
     
+    func viewDidLoad()
     func handleNavSelection(for type: MenuViewModel.MenuSideNavType, view: UIViewController?)
 }
 
@@ -24,6 +26,10 @@ class MainContainerViewModel: MainContainerViewModelProtocol {
         view.viewModel = viewModel
         viewModel.view = view
         return view
+    }
+    
+    func viewDidLoad() {
+        searchLottieAnimationName = "search_lottie"
     }
     
     func handleNavSelection(for type: MenuViewModel.MenuSideNavType, view: UIViewController?) {
@@ -54,6 +60,7 @@ class MainContainerViewModel: MainContainerViewModelProtocol {
         
         UserDefaultsHelper.shared.sessionID = nil
         UserDefaultsHelper.shared.userType = nil
+        UserDefaultsHelper.shared.avatarName = nil
         
         (view as? ViewController)?.transition(isShow: false, isAnimate: true) {_ in
             UIApplication.shared.firstKeyWindow?.rootViewController = loginVC
@@ -72,6 +79,16 @@ class MainContainerViewModel: MainContainerViewModelProtocol {
     }
     
     weak var view: MainContainerViewProtocol?
+    
+    var searchLottieAnimationName: String? {
+        get {
+            return UserDefaultsHelper.shared.searchLottieAnimationName
+        }
+        
+        set {
+            UserDefaultsHelper.shared.searchLottieAnimationName = newValue
+        }
+    }
     
     private let transitioningDelegate = MovieTVTransitioningDelegate()
 }

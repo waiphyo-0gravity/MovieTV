@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Lottie
+
 protocol SearchViewProtocol: AnyObject {
     var viewModel: SearchViewModelProtocol? { get set }
     
@@ -57,6 +59,7 @@ class SearchViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
+        viewModel?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +70,7 @@ class SearchViewController: ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        searchTxtField.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,6 +85,7 @@ class SearchViewController: ViewController {
             self?.searchContainerView.transform = isShow ? .identity : .init(translationX: -24, y: 0)
             self?.cancelBtn.transform = isShow ? .identity : .init(translationX: 24, y: 0)
             self?.searchCountLbl.transform = isShow ? .identity : .init(translationX: 0, y: 24)
+            self?.lottieView.transform = isShow ? .identity : .init(translationX: 0, y: 24)
             self?.searchCollectionView.transform = isShow ? .identity : .init(translationX: 0, y: 24)
         }, completion: completion)
     }
@@ -106,6 +111,7 @@ class SearchViewController: ViewController {
     
     @objc func handleTxtFieldChanged() {
         animateSearchImgContainer(isSearching: true)
+        animateLottieAnimationView(isShow: searchTxtField.text?.isEmpty != false)
         viewModel?.search(for: searchTxtField.text)
     }
     
@@ -116,6 +122,12 @@ class SearchViewController: ViewController {
         setUpSearchTxtField()
         handleDataChanged()
         searchCollectionView.customDelegate = self
+        
+        lottieView.loopMode = .loop
+        
+        if let lottieAnimateFileName = viewModel?.searchLottieAnimationName {
+            lottieView.changeAnimation(with: lottieAnimateFileName)
+        }
     }
     
     private func setUpSearchTxtField() {
@@ -126,7 +138,6 @@ class SearchViewController: ViewController {
         searchContainerView.layer.cornerRadius = 8
         searchContainerView.addAccentShadow()
         animateSearchImgContainer(isSearching: false, isAnimate: false)
-        searchTxtField.becomeFirstResponder()
     }
     
     private func handleDataChanged() {
@@ -160,6 +171,21 @@ class SearchViewController: ViewController {
         activityIndicatorView.alpha = isSearching ? 1 : 0
     }
     
+    private func animateLottieAnimationView(isShow: Bool, isAnimate: Bool = true) {
+        guard (isShow && lottieView.alpha == 0) || (!isShow && lottieView.alpha == 1) else { return }
+        
+        if isShow {
+            lottieView.play()
+        } else {
+            lottieView.pause()
+        }
+        
+        UIView.easeSpringAnimation(isAnimate: isAnimate) {[weak self] in
+            self?.lottieView.alpha = isShow ? 1 : 0
+            self?.lottieView.transform = isShow ? .identity : .init(scaleX: 0.8, y: 0.8)
+        }
+    }
+    
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchTxtField: UITextField!
     @IBOutlet weak var searchImgContainerView: UIView!
@@ -169,6 +195,7 @@ class SearchViewController: ViewController {
     @IBOutlet weak var topViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchCountLbl: UILabel!
     @IBOutlet weak var cancelBtn: MovieTVButton!
+    @IBOutlet weak var lottieView: AnimationView!
     
     private var searchNavController: StatusBarHidableNavController? {
         return navigationController as? StatusBarHidableNavController

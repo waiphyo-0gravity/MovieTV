@@ -21,6 +21,7 @@ protocol AccountWebServiceInputProtocol {
     func postFavouriteMovie(mediaID: Int, isAdding: Bool)
     func postRatingsMovie(movieID: Int, ratings: Float)
     func deleteRatingsMovie(movieID: Int)
+    func getAccountDetail()
 }
 
 protocol AccountWebServiceOutputProtocol: AnyObject {
@@ -28,6 +29,7 @@ protocol AccountWebServiceOutputProtocol: AnyObject {
     func responseFromPostWatchMovie(isSuccess: Bool, error: Error?)
     func responseFromPostFavouriteMovie(isSuccess: Bool, error: Error?)
     func responseFromPostRatingMovie(isSuccess: Bool, error: Error?)
+    func responseFromAccountDetail(isSuccess: Bool, data: AccountDetailModel?, error: Error?)
 }
 
 extension AccountWebServiceOutputProtocol {
@@ -35,6 +37,7 @@ extension AccountWebServiceOutputProtocol {
     func responseFromPostWatchMovie(isSuccess: Bool, error: Error?) {}
     func responseFromPostFavouriteMovie(isSuccess: Bool, error: Error?) {}
     func responseFromPostRatingMovie(isSuccess: Bool, error: Error?) {}
+    func responseFromAccountDetail(isSuccess: Bool, data: AccountDetailModel?, error: Error?) {}
 }
 
 class AccountWebService: AccountWebServiceInputProtocol {
@@ -164,8 +167,28 @@ class AccountWebService: AccountWebServiceInputProtocol {
             }
     }
     
+    func getAccountDetail() {
+        guard let url = URLHelper.Account.accountDetail.url,
+              let apiKey = apiKey else { return }
+        
+        var urlQueries = [URLQueryItem(name: "api_key", value: apiKey)]
+            
+        if mappedUserType == .normal {
+            urlQueries.append(URLQueryItem(name: "session_id", value: sessionID))
+        } else if mappedUserType == .guest {
+            urlQueries.append(URLQueryItem(name: "guest_session_id", value: guestSessionID))
+        }
+        
+        postRatingMovie = NetworkingFramework.request(
+            url: url,
+            method: .get,
+            urlQueries: urlQueries).response(dataType: AccountDetailModel.self) {[weak self] (data , response, error) in
+                self?.viewModel?.responseFromAccountDetail(isSuccess: data != nil, data: data, error: error)
+            }
+    }
+    
     weak var viewModel: AccountWebServiceOutputProtocol?
-    var apiKey: String? { UserDefaultsHelper.shared.apiKey }
+    var apiKey: String? { URLHelper.apiKey }
     var sessionID: String? { UserDefaultsHelper.shared.sessionID }
     var guestSessionID: String? { UserDefaultsHelper.shared.guestSessionID }
     var mappedUserType: UserDefaultsHelper.UserType? { UserDefaultsHelper.shared.mappedUserType }

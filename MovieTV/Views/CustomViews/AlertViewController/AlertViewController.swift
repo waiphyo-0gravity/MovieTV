@@ -49,6 +49,8 @@ class AlertViewController: UIViewController {
     }
     
     private func setUpViews() {
+        modalPresentationStyle = .overFullScreen
+        
         view.addSubview(overlayView)
         overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -148,7 +150,11 @@ class AlertViewController: UIViewController {
     let overlayView: UIVisualEffectView = {
         let temp = UIVisualEffectView()
         temp.translatesAutoresizingMaskIntoConstraints = false
-        temp.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        if #available(iOS 13.0, *) {
+            temp.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        } else {
+            temp.effect = UIBlurEffect(style: .dark)
+        }
         return temp
     }()
 

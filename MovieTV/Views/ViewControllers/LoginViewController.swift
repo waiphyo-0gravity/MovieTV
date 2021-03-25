@@ -8,6 +8,7 @@
 
 import UIKit
 import AuthenticationServices
+import Lottie
 
 protocol LoginViewProtocol: AnyObject {
     var viewModel: LoginViewModelProtocol? { get set }
@@ -17,10 +18,15 @@ protocol LoginViewProtocol: AnyObject {
 }
 
 class LoginViewController: ViewController, UITextFieldDelegate {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initial()
         transition(isShow: false, isAnimate: false)
+        handleViewStateChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,34 +35,55 @@ class LoginViewController: ViewController, UITextFieldDelegate {
         handleInputFieldsChange(isAnimate: false)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
     override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        greetingLottieView.layoutIfNeeded()
+        
         UIView.easeSpringAnimation(isAnimate: isAnimate, withDuration: 0.3, animations: {[weak self] in
             self?.topView.alpha = isShow ? 1 : 0
             self?.stackView.alpha = isShow ? 1 : 0
             self?.footerView.alpha = isShow ? 1 : 0
-            self?.characterImgView.alpha = isShow ? 1 : 0
             self?.loginBtnContainerView.alpha = isShow ? 1 : 0
-            self?.characterImgView.transform = isShow ? .identity : .init(translationX: 24, y: 0)
-            self?.helloLbl.transform = isShow ? .identity : .init(translationX: 0, y: -24)
-            self?.welcomeLbl.transform = isShow ? .identity : .init(translationX: -24, y: 0)
             self?.footerView.transform = isShow ? .identity : .init(translationX: 0, y: 40)
-            self?.stackView.transform = isShow ? .identity : .init(translationX: 40, y: 0)
+            self?.stackView.transform = isShow ? .identity : .init(translationX: -40, y: 0)
             self?.loginBtnContainerView.transform = isShow ? .identity : .init(translationX: 0, y: 40)
+            
+            if self?.viewState == .loading {
+                self?.loadingLottieView.alpha = isShow ? 1 : 0
+            } else {
+                self?.greetingLottieView.alpha = isShow ? 1 : 0
+                self?.greetingLottieView.transform = isShow ? .identity : .init(translationX: 40, y: 0)
+            }
         }, completion: completion)
     }
     
     @IBAction func clickLoginBtn(_ sender: Any) {
+        viewState = .loading
         makeLogin()
     }
     
     @IBAction func clickLoginWithTMDbBtn(_ sender: Any) {
         view.endEditing(true)
+        viewState = .loading
         viewModel?.logInWithOAuth()
     }
     
     @IBAction func clickGuestBtn(_ sender: Any) {
         view.endEditing(true)
+        viewState = .loading
         viewModel?.loginAsGuest()
+    }
+    
+    @objc private func willEnterForeground() {
+        if viewState == .loading {
+            loadingLottieView.play()
+        } else {
+            greetingLottieView.play()
+        }
     }
     
     @objc private func handleKeyboard(notification: NSNotification) {
@@ -91,11 +118,9 @@ class LoginViewController: ViewController, UITextFieldDelegate {
     }
     
 //    MARK: - Varuables declaration.
-    @IBOutlet weak var helloLbl: UILabel!
     @IBOutlet weak var userNameTxtField: MovieTVTextField!
     @IBOutlet weak var passTxtField: MovieTVTextField!
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var loginBtnWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginBtnContainerView: UIView!
@@ -105,12 +130,13 @@ class LoginViewController: ViewController, UITextFieldDelegate {
     @IBOutlet weak var loginWithTMDbActionBtn: MovieTVButton!
     @IBOutlet weak var guestBtn: MovieTVButton!
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var characterImgView: UIImageView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var greetingLottieView: AnimationView!
+    @IBOutlet weak var loadingLottieView: AnimationView!
     
     var viewModel: LoginViewModelProtocol?
     
-    enum ViewState {
+    enum LoginBtnState {
         case normal, update
         
         var loginBtnWidth: CGFloat {
@@ -132,8 +158,22 @@ class LoginViewController: ViewController, UITextFieldDelegate {
         }
     }
     
-    private var currentViewState: ViewState = .normal {
+    enum ViewState {
+        case normal, loading, fail
+    }
+    
+    private var loginBtnState: LoginBtnState = .normal {
         didSet {
+            guard oldValue != loginBtnState else { return }
+            
+            handleLoginBtnStateChange()
+        }
+    }
+    
+    private var viewState: ViewState = .normal {
+        didSet {
+            guard oldValue != viewState else { return }
+            
             handleViewStateChange()
         }
     }
@@ -149,6 +189,7 @@ class LoginViewController: ViewController, UITextFieldDelegate {
 
 //  MARK: - ASWebAuthenticationSession
 extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
+    @available(iOS 12.0, *)
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return self.view.window ?? ASPresentationAnchor()
     }
@@ -157,11 +198,13 @@ extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
 //  MARK: - VIEW_MODEL -> VIEW
 extension LoginViewController: LoginViewProtocol {
     func successLogin() {
+        viewModel?.setDefaultAvatarProfile()
         viewModel?.routToMainView(from: self)
     }
     
     func failedLogin(error: Error?) {
-        print(error)
+        viewState = .normal
+        loginBtnState = .normal
     }
 }
 
@@ -169,11 +212,12 @@ extension LoginViewController: LoginViewProtocol {
 extension LoginViewController {
     private func initial() {
         view.touchAroundToHideKeyboard()
-        setUpHelloLabel()
         setUpLoginBtn()
         setUpOAuthBtn()
         setUpGuestBtn()
         bindActions()
+        greetingLottieView.loopMode = .loop
+        loadingLottieView.loopMode = .loop
     }
     
     private func setUpLoginBtn() {
@@ -182,14 +226,6 @@ extension LoginViewController {
         loginArrowImgView.superview?.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: loginBtn.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: loginBtn.centerYAnchor).isActive = true
-    }
-    
-    private func setUpHelloLabel() {
-        guard let text = helloLbl.text else { return }
-        
-        let mutableText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont(name: UIFont.FontStyle.bold.rawValue, size: 42.0)!])
-        mutableText.addAttribute(NSAttributedString.Key.font, value: UIFont(name: UIFont.FontStyle.regular.rawValue, size: 42)!, range: NSRange(location: 0, length: 5))
-        helloLbl.attributedText = mutableText
     }
     
     private func setUpOAuthBtn() {
@@ -233,8 +269,9 @@ extension LoginViewController {
     
     private func makeLogin() {
         view.endEditing(true)
-        
-        currentViewState = .update
+        userNameTxtField.txtField.resignFirstResponder()
+        passTxtField.txtField.resignFirstResponder()
+        loginBtnState = .update
         
         viewModel?.logIn(username: userNameTxtField.txtField.text, password: passTxtField.txtField.text)
     }
@@ -246,30 +283,32 @@ extension LoginViewController {
         loginBtn.isUserInteractionEnabled = isNeedToEnable
         
         UIView.easeSpringAnimation(isAnimate: isAnimate) {[weak self] in
-            self?.loginBtnContainerView.backgroundColor = isNeedToEnable ? UIColor.systemOrange : UIColor.S70
+            self?.loginBtnContainerView.backgroundColor = isNeedToEnable ? UIColor.Secondary100 : UIColor.S70
             self?.loginBtnContainerView.transform = isNeedToEnable ? .identity : CGAffineTransform.identity.scaledBy(x: 0.7, y: 0.7)
         }
     }
     
-    private func handleViewStateChange() {
-        let isUpdating = currentViewState == .update
+    private func handleLoginBtnStateChange() {
+        let isUpdating = loginBtnState == .update
         
         UIView.easeSpringAnimation {[weak self] in
             guard let self = self else { return }
             
-            self.loginBtnContainerView.layer.cornerRadius = self.currentViewState.loginBtnCornerRadius
-            self.loginBtnWidthConstraint.constant = self.currentViewState.loginBtnWidth
+            self.loginBtnContainerView.layer.cornerRadius = self.loginBtnState.loginBtnCornerRadius
+            self.loginBtnWidthConstraint.constant = self.loginBtnState.loginBtnWidth
             self.loginArrowImgView.alpha = isUpdating ? 0 : 1
             self.view.layoutIfNeeded()
         }
         
         loginBtn.isUserInteractionEnabled = !isUpdating
         
-        let animation = CABasicAnimation(keyPath: "transform.rotation")
-        animation.fromValue = 0.0
-        animation.toValue = CGFloat.pi / 2
-        animation.duration = 0.5
-        loginArrowImgView.layer.add(animation, forKey: nil)
+        if isUpdating {
+            let animation = CABasicAnimation(keyPath: "transform.rotation")
+            animation.fromValue = 0.0
+            animation.toValue = CGFloat.pi / 2
+            animation.duration = 0.5
+            loginArrowImgView.layer.add(animation, forKey: nil)
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {[weak self, isUpdating] in
             if isUpdating == true {
@@ -277,6 +316,56 @@ extension LoginViewController {
             } else {
                 self?.activityIndicator.stopAnimating()
             }
+        }
+    }
+    
+    private func handleViewStateChange() {
+        let isLoading = viewState == .loading
+        
+        greetingLottieView.alpha = isLoading ? 0 : 1
+        loadingLottieView.alpha = isLoading ? 1 : 0
+        view.isUserInteractionEnabled = !isLoading
+        
+        UIView.easeSpringAnimation {
+            self.stackView.alpha = isLoading ? 0.5 : 1
+            self.footerView.alpha = isLoading ? 0.5 : 1
+            self.loginBtnContainerView.alpha = isLoading ? 0.5 : 1
+        }
+        
+        switch viewState {
+        case .normal, .fail:
+            greetingLottieView.play()
+            
+            loadingLottieView.stop()
+            loadingLottieView.layer.removeAllAnimations()
+            loadingLottieView.transform = .identity
+        case .loading:
+            greetingLottieView.stop()
+            
+            loadingLottieView.play()
+            
+            let groupAnimation = CAAnimationGroup()
+            groupAnimation.duration = 6
+            groupAnimation.repeatCount = .infinity
+            
+            let translationAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+            translationAnimation.duration = 3
+            translationAnimation.autoreverses = true
+            translationAnimation.fromValue = 0
+            translationAnimation.fillMode = .both
+            translationAnimation.toValue = -UIScreen.main.bounds.width/2
+            
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
+            rotationAnimation.duration = 0.0001
+            rotationAnimation.beginTime = 3
+            rotationAnimation.fromValue = 0
+            rotationAnimation.fillMode = .both
+            rotationAnimation.isRemovedOnCompletion = false
+            rotationAnimation.toValue = CGFloat.pi
+            
+            groupAnimation.animations = [translationAnimation, rotationAnimation]
+            
+            loadingLottieView.layer.add(groupAnimation, forKey: "move")
         }
     }
 }

@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Lottie
 
 protocol MenuViewProtocol: AnyObject {
     var viewModel: MenuViewModelProtocol? { get set }
     var mainContainerDelegate: MainContainerViewDelegate? { get set }
+    
+    func handleDisplayNameChanged()
 }
 
-class MenuViewController: ViewController {
+protocol MenuViewControllerDelegate: AnyObject {
+    func changeProfileAnimation(isShow: Bool)
+}
+
+class MenuViewController: ViewController, MenuViewControllerDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         setUpConstraint(with: size)
@@ -25,6 +32,7 @@ class MenuViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.viewDidLoad()
         initial()
     }
     
@@ -32,9 +40,40 @@ class MenuViewController: ViewController {
         mainContainerDelegate?.menuSelectionChanged(to: MenuViewModel.MenuSideNavType.logout)
     }
     
+    @IBAction func clickedProfileView(_ sender: Any) {
+        viewModel?.showProfileChooser(from: self)
+    }
+    
     private func initial() {
         setUpConstraint()
         tableViewSetUp()
+        setUpProfileView()
+    }
+    
+    func changeProfileAnimation(isShow: Bool) {
+        guard (isShow && !profileLottieView.isAnimationPlaying) || (!isShow && profileLottieView.isAnimationPlaying) else { return }
+        
+        switch true {
+        case isShow && !profileLottieView.isAnimationPlaying:
+            profileLottieView.play()
+        case !isShow && profileLottieView.isAnimationPlaying:
+            profileLottieView.pause()
+        default:
+            break
+        }
+    }
+    
+    private func setUpProfileView() {
+        profileLottieView.loopMode = .loop
+        profileContainerView.addAccentShadow()
+        
+        if let avatar = viewModel?.avatarName {
+            profileLottieView.changeAnimation(with: avatar, autoPlay: false)
+        }
+        
+        profileEditActionBtn.specificAnimateView = profileContainerView
+        
+        handleDisplayNameChanged()
     }
     
     private func setUpConstraint(with specificView: CGSize? = nil) {
@@ -57,6 +96,11 @@ class MenuViewController: ViewController {
     @IBOutlet weak var tableViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutBtn: MovieTVButton!
+    @IBOutlet weak var menuTopView: MovieDetailRatingView!
+    @IBOutlet weak var profileContainerView: UIView!
+    @IBOutlet weak var profileLottieView: AnimationView!
+    @IBOutlet weak var profileEditActionBtn: MovieTVButton!
+    @IBOutlet weak var displayNameLbl: UILabel!
     
     var viewModel: MenuViewModelProtocol?
     weak var mainContainerDelegate: MainContainerViewDelegate?
@@ -96,5 +140,17 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate, MenuSi
 
 //  MARK: - VIEW_MODEL -> VIEW
 extension MenuViewController: MenuViewProtocol {
-    
+    func handleDisplayNameChanged() {
+        displayNameLbl.text = "Hi \(viewModel?.displayName ?? "")!"
+    }
+}
+
+//  MARK: - Profile chooser delegates.
+extension MenuViewController: ProfileChooserViewDelegate {
+    func handleAvatarChanging() {
+        guard let avatar = viewModel?.avatarName else { return }
+        
+        profileLottieView.animation = nil
+        profileLottieView.changeAnimation(with: avatar, autoPlay: true)
+    }
 }

@@ -21,6 +21,7 @@ enum URLHelper {
     static let movieID = "2"
     static let omdbAPIKey = "c38199c1"
     static let OAuthCallbackURLScheme = "movietv"
+    static let apiKey = "5d426f341099601fa75eea89f7598909"
     
     enum Image {
         case original(String?), customWidth(Int, String?)
@@ -124,7 +125,7 @@ enum URLHelper {
     }
     
     enum Account: URLHelperProtocol {
-        case addWatchList, addFavorite, addRatings(movieID: Int), watchList, favorite
+        case addWatchList, addFavorite, addRatings(movieID: Int), watchList, favorite, accountDetail
         case ratedList(userType: UserDefaultsHelper.UserType?, guestSessionID: String?)
         
         var url: URL? {
@@ -133,6 +134,8 @@ enum URLHelper {
         
         var path: String {
             switch self {
+            case .accountDetail:
+                return "/account"
             case .favorite:
                 return "/account/0/favorite/movies"
             case .watchList:

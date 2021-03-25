@@ -91,7 +91,7 @@ class MovieDetailWebService: MovieDetailWebServiceInputProtocol {
     
     weak var viewModel: MovieDetailWebServiceOutputProtocol?
     
-    var apiKey: String? { UserDefaultsHelper.shared.apiKey }
+    var apiKey: String? { URLHelper.apiKey }
     var sessionID: String? { UserDefaultsHelper.shared.sessionID }
     var guestSessionID: String? { UserDefaultsHelper.shared.guestSessionID }
     var mappedUserType: UserDefaultsHelper.UserType? { UserDefaultsHelper.shared.mappedUserType }

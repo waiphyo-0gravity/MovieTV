@@ -2,7 +2,8 @@
 # platform :ios, '9.0'
 
 def shared_pods
-	pod "youtube-ios-player-helper"
+	pod 'youtube-ios-player-helper'
+	pod 'lottie-ios'
 end
 
 target 'MovieTV' do
