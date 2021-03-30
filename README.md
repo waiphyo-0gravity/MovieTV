@@ -1,7 +1,12 @@
-# MovieTV
-
-[![TMDb: v.3](https://img.shields.io/badge/TMDb-v.3-orange)](https://developers.themoviedb.org/3)
-[![Twitter: waiphyo995](https://img.shields.io/twitter/follow/waiphyo995?style=social)](https://twitter.com/waiphyo995)
+<h1 align="center">🍿 MovieTV 🍿</h1>
+<p align="center">
+  <a href="https://developers.themoviedb.org/3">
+    <img src="https://img.shields.io/badge/TMDb-v.3-orange" alt="TMDb: v.3">
+  </a>
+  <a href="https://twitter.com/waiphyo995">
+    <img src="https://img.shields.io/twitter/follow/waiphyo995?style=social" alt="Twitter: waiphyo995">
+  </a>
+</p>
 
 ### About MovieTV
 `MovieTV` have been developed with swift + [TMDb API](https://developers.themoviedb.org/3). It will help you about movies' statistics.
@@ -11,6 +16,11 @@
 - *Changing profile with default animated characters.* **(All of these characters are used from [lottie free animation files](https://lottiefiles.com/featured))**
 - *Give ratings, mark watchlist & make favourate movies. If you tour as guest, u can only give ratings.*
 - *Search and explore movie statistics.*
+
+### App State
+```
+<p>Can't download from App store yet.</p>
+```
 
 ## App Overview
 This project was made as my first open source project. Here are some screenshots.
