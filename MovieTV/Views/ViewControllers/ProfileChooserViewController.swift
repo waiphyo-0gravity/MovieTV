@@ -12,20 +12,16 @@ import Lottie
 protocol ProfileChooserViewProtocol: AnyObject {
     var viewModel: ProfileChooserViewModelProtocol? { get set }
     var delegate: ProfileChooserViewDelegate? { get set }
+    var touchedFrame: CGRect { get set }
+    var displayedName: String? { get set }
 }
 
 protocol ProfileChooserViewDelegate {
     func handleAvatarChanging()
+    func animateAvatarView()
 }
 
 class ProfileChooserViewController: ViewController {
-
-    var data = [ProfileChooserModel]() {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.mapData()
@@ -41,9 +37,40 @@ class ProfileChooserViewController: ViewController {
     }
     
     override func transition(isShow: Bool, isAnimate: Bool, completion: ((Bool) -> Void)? = nil) {
+        if let row = viewModel?.currentSelectedAvatarIndex,
+           let cell = collectionView.cellForItem(at: IndexPath(row: row, section: 0)) as? ProfileChooserCollectionViewCell {
+            cell.layer.zPosition = 100
+            cell.nameLbl.text = isShow ? data[row].profile.name : displayedName
+            
+            if !isShow && isAnimate && data[row].profile != .random {
+                cell.profileLottieView.stop()
+            }
+        }
+        
         UIView.easeSpringAnimation(isAnimate: isAnimate, animations: {
             self.blurView.alpha = isShow ? 1 : 0
-            self.collectionView.transform = isShow ? .identity : CGAffineTransform(translationX: 0, y: 64).concatenating(CGAffineTransform(scaleX: 0.009, y: 0.009))
+            self.collectionView.visibleCells.forEach { aCell in
+                guard let aCell = aCell as? ProfileChooserCollectionViewCell else { return }
+                
+                if isShow {
+                    aCell.transform = .identity
+                    
+                    if let index = self.collectionView.indexPath(for: aCell)?.row {
+                        aCell.profileContainerView.transform = self.data[index].transform ?? .identity
+                    }
+                }else {
+                    aCell.profileContainerView.transform = .identity
+                    let translateX = self.touchedFrame.origin.x - aCell.frame.origin.x - aCell.profileContainerView.frame.origin.x
+                    let translateY = self.touchedFrame.origin.y - aCell.frame.origin.y - aCell.profileContainerView.frame.origin.y - self.collectionView.contentInset.top - (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0)
+
+                    aCell.transform = CGAffineTransform(translationX: translateX, y: translateY)
+                    
+                    if isAnimate {
+                        aCell.profileContainerView.backgroundColor = .white
+                        aCell.profileLottieView.backgroundColor = .ProfileBG
+                    }
+                }
+            }
         }, completion: completion)
     }
     
@@ -77,6 +104,14 @@ class ProfileChooserViewController: ViewController {
     
     var viewModel: ProfileChooserViewModelProtocol?
     var delegate: ProfileChooserViewDelegate?
+    var touchedFrame: CGRect = .zero
+    var displayedName: String?
+    
+    var data = [ProfileChooserModel]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 }
 
 //  MARK: Collectionview delegates & datasources.
@@ -106,12 +141,14 @@ extension ProfileChooserViewController: UICollectionViewDataSource, UICollisionB
     func handleClickedProfile(for cell: UICollectionViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         
-        let isAvatarChanged = viewModel?.handleAvatarSelection(at: indexPath.row)
+        viewModel?.currentSelectedAvatarIndex = indexPath.row
         
-        makeDismiss {[weak self] in
-            guard isAvatarChanged == true else { return }
-            
-            self?.delegate?.handleAvatarChanging()
+        if viewModel?.handleAvatarSelection(at: indexPath.row) == true {
+            delegate?.handleAvatarChanging()
+        }
+        
+        makeDismiss {
+            self.delegate?.animateAvatarView()
         }
     }
 }

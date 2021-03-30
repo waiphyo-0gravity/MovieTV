@@ -24,20 +24,20 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npu-Gy-Zmf">
-                        <rect key="frame" x="1.5" y="0.0" width="128" height="139"/>
+                        <rect key="frame" x="5.5" y="0.0" width="120" height="139"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrM-IW-z8c" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="4" y="4" width="120" height="109.5"/>
+                                <rect key="frame" x="4" y="4" width="112" height="109.5"/>
                                 <color key="backgroundColor" name="ProfileBG"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQU-1e-VCz">
-                                <rect key="frame" x="4" y="117.5" width="120" height="17.5"/>
+                                <rect key="frame" x="4" y="117.5" width="112" height="17.5"/>
                                 <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="15"/>
                                 <color key="textColor" name="C300"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIL-Li-UJp" customClass="MovieTVButton" customModule="MovieTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="139"/>
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="139"/>
                                 <connections>
                                     <action selector="clickedProfileActionBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="3zR-42-No7"/>
                                 </connections>
@@ -56,7 +56,7 @@
                             <constraint firstAttribute="trailing" secondItem="mrM-IW-z8c" secondAttribute="trailing" constant="4" id="aDF-NF-XcK"/>
                             <constraint firstAttribute="bottom" secondItem="jQU-1e-VCz" secondAttribute="bottom" constant="4" id="d3R-8T-ySd"/>
                             <constraint firstAttribute="height" constant="139" id="eh4-Vi-DvJ"/>
-                            <constraint firstAttribute="width" constant="128" id="iYK-bN-hPM"/>
+                            <constraint firstAttribute="width" constant="120" id="iYK-bN-hPM"/>
                             <constraint firstItem="jQU-1e-VCz" firstAttribute="top" secondItem="mrM-IW-z8c" secondAttribute="bottom" constant="4" id="pZV-sf-RzV"/>
                         </constraints>
                     </view>

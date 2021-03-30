@@ -31,6 +31,8 @@ class ProfileChooserCollectionViewCell: UICollectionViewCell, NibableCellProtoco
     private func handleDataChanged() {
         guard let data = data else { return }
         
+        profileActionBtn.originalTransform = data.transform ?? .identity
+        
         nameLbl.text = data.profile.name
         
         if let transformData = data.transform {
@@ -38,6 +40,11 @@ class ProfileChooserCollectionViewCell: UICollectionViewCell, NibableCellProtoco
         }
         
         profileLottieView.changeAnimation(with: data.profile.rawValue)
+        
+        guard data.profile == .random else { return }
+        
+        profileContainerView.backgroundColor = .clear
+        profileLottieView.backgroundColor = .clear
     }
     
     @IBOutlet weak var profileContainerView: UIView!

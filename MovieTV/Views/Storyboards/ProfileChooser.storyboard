@@ -21,29 +21,21 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3bx-0H-1sH">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZCJ-an-k0Z">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="32" minimumInteritemSpacing="0.0" id="dcc-my-Bh2">
-                                                <size key="itemSize" width="150" height="180"/>
-                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            </collectionViewFlowLayout>
-                                            <cells/>
-                                        </collectionView>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="ZCJ-an-k0Z" secondAttribute="trailing" id="ARe-2g-gn3"/>
-                                        <constraint firstItem="ZCJ-an-k0Z" firstAttribute="leading" secondItem="3bx-0H-1sH" secondAttribute="leading" id="BwT-h7-L21"/>
-                                        <constraint firstItem="ZCJ-an-k0Z" firstAttribute="top" secondItem="3bx-0H-1sH" secondAttribute="top" id="MgW-VW-FYV"/>
-                                        <constraint firstAttribute="bottom" secondItem="ZCJ-an-k0Z" secondAttribute="bottom" id="MwY-PT-D36"/>
-                                    </constraints>
                                 </view>
                                 <blurEffect style="systemUltraThinMaterialDark"/>
                             </visualEffectView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZCJ-an-k0Z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="32" minimumInteritemSpacing="0.0" id="dcc-my-Bh2">
+                                    <size key="itemSize" width="150" height="180"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mgt-zk-O67"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,7 +43,11 @@
                             <constraint firstItem="Owd-o2-HEy" firstAttribute="top" secondItem="sx4-rM-664" secondAttribute="top" id="4Kx-Gc-ddW"/>
                             <constraint firstItem="Mgt-zk-O67" firstAttribute="trailing" secondItem="Owd-o2-HEy" secondAttribute="trailing" id="MEa-ws-U5V"/>
                             <constraint firstAttribute="bottom" secondItem="Owd-o2-HEy" secondAttribute="bottom" id="WR4-9N-plD"/>
+                            <constraint firstItem="ZCJ-an-k0Z" firstAttribute="bottom" secondItem="sx4-rM-664" secondAttribute="bottom" id="d4M-54-gVw"/>
+                            <constraint firstAttribute="top" secondItem="ZCJ-an-k0Z" secondAttribute="top" id="kh0-s1-3fb"/>
                             <constraint firstItem="Owd-o2-HEy" firstAttribute="leading" secondItem="Mgt-zk-O67" secondAttribute="leading" id="wBG-Kk-4oO"/>
+                            <constraint firstItem="ZCJ-an-k0Z" firstAttribute="leading" secondItem="sx4-rM-664" secondAttribute="leading" id="x4q-6G-MTm"/>
+                            <constraint firstAttribute="trailing" secondItem="ZCJ-an-k0Z" secondAttribute="trailing" id="yc2-tK-cER"/>
                         </constraints>
                     </view>
                     <connections>

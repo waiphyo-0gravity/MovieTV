@@ -12,6 +12,7 @@ protocol ProfileChooserViewModelProtocol: AnyObject {
     var view: ProfileChooserViewProtocol? { get set }
     var data: [ProfileChooserModel] { get set }
     var avatarName: String? { get set }
+    var currentSelectedAvatarIndex: Int? { get set }
     
     func mapData()
     func handleAvatarSelection(at index: Int) -> Bool
@@ -20,11 +21,13 @@ protocol ProfileChooserViewModelProtocol: AnyObject {
 class ProfileChooserViewModel: ProfileChooserViewModelProtocol {
     weak var view: ProfileChooserViewProtocol?
     
-    static func createModule(delegate: ProfileChooserViewDelegate? = nil) -> UIViewController? {
+    static func createModule(delegate: ProfileChooserViewDelegate? = nil, touchedFrame: CGRect = .zero, displayedName: String? = nil) -> UIViewController? {
         guard let viewController = UIViewController.ProfileChooserViewController as? ProfileChooserViewController else { return nil }
         
         let viewModel: ProfileChooserViewModelProtocol = ProfileChooserViewModel()
         
+        viewController.touchedFrame = touchedFrame
+        viewController.displayedName = displayedName
         viewController.delegate = delegate
         viewController.viewModel = viewModel
         viewModel.view = viewController
@@ -93,6 +96,7 @@ class ProfileChooserViewModel: ProfileChooserViewModelProtocol {
     }
     
     var data: [ProfileChooserModel] = []
+    var currentSelectedAvatarIndex: Int? = 0
     
     var avatarName: String? {
         get {

@@ -41,7 +41,9 @@ class MenuViewController: ViewController, MenuViewControllerDelegate {
     }
     
     @IBAction func clickedProfileView(_ sender: Any) {
-        viewModel?.showProfileChooser(from: self)
+        profileContainerView.transform = .identity
+        let touchedViewFrame = menuTopView.convert(profileContainerView.frame, to: nil)
+        viewModel?.showProfileChooser(from: self, touchedViewFrame: touchedViewFrame, displayedName: displayNameLbl.text)
     }
     
     private func initial() {
@@ -65,7 +67,7 @@ class MenuViewController: ViewController, MenuViewControllerDelegate {
     
     private func setUpProfileView() {
         profileLottieView.loopMode = .loop
-        profileContainerView.addAccentShadow()
+        profileContainerView.addAccentShadow(with: .init(rect: profileContainerView.bounds, transform: nil))
         
         if let avatar = viewModel?.avatarName {
             profileLottieView.changeAnimation(with: avatar, autoPlay: false)
@@ -151,6 +153,10 @@ extension MenuViewController: ProfileChooserViewDelegate {
         guard let avatar = viewModel?.avatarName else { return }
         
         profileLottieView.animation = nil
-        profileLottieView.changeAnimation(with: avatar, autoPlay: true)
+        profileLottieView.changeAnimation(with: avatar, autoPlay: false)
+    }
+    
+    func animateAvatarView() {
+        profileLottieView.play()
     }
 }

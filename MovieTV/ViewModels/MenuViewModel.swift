@@ -17,7 +17,7 @@ protocol MenuViewModelProtocol {
     
     func viewDidLoad()
     func getMainContainerTranslationRatio(with specificSize: CGSize?) -> CGFloat?
-    func showProfileChooser(from vc: (UIViewController & ProfileChooserViewDelegate)?)
+    func showProfileChooser(from vc: (UIViewController & ProfileChooserViewDelegate)?, touchedViewFrame: CGRect, displayedName: String?)
 }
 
 class MenuViewModel: MenuViewModelProtocol {
@@ -51,9 +51,9 @@ class MenuViewModel: MenuViewModelProtocol {
         return ((specificSize.width * 2.2) / 3) - 42
     }
     
-    func showProfileChooser(from vc: (UIViewController & ProfileChooserViewDelegate)?) {
+    func showProfileChooser(from vc: (UIViewController & ProfileChooserViewDelegate)?, touchedViewFrame: CGRect, displayedName: String?) {
         guard let fromVC = vc,
-              let movieDetailVC = ProfileChooserViewModel.createModule(delegate: vc) else { return }
+              let movieDetailVC = ProfileChooserViewModel.createModule(delegate: vc, touchedFrame: touchedViewFrame, displayedName: displayedName) else { return }
         
         movieDetailVC.modalPresentationStyle = .overFullScreen
         fromVC.present(movieDetailVC, animated: false)
