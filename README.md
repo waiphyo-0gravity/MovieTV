@@ -22,6 +22,6 @@ src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/3.jpeg" wi
 src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/4.jpeg" width="220">  <img 
 src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/5.jpeg" width="220">
 
-### Pods i use
+### Pods I use
 - [youtube-ios-player-helper](https://cocoapods.org/pods/youtube-ios-player-helper)
 - [lottie-ios](https://cocoapods.org/pods/lottie-ios)
