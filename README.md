@@ -12,7 +12,11 @@
 - *Give ratings, mark watchlist & make favourate movies. If you tour as guest, u can only give ratings.*
 
 ## App Overview
-This project was made as my first open source project. Here are some screens.
+This project was made as my first open source project. Here are some screenshots.
 
-### Authentication
-
+### Screenshots
+<img src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/1.jpeg" width="220">  <img 
+src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/2.jpeg" width="220">  <img 
+src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/3.jpeg" width="220">  <img 
+src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/4.jpeg" width="220">  <img 
+src="https://github.com/waiphyo-0gravity/MovieTV/blob/main/Screenshot/5.jpeg" width="220">
