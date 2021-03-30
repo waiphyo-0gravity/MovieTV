@@ -7,7 +7,7 @@
 `MovieTV` have been developed with swift + [TMDb API](https://developers.themoviedb.org/3). It will help you about movies' statistics.
 
 ### Features
-- *Log in from app, TMDb OAuth & tour as guest.* **(With TMDb api)**
+- *Log in from app, TMDb OAuth & tour as guest.* **(With TMDb API)**
 - *Changing profile with default animated characters.* **(All of these characters are used from [lottie free animation files](https://lottiefiles.com/featured))**
 - *Give ratings, mark watchlist & make favourate movies. If you tour as guest, u can only give ratings.*
 - *Search and explore movie statistics.*
