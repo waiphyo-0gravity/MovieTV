@@ -19,7 +19,7 @@
 
 ### App State
 ```
-<p>Can't download from App store yet.</p>
+Can't download from App store yet.
 ```
 
 ## App Overview
